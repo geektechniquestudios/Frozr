@@ -1,30 +1,46 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./App.css"
 import { firebaseApp } from "../config"
-import { getFirestore } from "firebase/firestore"
+import {
+  collection,
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore"
 
 const db = getFirestore(firebaseApp)
 
 export const App = () => {
   const [count, setCount] = useState(0)
+  const countCollectionRef = collection(db, "count")
+  const countDocRef = doc(countCollectionRef, "counter")
 
-  const storeCountInFirebase = (count: Number) => {}
+  const storeCountInFirestore = (count: Number) => {
+    setDoc(countDocRef, { value: count })
+  }
+
+  useEffect(() => {
+    getDoc(countDocRef).then(doc => {
+      setCount(doc.data()?.value)
+    })
+  }, [])
 
   return (
     <div>
       <div>{count}</div>
       <button
         onClick={() => {
+          storeCountInFirestore(count + 1)
           setCount(count + 1)
-          storeCountInFirebase(count)
         }}
       >
         +
       </button>
       <button
         onClick={() => {
+          storeCountInFirestore(count - 1)
           setCount(count - 1)
-          storeCountInFirebase(count)
         }}
       >
         -
