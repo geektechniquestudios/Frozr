@@ -8,9 +8,10 @@ import {
   setDoc,
 } from "firebase/firestore"
 
+
 const db = getFirestore(firebaseApp)
 
-export const App = () => {
+export const App: React.FC = () => {
   const [count, setCount] = useState(0)
   const countCollectionRef = collection(db, "count")
   const countDocRef = doc(countCollectionRef, "counter")
@@ -26,7 +27,10 @@ export const App = () => {
   }, [])
 
   return (
-    <div>
+    <div className="bg-slate-500">
+      <div className="sticky top-0 flex w-full items-center justify-center border-b border-zinc-600 bg-zinc-800 text-xl text-zinc-300 h-11">
+        Has the Dog Been Fed?
+      </div>
       <div>{count}</div>
       <button
         onClick={() => {
