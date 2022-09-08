@@ -8,10 +8,8 @@ import {
   setDoc,
 } from "firebase/firestore"
 import * as React from "react"
-import Button from "@mui/material/Button"
 import Checkbox from "@mui/material/Checkbox"
 import FormControlLabel from "@mui/material/FormControlLabel"
-import FormGroup from "@mui/material/FormGroup"
 import { blue, green, orange } from "@mui/material/colors"
 
 const db = getFirestore(firebaseApp)
@@ -25,19 +23,32 @@ export const App: React.FC = () => {
     setDoc(countDocRef, { value: count })
   }
 
+  const [am, setAm] = useState(false)
+  const daysColRef = collection(db, "days")
+  const dayDocRef = doc(daysColRef, "day")
+
+  const storeAmInFirestore = (am: Boolean) => {
+    setDoc(dayDocRef, { am })
+  }
+
   useEffect(() => {
     getDoc(countDocRef).then(doc => {
       setCount(doc.data()?.value)
     })
+    getDoc(dayDocRef).then(doc => {
+      setAm(doc.data()?.am)
+    })
   }, [])
 
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsAmChecked] = useState(false)
   const [isPmChecked, setIsPmChecked] = useState(false)
 
-  const handleOnChange = () => {
-    setIsChecked(!isChecked)
+  const handleAmOnChange = () => {
+    setIsAmChecked(!isChecked)
     storeCountInFirestore(count + 1)
     setCount(count + 1)
+    setAm(true)
+    storeAmInFirestore(!am)
   }
   const handlePmOnChange = () => {
     setIsPmChecked(!isPmChecked)
@@ -46,23 +57,24 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="bg-sky-900 h-screen">
+    <div className="bg-sky-900 flex flex-col h-screen">
       <div className="sticky top-0 flex w-full items-center justify-center border border-sky-600 bg-sky-700 text-xl text-zinc-300 h-11">
         Has the Dog Been Fed?
       </div>
-      <div className="flex justify-center">
-        <div className="flex max-w-4xl grow flex-col gap-3 bg-sky-900 px-10">
+      <div className="flex justify-center border border-green-400 h-full">
+        <div className="flex flex-col gap-3 bg-sky-900 px-10 max-w-4xl border">
           <div className="flex justify-end p-1 m-2 rounded bg-pink-200">
             {count}
+            {am}
           </div>
           <div className="flex justify-between bg-cyan-200 rounded p-2">
-            <div className="flex border border-sky-300 rounded p-1 mx-1 items-center justify-center">
+            <div className="flex border border-sky-300 rounded p-1 mx-1 items-center justify-between">
               Date Here
             </div>
             <div className="flex justify-center">
               <FormControlLabel
                 checked={!isChecked}
-                onChange={handleOnChange}
+                onChange={handleAmOnChange}
                 control={
                   <Checkbox
                     size="small"
@@ -96,7 +108,7 @@ export const App: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mt-3 flex h-10 bg-sky-800 items-center justify-evenly">
+      <div className="flex h-10 bg-sky-800 items-center justify-evenly">
         Footer
       </div>
     </div>
