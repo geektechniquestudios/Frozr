@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import { firebaseApp } from "../config"
+import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth"
 import {
   collection,
   doc,
   getDoc,
   getFirestore,
   setDoc,
+  serverTimestamp,
+  runTransaction,
 } from "firebase/firestore"
 import * as React from "react"
 import Checkbox from "@mui/material/Checkbox"
@@ -18,6 +21,7 @@ export const App: React.FC = () => {
   const [count, setCount] = useState(0)
   const countCollectionRef = collection(db, "count")
   const countDocRef = doc(countCollectionRef, "counter")
+  const auth = getAuth(firebaseApp)
 
   const storeCountInFirestore = (count: Number) => {
     setDoc(countDocRef, { value: count })
@@ -56,10 +60,34 @@ export const App: React.FC = () => {
     setCount(count - 1)
   }
 
+  const signInWithGoogle = async () => {
+    const addToUsers = () => {
+      if (auth?.currentUser) {
+        const userDoc = doc(db, "users", auth.currentUser!.uid)
+        runTransaction(db, async transaction => {
+          const doc = await transaction.get(userDoc)
+          if (!doc.exists()) {
+            transaction.set(userDoc, {
+              photoURL: auth.currentUser!.photoURL,
+              displayName: auth.currentUser!.displayName,
+              joinDate: serverTimestamp(),
+              families: [],
+            })
+          }
+        })
+      }
+    }
+    const provider = new GoogleAuthProvider()
+    signInWithRedirect(auth, provider).then(addToUsers)
+  }
+
   return (
     <div className="bg-sky-900 flex flex-col h-screen">
       <div className="sticky top-0 flex w-full items-center justify-center border border-sky-600 bg-sky-700 text-xl text-zinc-300 h-11">
         Has the Dog Been Fed?
+        <button className="bg-green-600" onClick={signInWithGoogle}>
+          Login with Google
+        </button>
       </div>
       <div className="flex justify-center border border-green-400 h-full">
         <div className="flex flex-col gap-3 bg-sky-900 px-10 max-w-4xl border">
