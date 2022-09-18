@@ -50,10 +50,10 @@ export const MainContent: React.FC = () => {
   }
 
   return (
-    <div className="flex h-full justify-center border border-green-400">
-      <div className="flex max-w-4xl flex-col gap-3 border bg-sky-900 px-10">
-        <div className="flex justify-between  rounded bg-cyan-200 p-2">
-          <div className="mx-1 flex items-center justify-between rounded border border-sky-300 p-1">
+    <div className="flex h-full justify-center">
+      <div className="flex max-w-4xl flex-col gap-3 bg-stone-600 px-10">
+        <div className="flex justify-between rounded bg-rose-100 p-2">
+          <div className="mx-1 flex items-center justify-between rounded border border-stone-500 p-1">
             Date Here
           </div>
           {isLoading && <div className="w-22">Loading...</div>}
