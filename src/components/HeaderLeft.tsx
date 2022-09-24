@@ -1,5 +1,5 @@
 import React from "react"
 
 export const HeaderLeft: React.FC = () => {
-  return <div>HeaderLeft</div>
+  return <div>Header Left</div>
 }
