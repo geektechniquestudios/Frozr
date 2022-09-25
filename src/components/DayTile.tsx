@@ -6,8 +6,11 @@ import { blue, green, orange } from "@mui/material/colors"
 import {
   collection,
   doc,
+  DocumentData,
+  DocumentReference,
   getDoc,
   getFirestore,
+  setDoc,
   updateDoc,
 } from "firebase/firestore"
 import { Auth } from "../Auth"
@@ -32,6 +35,12 @@ export const DayTile: React.FC = () => {
     updateDoc(dayDocRef, { pm })
   }
 
+  const usersColRef = collection(db, "users")
+  const userDocRef = doc(usersColRef, "oaVPHh3IMzcTHQd5Iqlvg7GcBBZ2")
+  const storeUserAmInFirestore = (am: Boolean) => {
+    setDoc(userDocRef, { am }, {merge: true})
+  }
+
   useEffect(() => {
     getDoc(dayDocRef)
       .then(doc => {
@@ -45,6 +54,7 @@ export const DayTile: React.FC = () => {
 
   const handleAmOnChange = () => {
     storeAmInFirestore(!am)
+    storeUserAmInFirestore(!am)
     setAm(!am)
   }
   const handlePmOnChange = () => {

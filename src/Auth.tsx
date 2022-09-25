@@ -1,12 +1,15 @@
 import { createContainer } from "unstated-next"
 import { firebaseApp } from "../config"
 import { useAuthState } from "react-firebase-hooks/auth"
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import {
   doc,
   getFirestore,
   serverTimestamp,
   runTransaction,
+  setDoc,
+  collection,
+  addDoc,
 } from "firebase/firestore"
 
 const db = getFirestore(firebaseApp)
@@ -19,6 +22,7 @@ const useAuth = () => {
     const addToUsers = () => {
       if (auth.currentUser) {
         const userDoc = doc(db, "users", auth.currentUser!.uid)
+        const familyDoc = doc(db, "families", auth.currentUser!.uid + "-family")
         runTransaction(db, async transaction => {
           const doc = await transaction.get(userDoc)
           if (!doc.exists()) {
@@ -26,14 +30,18 @@ const useAuth = () => {
               photoURL: auth.currentUser!.photoURL,
               displayName: auth.currentUser!.displayName,
               joinDate: serverTimestamp(),
-              families: [],
+              families: [auth.currentUser!.uid + "-family"],
+            })
+            transaction.set(familyDoc, {
+              users:[auth.currentUser!.uid],
             })
           }
         })
       }
     }
+
     const provider = new GoogleAuthProvider()
-    signInWithRedirect(auth, provider).then(addToUsers)
+    signInWithPopup(auth, provider).then(addToUsers)
   }
 
   const signOutWithGoogle = async () => {
@@ -49,4 +57,3 @@ const useAuth = () => {
 }
 
 export const Auth = createContainer(useAuth)
-
