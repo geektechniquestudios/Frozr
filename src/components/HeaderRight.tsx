@@ -9,6 +9,7 @@ export const HeaderRight: React.FC = () => {
     <div>
       {!user && (
         <Button
+          color="primary"
           variant="contained"
           className="m-1 rounded bg-green-600 px-1 text-sm"
           onClick={signInWithGoogle}
@@ -18,6 +19,7 @@ export const HeaderRight: React.FC = () => {
       )}
       {user && (
         <Button
+          color="secondary"
           variant="outlined"
           className="m-1 rounded bg-rose-900 px-1 text-sm"
           onClick={signOutWithGoogle}
