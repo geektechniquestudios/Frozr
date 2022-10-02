@@ -14,11 +14,12 @@ import {
   updateDoc,
 } from "firebase/firestore"
 import { Auth } from "../Auth"
+import { User } from "../models/User"
 
 const db = getFirestore(firebaseApp)
 
 export const DayTile: React.FC = () => {
-  const { user } = Auth.useContainer()
+  const { user, auth } = Auth.useContainer()
 
   const [am, setAm] = useState(false)
   const [pm, setPm] = useState(false)
@@ -36,9 +37,11 @@ export const DayTile: React.FC = () => {
   }
 
   const usersColRef = collection(db, "users")
-  const userDocRef = doc(usersColRef, "oaVPHh3IMzcTHQd5Iqlvg7GcBBZ2")
-  const storeUserAmInFirestore = (am: Boolean) => {
-    setDoc(userDocRef, { am }, {merge: true})
+  const userDocRef = auth?.currentUser?.uid
+    ? (doc(db, "users", auth.currentUser!.uid) as DocumentReference<User>)
+    : null
+  const storeUserAmInFirestore = (am: boolean) => {
+    if (userDocRef) updateDoc(userDocRef, { am })
   }
 
   useEffect(() => {
