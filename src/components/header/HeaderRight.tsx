@@ -1,17 +1,15 @@
 import Button from "@mui/material/Button"
 import React from "react"
-import { Auth } from "../Auth"
+import { Auth } from "../../containers/Auth"
 
 export const HeaderRight: React.FC = () => {
   const { signInWithGoogle, signOutWithGoogle, user } = Auth.useContainer()
 
   return (
-    <div>
+    <div className="mx-3 flex flex-auto items-center justify-end gap-1.5 align-middle">
       {!user && (
         <Button
-          color="primary"
           variant="contained"
-          className="m-1 rounded bg-green-600 px-1 text-sm"
           onClick={signInWithGoogle}
         >
           Sign In with Google
@@ -19,9 +17,7 @@ export const HeaderRight: React.FC = () => {
       )}
       {user && (
         <Button
-          color="secondary"
-          variant="outlined"
-          className="m-1 rounded bg-rose-900 px-1 text-sm"
+          variant="contained"
           onClick={signOutWithGoogle}
         >
           Sign Out

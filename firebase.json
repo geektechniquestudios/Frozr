@@ -1,0 +1,23 @@
+{
+  "firestore": {
+    "target": "frozr",
+    "rules": "firestore.rules"
+  },
+  "hosting": [
+    {
+      "target": "frozr",
+      "predeploy": "yarn build",
+      "public": "dist",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "rules": "storage.rules"
+  }
+}
