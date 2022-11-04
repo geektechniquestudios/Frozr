@@ -6,7 +6,7 @@ export const HeaderRight: React.FC = () => {
   const { signInWithGoogle, signOutWithGoogle, user } = Auth.useContainer()
 
   return (
-    <div className="mx-3 flex flex-auto items-center justify-end gap-1.5 align-middle">
+    <div className="mx-1 flex flex-auto items-center justify-end gap-1.5 align-middle">
       {!user && (
         <Button
           variant="contained"
