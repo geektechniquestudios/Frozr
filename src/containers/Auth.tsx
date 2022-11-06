@@ -77,20 +77,20 @@ const useAuth = () => {
       //   walletAddress,
       // })
       //   .then(() => {
-          setIsWalletConnected(true)
-          setIsWalletConnecting(false)
-          setWalletAddress(walletAddress)
-          localStorage.setItem("walletAddress", walletAddress)
-          localStorage.setItem("isWalletConnected", "true")
-        // })
-        // .then(() => {
-        //   alert("Wallet connected")
-        // })
-        // .catch((error) => {
-        //   console.error(error)
-        //   alert("Error connecting to wallet")
-        //   setIsWalletConnected(false)
-        // })
+      setIsWalletConnected(true)
+      setIsWalletConnecting(false)
+      setWalletAddress(walletAddress)
+      localStorage.setItem("walletAddress", walletAddress)
+      localStorage.setItem("isWalletConnected", "true")
+      // })
+      // .then(() => {
+      //   alert("Wallet connected")
+      // })
+      // .catch((error) => {
+      //   console.error(error)
+      //   alert("Error connecting to wallet")
+      //   setIsWalletConnected(false)
+      // })
     } catch (error) {
       console.error(error)
       alert("Error connecting to wallet.")
@@ -102,17 +102,17 @@ const useAuth = () => {
     // if (!auth.currentUser) return
     // const userDoc = doc(db, "users", auth.currentUser!.uid)
     // updateDoc(userDoc, {
-      // walletAddress: "",
+    // walletAddress: "",
     // })
-      // .then(() => {
-        setWalletAddress("")
-        setIsWalletConnected(false)
-        localStorage.setItem("walletAddress", "")
-        localStorage.setItem("isWalletConnected", "false")
-      // })
-      // .catch(() => {
-        // alert("Error disconnecting wallet")
-      // })
+    // .then(() => {
+    setWalletAddress("")
+    setIsWalletConnected(false)
+    localStorage.setItem("walletAddress", "")
+    localStorage.setItem("isWalletConnected", "false")
+    // })
+    // .catch(() => {
+    // alert("Error disconnecting wallet")
+    // })
   }
 
   return {

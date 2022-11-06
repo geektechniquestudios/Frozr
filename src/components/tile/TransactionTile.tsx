@@ -1,30 +1,28 @@
-import { Button } from "@mui/material"
 import { useState } from "react"
 import { Dayjs } from "dayjs"
 import { ConnectWallet } from "./ConnectWallet"
 import { SelectCurrency } from "./SelectCurrency"
-import { AmountAndTime } from "./AmountAndTime"
+import { Amount } from "./Amount"
+import { SendFunds } from "./SendFunds"
+import { Date } from "./Date"
 
 export const TransactionTile = () => {
-  const [dateValue, setDateValue] = useState<Dayjs | null>(null)
-  const [currencyAmount, setCurrencyAmount] = useState("")
+  const [date, setDate] = useState<Dayjs | null>(null)
+  const [amount, setAmount] = useState("")
   const [currency, setCurrency] = useState("")
 
   return (
-    <div className="h-96 rounded-md  border border-stone-400 bg-stone-500">
+    <div
+      className="h-[32em] shrink-0 rounded-md  border border-stone-600 bg-slate-500 bg-opacity-40"
+      style={{
+        backdropFilter: "blur(16px)",
+      }}
+    >
       <ConnectWallet />
       <SelectCurrency currency={currency} setCurrency={setCurrency} />
-      <AmountAndTime
-        currencyAmount={currencyAmount}
-        setCurrencyAmount={setCurrencyAmount}
-        dateValue={dateValue}
-        setDateValue={setDateValue}
-      />
-      <div className="grid h-1/4 place-content-center">
-        <Button onClick={() => {}} className="" variant="contained">
-          Store your funds
-        </Button>
-      </div>
+      <Amount amount={amount} setAmount={setAmount} />
+      <Date date={date} setDate={setDate} />
+      <SendFunds amount={amount} date={date} currency={currency} />
     </div>
   )
 }

@@ -11,7 +11,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
     disconnectWallet,
   } = Auth.useContainer()
   return (
-    <div className="flex h-1/4 justify-evenly gap-4 py-1">
+    <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
         {!isWalletConnected && (
           <Button onClick={connectWallet} className="w-48" variant="contained">

@@ -4,7 +4,7 @@ import { App } from "./App"
 import { Auth } from "./containers/Auth"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 
-import "./index.css"
+import "./index.scss"
 
 const theme = createTheme({
 //   palette: {
