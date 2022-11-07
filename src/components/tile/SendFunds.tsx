@@ -64,15 +64,12 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
       const isConfirmed = await Swal.fire({
         title: `Are you sure you want to store ${amount} ${currency} for ${daysToFreeze}?`,
         showCancelButton: true,
-        confirmButtonText: "Yes",
-        denyButtonText: "No",
+        confirmButtonText: "Send",
       }).then((res) => res.isConfirmed)
       return isConfirmed
     }
 
-    const areFieldsFilled = () => {
-
-    }
+    const areFieldsFilled = () => {}
 
     // if (!areFieldsFilled) return
 
@@ -107,9 +104,9 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
     <div className="grid h-1/5 place-content-center">
       <Button
         onClick={sendDeposit}
-        className=""
-        variant="contained"
-        // disabled={!isWalletConnected}
+        className="h-14 w-48"
+        variant="outlined"
+        sx={{ fontWeight: "bold", color: "" }}
       >
         Store your funds
       </Button>

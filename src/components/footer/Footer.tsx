@@ -9,7 +9,7 @@ import { SocialLink } from "./SocialLink"
 
 export const Footer: React.FC = () => {
   return (
-    <div className="flex h-14 items-center justify-evenly py-2">
+    <div className="flex h-14 items-center justify-between py-2">
       <SocialLink
         href="https://www.linkedin.com/in/terry-dorsey-0a51b5187/"
         icon={<BsLinkedin />}

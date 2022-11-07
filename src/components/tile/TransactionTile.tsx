@@ -20,8 +20,8 @@ export const TransactionTile = () => {
     >
       <ConnectWallet />
       <SelectCurrency currency={currency} setCurrency={setCurrency} />
-      <Amount amount={amount} setAmount={setAmount} />
       <Date date={date} setDate={setDate} />
+      <Amount amount={amount} setAmount={setAmount} />
       <SendFunds amount={amount} date={date} currency={currency} />
     </div>
   )

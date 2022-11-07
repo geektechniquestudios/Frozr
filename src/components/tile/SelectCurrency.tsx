@@ -15,17 +15,18 @@ export const SelectCurrency: React.FC<Props> = ({ currency, setCurrency }) => {
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="p-3">
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={{ input: { color: "white" } }}>
           <InputLabel>Select Currency</InputLabel>
           <Select
             className="w-48"
+            // variant="standard"
             value={currency}
             label="Select Currency"
             onChange={(event: SelectChangeEvent) => {
               setCurrency(event.target.value)
             }}
           >
-            <MenuItem value="10">Avax</MenuItem>
+            <MenuItem value="Avax">Avax</MenuItem>
           </Select>
         </FormControl>
       </div>

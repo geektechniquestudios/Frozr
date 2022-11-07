@@ -7,18 +7,16 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import "./index.scss"
 
 const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: "#15803d",
-//     },
-//     secondary: {
-//       main: "#f43f5e",
-//     },
-//     background: {
-//       default: "#192231",
-//       paper: "#24344d",
-//     },
-//   },
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#93c5fd", // blue 300 
+    },
+    background: {
+      default: "#192231",
+      paper: "#24344d",
+    },
+  },
 })
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

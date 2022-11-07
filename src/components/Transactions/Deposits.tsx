@@ -15,7 +15,7 @@ export const Deposits: React.FC<Props> = ({}) => {
   return (
     <AnimatePresence>
       <div
-        className="h-[32em] grow rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-4 shrink-0"
+        className="h-[32em] shrink-0 grow rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-4"
         style={{
           backdropFilter: "blur(16px)",
         }}
@@ -23,11 +23,7 @@ export const Deposits: React.FC<Props> = ({}) => {
         <p className="grid h-14 w-full place-content-center border-b border-slate-400 text-2xl font-extrabold text-stone-300">
           Your Deposits
         </p>
-        <div
-          className={`flex flex-col gap-2 ${
-            transactions.length === 0 ? "mt-14" : ""
-          }`}
-        >
+        <div className="flex flex-col gap-2">
           {isLoading ? (
             <motion.div
               initial={{ opacity: 0, translateY: -30 }}
@@ -58,7 +54,7 @@ export const Deposits: React.FC<Props> = ({}) => {
               }}
               className="m-4 grid place-content-center rounded-lg border bg-slate-600 p-2 text-2xl font-bold text-stone-300"
             >
-              No deposits to show
+              No deposits yet
             </motion.div>
           )}
         </div>

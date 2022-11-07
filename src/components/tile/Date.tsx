@@ -14,7 +14,7 @@ export const Date: React.FC<Props> = ({ date, setDate }) => {
       <div className="grid place-content-center p-3">
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <MobileDatePicker
-            className="text-stone-300 w-48"
+            className="w-48 text-stone-300"
             label="Choose the date"
             value={date}
             onChange={(newValue) => {
@@ -24,7 +24,7 @@ export const Date: React.FC<Props> = ({ date, setDate }) => {
           />
         </LocalizationProvider>
       </div>
-      <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-300 bg-opacity-20">
+      <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-zinc-400 bg-opacity-80">
         <div />
         <div />
         <img
