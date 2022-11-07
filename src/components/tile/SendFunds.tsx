@@ -4,6 +4,7 @@ import { ethers } from "ethers"
 import Frozr from "../../artifacts/contracts/Frozr.sol/Frozr.json"
 import Swal from "sweetalert2"
 import { Auth } from "../../containers/Auth"
+import { Form } from "../../containers/Form"
 
 declare let window: any
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS
@@ -15,6 +16,12 @@ interface Props {
 }
 
 export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
+  const {
+    setConnectBorderColor,
+    setCurrencyBorderColor,
+    setCalendarBorderColor,
+    setAmountBorderColor,
+  } = Form.useContainer()
   const bigAmount = ethers.utils.parseEther(String(Number(amount)))
 
   const overrides = {
@@ -62,16 +69,47 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
   const sendDeposit = async (): Promise<void> => {
     const doesUserAccept = async (daysToFreeze: number): Promise<boolean> => {
       const isConfirmed = await Swal.fire({
-        title: `Are you sure you want to store ${amount} ${currency} for ${daysToFreeze}?`,
+        title: `Are you sure you want to store ${amount} ${currency} for ${daysToFreeze} ${
+          daysToFreeze === 1 ? "day" : "days"
+        }?`,
         showCancelButton: true,
         confirmButtonText: "Send",
+        confirmButtonColor: "#93c5fd",
       }).then((res) => res.isConfirmed)
       return isConfirmed
     }
 
-    const areFieldsFilled = () => {}
+    const areFieldsFilled = () => {
+      const reddenWalletButton = () => {
+        setConnectBorderColor("red")
+        return false
+      }
+      const reddenCurrencyButton = () => {
+        setCurrencyBorderColor("")
+        setCurrencyBorderColor("border-red-600")
+        return false
+      }
+      const reddenCalendarButton = () => {
+        setConnectBorderColor("")
+        setCurrencyBorderColor("border-transparent")
+        setCalendarBorderColor("border-red-600")
+        return false
+      }
+      const reddenAmountButton = () => {
+        setConnectBorderColor("")
+        setCurrencyBorderColor("border-transparent")
+        setCalendarBorderColor("border-transparent")
+        setAmountBorderColor("border-red-600")
+        return false
+      }
+      if (!isWalletConnected) return reddenWalletButton()
+      else if (!currency) return reddenCurrencyButton()
+      else if (!date || dayjs(date) < dayjs()) return reddenCalendarButton()
+      else if (!amount || Number(amount) <= 0) return reddenAmountButton()
+      return true
+    }
 
-    // if (!areFieldsFilled) return
+    if (!areFieldsFilled()) return
 
     if (typeof window.ethereum !== undefined) {
       await window.ethereum.request({ method: "eth_requestAccounts" })
@@ -106,7 +144,7 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
         onClick={sendDeposit}
         className="h-14 w-48"
         variant="outlined"
-        sx={{ fontWeight: "bold", color: "" }}
+        sx={{ fontWeight: "bold" }}
       >
         Store your funds
       </Button>

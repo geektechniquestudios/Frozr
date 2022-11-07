@@ -1,4 +1,5 @@
 import CurrencyInput from "react-currency-input-field"
+import { Form } from "../../containers/Form"
 
 interface Props {
   amount: string
@@ -6,13 +7,14 @@ interface Props {
 }
 
 export const Amount: React.FC<Props> = ({ amount, setAmount }) => {
+  const { amountBorderColor } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
         <CurrencyInput
-          className="w-48 rounded-md border border-blue-300 bg-transparent py-1 text-stone-200 h-14 px-3"
+          className={`${amountBorderColor} h-14 w-48 rounded-md border bg-transparent py-1 px-3 text-stone-200 hover:border-white`}
           autoComplete="off"
-          placeholder="Choose your amount"
+          placeholder="Choose amount"
           defaultValue=""
           decimalsLimit={18}
           value={amount}

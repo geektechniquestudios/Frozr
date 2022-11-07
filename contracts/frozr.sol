@@ -61,6 +61,27 @@ contract Frozr is Ownable {
     emit WithdrawEvent(msg.sender, deposits[_depositId].amount);
   }
 
+  function withdawEarly(uint _depositId) external payable {
+    require(
+      deposits[_depositId].isComplete == false,
+      "This deposit has already been withdrawn"
+    );
+    require(
+      deposits[_depositId].sender == msg.sender,
+      "You are not the owner of this deposit"
+    );
+
+    // add 10% fee to fror balance
+    frozrBalance += deposits[_depositId].amount / 10;
+
+    deposits[_depositId].isComplete = true;
+    payable(msg.sender).transfer(
+      deposits[_depositId].amount - (deposits[_depositId].amount / 10)
+    );
+
+    emit WithdrawEvent(msg.sender, deposits[_depositId].amount);
+  }
+
   function viewDeposits() external view returns (Deposit[] memory) {
     uint[] memory ids = addressToDepositIds[msg.sender];
     Deposit[] memory userDeposits = new Deposit[](ids.length);

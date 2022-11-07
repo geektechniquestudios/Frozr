@@ -5,6 +5,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material"
+import { Form } from "../../containers/Form"
 
 interface Props {
   currency: string
@@ -12,14 +13,17 @@ interface Props {
 }
 
 export const SelectCurrency: React.FC<Props> = ({ currency, setCurrency }) => {
+  const { currencyBorderColor, setCurrencyBorderColor } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="p-3">
-        <FormControl fullWidth sx={{ input: { color: "white" } }}>
+        <FormControl fullWidth>
           <InputLabel>Select Currency</InputLabel>
           <Select
-            className="w-48"
-            // variant="standard"
+            onClick={() => {
+              setCurrencyBorderColor("border-transparent")
+            }}
+            className={`${currencyBorderColor} w-48 border`}
             value={currency}
             label="Select Currency"
             onChange={(event: SelectChangeEvent) => {

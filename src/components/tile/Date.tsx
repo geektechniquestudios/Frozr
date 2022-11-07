@@ -1,7 +1,11 @@
 import { TextField } from "@mui/material"
-import { LocalizationProvider, MobileDatePicker } from "@mui/x-date-pickers"
+import {
+  DesktopDatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { Dayjs } from "dayjs"
+import { Form } from "../../containers/Form"
 
 interface Props {
   date: Dayjs | null
@@ -9,13 +13,17 @@ interface Props {
 }
 
 export const Date: React.FC<Props> = ({ date, setDate }) => {
+  const { calendarBorderColor } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <MobileDatePicker
-            className="w-48 text-stone-300"
-            label="Choose the date"
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          className="border border-red-600"
+        >
+          <DesktopDatePicker
+            className={`${calendarBorderColor} w-48 border text-stone-300`}
+            label="Pick date"
             value={date}
             onChange={(newValue) => {
               if (newValue) setDate(newValue)

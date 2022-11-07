@@ -1,17 +1,24 @@
 import { CircularProgress } from "@mui/material"
 import { AnimatePresence, motion } from "framer-motion"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Transaction } from "./Transaction"
 
 interface Props {}
 
 export const Deposits: React.FC<Props> = ({}) => {
   const [transactions, setTransactions] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   // if wallet is connected, load transactions from the blockchain
   // use effect "iswalletconnected" to load transactions
   // if loading, show spinner
   // if no transactions, show "no transactions"
+
+  useEffect(() => {
+    // load transactions from blockchain
+    // set transactions
+    // set loading to false
+  }, [])
+
   return (
     <AnimatePresence>
       <div
@@ -36,7 +43,7 @@ export const Deposits: React.FC<Props> = ({}) => {
               }}
               className="flex w-full justify-center"
             >
-              <CircularProgress variant="indeterminate" />
+              <CircularProgress variant="indeterminate" className="m-6" />
             </motion.div>
           ) : transactions.length > 0 ? (
             transactions.map((transaction: any) => (

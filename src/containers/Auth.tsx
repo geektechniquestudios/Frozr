@@ -7,7 +7,6 @@ import {
   getFirestore,
   serverTimestamp,
   runTransaction,
-  updateDoc,
 } from "firebase/firestore"
 import { ethers } from "ethers"
 import { useState } from "react"
