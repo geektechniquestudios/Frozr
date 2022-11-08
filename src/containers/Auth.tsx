@@ -57,10 +57,6 @@ const useAuth = () => {
   const [isWalletConnecting, setIsWalletConnecting] = useState(false)
 
   const connectWallet = async () => {
-    // if (!user) {
-    //   signInWithGoogle()
-    //   return
-    // }
     if (typeof window.ethereum === undefined) {
       alert("Metamask not installed")
       return
@@ -71,25 +67,11 @@ const useAuth = () => {
       await provider.send("eth_requestAccounts", [])
       const signer = provider.getSigner()
       const walletAddress = await signer.getAddress()
-      // const userDoc = doc(db, "users", auth.currentUser!.uid)
-      // updateDoc(userDoc, {
-      //   walletAddress,
-      // })
-      //   .then(() => {
       setIsWalletConnected(true)
       setIsWalletConnecting(false)
       setWalletAddress(walletAddress)
       localStorage.setItem("walletAddress", walletAddress)
       localStorage.setItem("isWalletConnected", "true")
-      // })
-      // .then(() => {
-      //   alert("Wallet connected")
-      // })
-      // .catch((error) => {
-      //   console.error(error)
-      //   alert("Error connecting to wallet")
-      //   setIsWalletConnected(false)
-      // })
     } catch (error) {
       console.error(error)
       alert("Error connecting to wallet.")
@@ -98,20 +80,10 @@ const useAuth = () => {
   }
 
   const disconnectWallet = async () => {
-    // if (!auth.currentUser) return
-    // const userDoc = doc(db, "users", auth.currentUser!.uid)
-    // updateDoc(userDoc, {
-    // walletAddress: "",
-    // })
-    // .then(() => {
     setWalletAddress("")
     setIsWalletConnected(false)
     localStorage.setItem("walletAddress", "")
     localStorage.setItem("isWalletConnected", "false")
-    // })
-    // .catch(() => {
-    // alert("Error disconnecting wallet")
-    // })
   }
 
   return {
