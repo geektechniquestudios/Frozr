@@ -7,7 +7,7 @@ const useForm = () => {
   const [currencyBorderColor, setCurrencyBorderColor] =
     useState("border-transparent")
   const [calendarBorderColor, setCalendarBorderColor] =
-    useState("border-blue-400")
+    useState("border-transparent")
   const [amountBorderColor, setAmountBorderColor] = useState("border-blue-300")
   return {
     connectBorderColor,

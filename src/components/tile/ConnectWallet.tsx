@@ -1,6 +1,7 @@
 import { Button } from "@mui/material"
 import { Auth } from "../../containers/Auth"
 import { Form } from "../../containers/Form"
+import { default as connectWalletLogo } from "/src/assets/undraw_pay.svg"
 
 interface Props {}
 
@@ -36,7 +37,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
         )}
       </div>
       <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-100 bg-opacity-70">
-        <img src="./src/assets/undraw_pay.svg" alt="wallet" className="h-16" />
+        <img src={connectWalletLogo} alt="wallet logo" className="h-16" />
         <div />
       </div>
     </div>
