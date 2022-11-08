@@ -9,6 +9,11 @@ const useForm = () => {
   const [calendarBorderColor, setCalendarBorderColor] =
     useState("border-transparent")
   const [amountBorderColor, setAmountBorderColor] = useState("border-blue-300")
+  const [deposits, setDeposits] = useState(true)
+  const refreshDeposits = () => {
+    setDeposits(!deposits)
+  }
+
   return {
     connectBorderColor,
     setConnectBorderColor,
@@ -18,6 +23,8 @@ const useForm = () => {
     setCalendarBorderColor,
     amountBorderColor,
     setAmountBorderColor,
+    refreshDeposits,
+    deposits
   }
 }
 

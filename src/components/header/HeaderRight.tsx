@@ -8,7 +8,7 @@ export const HeaderRight: React.FC = () => {
 
   return (
     <div className="mx-1 flex flex-auto items-center justify-end gap-1.5 align-middle">
-      <AnimatePresence>
+      
         {/* {!user && (
         <Button
           variant="contained"
@@ -29,7 +29,6 @@ export const HeaderRight: React.FC = () => {
           <motion.a
             initial={{ opacity: 0 }}
             animate={{ opacity: [0, 0, 1], translateY: 0 }}
-            exit={{ opacity: 0, translateX: 30 }}
             transition={{
               duration: 0.7,
               type: "spring",
@@ -53,7 +52,7 @@ export const HeaderRight: React.FC = () => {
             </div>
           </motion.a>
         )}
-      </AnimatePresence>
+      
     </div>
   )
 }

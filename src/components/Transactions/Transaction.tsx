@@ -1,5 +1,11 @@
-interface Props {}
+import { BigNumber } from "ethers"
 
-export const Transaction: React.FC<Props> = ({}) => {
-  return <> Transaction </>
+interface Props {
+  amount: BigNumber
+  releaseDate: BigNumber
+  currency: string
+}
+
+export const Deposit: React.FC<Props> = ({ amount }) => {
+  return <div className="">{amount.toString()}</div>
 }

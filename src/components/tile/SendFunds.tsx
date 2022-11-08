@@ -21,13 +21,8 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
     setCurrencyBorderColor,
     setCalendarBorderColor,
     setAmountBorderColor,
+    refreshDeposits,
   } = Form.useContainer()
-  const bigAmount = ethers.utils.parseEther(String(Number(amount)))
-
-  const overrides = {
-    value: bigAmount,
-    gasLimit: 1000000,
-  }
 
   // use this version for mainnet inclusion
   // const isCorrectBlockchain = async (
@@ -72,6 +67,7 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
         title: `Are you sure you want to store ${amount} ${currency} for ${daysToFreeze} ${
           daysToFreeze === 1 ? "day" : "days"
         }?`,
+        icon: "question",
         showCancelButton: true,
         confirmButtonText: "Send",
         confirmButtonColor: "#93c5fd",
@@ -109,33 +105,44 @@ export const SendFunds: React.FC<Props> = ({ amount, date, currency }) => {
       return true
     }
 
-    if (!areFieldsFilled()) return
+    const callSmartContract = async () => {
+      if (typeof window.ethereum !== undefined) {
+        await window.ethereum.request({ method: "eth_requestAccounts" })
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+        const signer: ethers.providers.JsonRpcSigner = provider.getSigner()
+        const contract = new ethers.Contract(contractAddress, Frozr.abi, signer)
+        try {
+          if (!(await isCorrectBlockchain(provider))) return
+          const date1 = dayjs()
+          const date2 = dayjs(date)
+          const diff = date2.diff(date1, "day", true)
+          const daysToFreeze = Math.floor(diff) + 1
 
-    if (typeof window.ethereum !== undefined) {
-      await window.ethereum.request({ method: "eth_requestAccounts" })
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const signer: ethers.providers.JsonRpcSigner = provider.getSigner()
-      const contract = new ethers.Contract(contractAddress, Frozr.abi, signer)
-      try {
-        if (!(await isCorrectBlockchain(provider))) return
-        const date1 = dayjs()
-        const date2 = dayjs(date)
-        const diff = date2.diff(date1, "day", true)
-        const daysToFreeze = Math.floor(diff)
+          if (!(await doesUserAccept(daysToFreeze))) return
 
-        if (!(await doesUserAccept(daysToFreeze))) return
+          const bigAmount = ethers.utils.parseEther(String(Number(amount)))
 
-        const transaction = await contract.deposit(daysToFreeze, overrides)
-        transaction.wait().then(() => {
+          const overrides = {
+            value: bigAmount,
+            gasLimit: 1000000,
+          }
+
+          const transaction = await contract.deposit(daysToFreeze, overrides)
+          transaction.wait().then(() => {
+            contract.removeAllListeners()
+            refreshDeposits()
+          })
+        } catch (err) {
           contract.removeAllListeners()
-        })
-      } catch (err) {
-        contract.removeAllListeners()
-        console.error(err)
+          console.error(err)
+        }
+      } else {
+        alert("Please install MetaMask to place a bet.")
       }
-    } else {
-      alert("Please install MetaMask to place a bet.")
     }
+
+    if (!areFieldsFilled()) return
+    callSmartContract()
   }
 
   return (
