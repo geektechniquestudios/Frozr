@@ -27,8 +27,7 @@ export const Amount: React.FC<Props> = ({ amount, setAmount }) => {
           }}
           allowNegativeValue={false}
           onBlur={(e) => {
-            const newValue = Number(e.target.value.replace(/,/g, "") ?? 0)
-            setAmount(String(newValue))
+            setAmount(e.target.value)
           }}
           onKeyPress={(e) => {
             e.key === "Enter" && e.currentTarget.blur()

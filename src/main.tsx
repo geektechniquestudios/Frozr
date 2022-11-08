@@ -5,9 +5,9 @@ import { Auth } from "./containers/Auth"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 //@ts-ignore
 import { registerSW } from "virtual:pwa-register"
-
-import "./index.scss"
 import { Form } from "./containers/Form"
+import { Wallet } from "./containers/Wallet"
+import "./index.scss"
 
 const theme = createTheme({
   palette: {
@@ -26,9 +26,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Auth.Provider>
       <Form.Provider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <Wallet.Provider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </Wallet.Provider>
       </Form.Provider>
     </Auth.Provider>
   </React.StrictMode>,

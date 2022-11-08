@@ -6,16 +6,15 @@ import {
   SelectChangeEvent,
 } from "@mui/material"
 import { Form } from "../../containers/Form"
+import { Wallet } from "../../containers/Wallet"
 
 import { default as selectCurrencyLogo } from "/src/assets/undraw_currency.svg"
 
-interface Props {
-  currency: string
-  setCurrency: React.Dispatch<React.SetStateAction<string>>
-}
+interface Props {}
 
-export const SelectCurrency: React.FC<Props> = ({ currency, setCurrency }) => {
+export const SelectCurrency: React.FC<Props> = ({}) => {
   const { currencyBorderColor, setCurrencyBorderColor } = Form.useContainer()
+  const { currency, setCurrency } = Wallet.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="p-3">

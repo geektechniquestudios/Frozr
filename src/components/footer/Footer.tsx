@@ -1,7 +1,5 @@
 import React from "react"
-import { BsGithub } from "react-icons/bs"
 import { SocialLink } from "./SocialLink"
-import { MdOutlineMail } from "react-icons/md"
 import { BiSupport } from "react-icons/bi"
 import { FaDonate } from "react-icons/fa"
 import { RiCodeSSlashFill, RiFilePaperLine } from "react-icons/ri"
@@ -17,7 +15,7 @@ export const Footer: React.FC = () => {
         />
         <SocialLink
           title="Source Code"
-          href="https://github.com/geektechniquestudios"
+          href="https://github.com/geektechniquestudios/Frozr"
           icon={<RiCodeSSlashFill />}
         />
         <SocialLink

@@ -9,9 +9,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract Frozr is Ownable {
   uint depositId = 0;
   struct Deposit {
+    uint depositId;
     address sender;
     bool isComplete;
     uint amount;
+    uint startDate;
     uint releaseDate;
   }
   mapping(uint => Deposit) public deposits;
@@ -30,15 +32,15 @@ contract Frozr is Ownable {
     require(_daysToFreeze > 0, "You must freeze for at least 1 day");
 
     deposits[depositId] = Deposit(
+      depositId,
       msg.sender,
       false,
       msg.value,
+      block.timestamp,
       block.timestamp + (_daysToFreeze * 1 days)
     );
     addressToDepositIds[msg.sender].push(depositId);
     depositId++;
-
-    emit DepositEvent(msg.sender, msg.value);
   }
 
   function withdraw(uint _depositId) external payable {
@@ -57,8 +59,6 @@ contract Frozr is Ownable {
 
     deposits[_depositId].isComplete = true;
     payable(msg.sender).transfer(deposits[_depositId].amount);
-
-    emit WithdrawEvent(msg.sender, deposits[_depositId].amount);
   }
 
   // function withdawEarly(uint _depositId) external payable {
@@ -79,7 +79,6 @@ contract Frozr is Ownable {
   //     deposits[_depositId].amount - (deposits[_depositId].amount / 10)
   //   );
 
-  //   emit WithdrawEvent(msg.sender, deposits[_depositId].amount);
   // }
 
   function viewDeposits() external view returns (Deposit[] memory) {
@@ -99,7 +98,4 @@ contract Frozr is Ownable {
   function viewFrozrBalance() external view onlyOwner returns (uint) {
     return frozrBalance;
   }
-
-  event DepositEvent(address indexed from, uint256 amount);
-  event WithdrawEvent(address indexed from, uint256 amount);
 }

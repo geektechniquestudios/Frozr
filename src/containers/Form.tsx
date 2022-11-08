@@ -24,7 +24,7 @@ const useForm = () => {
     amountBorderColor,
     setAmountBorderColor,
     refreshDeposits,
-    deposits
+    deposits,
   }
 }
 

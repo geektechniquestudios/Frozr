@@ -1,16 +1,14 @@
-import { AnimatePresence, motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import { Auth } from "../../containers/Auth"
-import { BigNumber, ethers } from "ethers"
-import Frozr from "../../artifacts/contracts/Frozr.sol/Frozr.json"
+import { BigNumber } from "ethers"
 import { Form } from "../../containers/Form"
-import { Deposit } from "./Transaction"
-
-declare let window: any
-const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS
+import { Deposit } from "./Deposit"
+import { Wallet } from "../../containers/Wallet"
 
 export interface Transaction {
+  depositId: string
   amount: BigNumber
+  startDate: BigNumber
   releaseDate: BigNumber
   currency: string
   isComplete: boolean
@@ -22,58 +20,28 @@ export const Deposits: React.FC<Props> = ({}) => {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const { isWalletConnected } = Auth.useContainer()
   const { deposits } = Form.useContainer()
-
-  const getTransactions = async () => {
-    const isCorrectBlockchain = async (
-      provider: ethers.providers.Web3Provider,
-    ) => {
-      const { chainId } = await provider.getNetwork()
-      if (chainId !== 43113) {
-        alert(
-          "You are on the wrong network. Please switch to the fuji network.",
-        )
-        return false
-      } else {
-        return true
-      }
-    }
-
-    if (typeof window.ethereum === undefined) {
-      alert("Please install MetaMask to place a bet.")
-      return
-    }
-    await window.ethereum.request({ method: "eth_requestAccounts" })
-    const provider = new ethers.providers.Web3Provider(window.ethereum)
-    const signer: ethers.providers.JsonRpcSigner = provider.getSigner()
-    const contract = new ethers.Contract(contractAddress, Frozr.abi, signer)
-    try {
-      if (!(await isCorrectBlockchain(provider))) return
-
-      const transactions = await contract.viewDeposits()
-      setTransactions(transactions)
-      contract.removeAllListeners()
-    } catch (err) {
-      contract.removeAllListeners()
-      console.error(err)
-    }
-  }
+  const { callContract } = Wallet.useContainer()
 
   useEffect(() => {
     if (!isWalletConnected) return
-    getTransactions()
+    callContract(async (contract) => {
+      setTransactions(await contract.viewDeposits())
+    })
   }, [deposits, isWalletConnected])
+
+  console.log(transactions)
 
   return (
     <>
-      {isWalletConnected && (
+      {isWalletConnected && transactions.length > 0 && (
         <div
-          className="h-[32em] shrink-0 grow rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-4"
+          className="scrollbar h-[32em] shrink-0 overflow-auto rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-4"
           style={{
             backdropFilter: "blur(16px)",
           }}
         >
           {/* say something about how you will only see transactions from the network your wallet is on */}
-          <p className="grid h-14 w-full place-content-center border-b border-slate-400 text-2xl font-extrabold text-stone-300">
+          <p className="mb-2 grid h-14 w-full place-content-center border-b border-slate-400 text-2xl font-extrabold text-stone-300">
             Your Deposits
           </p>
           <div
@@ -87,7 +55,7 @@ export const Deposits: React.FC<Props> = ({}) => {
             //   stiffness: 40,
             // }}
           >
-            {transactions.map((transaction: Transaction, i) => (
+            {[...transactions].reverse().map((transaction: Transaction, i) => (
               <Deposit {...transaction} key={i} />
             ))}
           </div>
