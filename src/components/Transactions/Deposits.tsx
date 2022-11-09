@@ -39,8 +39,8 @@ export const Deposits: React.FC<Props> = ({}) => {
     hidden: { opacity: 0 },
   }
 
-  const isNextEnabled = page === Math.ceil(transactions.length / 5) - 1
-  const isPrevEnabled = page === 0
+  const isNextDisabled = page === Math.ceil(transactions.length / 6) - 1
+  const isPrevDisabled = page === 0
 
   return (
     <div
@@ -50,35 +50,37 @@ export const Deposits: React.FC<Props> = ({}) => {
       }}
     >
       {/* say something about how you will only see transactions from the network your wallet is on */}
-      <div className="flex w-full  justify-between px-2">
+      <div className="flex w-full justify-between gap-2 px-2">
         <button
+          title={!(isPrevDisabled || !isWalletConnected) ? "Previous" : ""}
           onClick={() => setPage(page - 1)}
-          disabled={isPrevEnabled || !isWalletConnected}
+          disabled={isPrevDisabled || !isWalletConnected}
           className="grid place-content-center"
         >
           <MdOutlineNavigateBefore
             size={29}
             className={`color-shift rounded-full border border-slate-500 bg-slate-600 bg-opacity-50 ${
-              isPrevEnabled || !isWalletConnected
+              isPrevDisabled || !isWalletConnected
                 ? "text-slate-500"
                 : "text-slate-200 hover:border-slate-300"
             }`}
           />
         </button>
-        <p className="grid h-14 w-full place-content-center text-2xl font-extrabold text-stone-300">
+        <p className="grid h-14 w-full place-content-center text-center text-xl font-extrabold text-stone-300 sm:text-2xl">
           {transactions.length == 0 || !isWalletConnected
-            ? "No Deposits Yet"
+            ? "No Deposits To Show"
             : "Your Deposits"}
         </p>
         <button
+          title={!(isNextDisabled || !isWalletConnected) ? "Next" : ""}
           onClick={() => setPage(page + 1)}
-          disabled={isNextEnabled || !isWalletConnected}
+          disabled={isNextDisabled || !isWalletConnected}
           className="grid place-content-center"
         >
           <MdOutlineNavigateNext
             size={29}
             className={`color-shift rounded-full border border-slate-500 bg-slate-600 bg-opacity-50 ${
-              isNextEnabled || !isWalletConnected
+              isNextDisabled || !isWalletConnected
                 ? "text-slate-500"
                 : "text-slate-200 hover:border-slate-300"
             }`}
