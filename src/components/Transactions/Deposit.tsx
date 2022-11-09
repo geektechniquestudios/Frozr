@@ -47,7 +47,7 @@ export const Deposit: React.FC<Transaction> = ({
         <p>{balance}</p>
         <p className="text-xs">{currency}</p>
       </div>
-      <div className="grid place-content-center px-2 py-1">
+      <div className="grid place-content-center px-2 py-1 text-sm sm:text-base">
         {startDateFormatted} - {releaseDateFormatted}
       </div>
       <div className="grid place-content-center px-2 py-1">

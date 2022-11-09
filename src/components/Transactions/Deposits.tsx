@@ -44,7 +44,7 @@ export const Deposits: React.FC<Props> = ({}) => {
 
   return (
     <div
-      className="scrollbar h-[28.5em] shrink-0 overflow-auto rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-2"
+      className="scrollbar shrink-0 overflow-auto rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-2"
       style={{
         backdropFilter: "blur(16px)",
       }}
@@ -53,7 +53,7 @@ export const Deposits: React.FC<Props> = ({}) => {
       <div className="flex w-full  justify-between px-2">
         <button
           onClick={() => setPage(page - 1)}
-          disabled={isPrevEnabled}
+          disabled={isPrevEnabled || !isWalletConnected}
           className="grid place-content-center"
         >
           <MdOutlineNavigateBefore
@@ -66,11 +66,13 @@ export const Deposits: React.FC<Props> = ({}) => {
           />
         </button>
         <p className="grid h-14 w-full place-content-center text-2xl font-extrabold text-stone-300">
-          Your Deposits
+          {transactions.length == 0 || !isWalletConnected
+            ? "No Deposits Yet"
+            : "Your Deposits"}
         </p>
         <button
           onClick={() => setPage(page + 1)}
-          disabled={isNextEnabled}
+          disabled={isNextEnabled || !isWalletConnected}
           className="grid place-content-center"
         >
           <MdOutlineNavigateNext
