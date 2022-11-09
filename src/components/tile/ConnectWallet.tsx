@@ -8,7 +8,7 @@ interface Props {}
 export const ConnectWallet: React.FC<Props> = ({}) => {
   const { isWalletConnected, connectWallet, disconnectWallet } =
     Auth.useContainer()
-  const { connectBorderColor } = Form.useContainer()
+  const { connectBorderColor, setPage } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
@@ -27,7 +27,10 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
         )}
         {isWalletConnected && (
           <Button
-            onClick={disconnectWallet}
+            onClick={() => {
+              disconnectWallet()
+              setPage(0)
+            }}
             className="h-14 w-48 opacity-30"
             variant="contained"
           >

@@ -1,35 +1,22 @@
 import { useEffect, useState } from "react"
 import { Auth } from "../../containers/Auth"
-import { BigNumber } from "ethers"
 import { Form } from "../../containers/Form"
 import { Deposit } from "./Deposit"
 import { Wallet } from "../../containers/Wallet"
 import { AnimatePresence, motion } from "framer-motion"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
 
-export interface Transaction {
-  depositId: string
-  amount: BigNumber
-  startDate: BigNumber
-  releaseDate: BigNumber
-  currency: string
-  isComplete: boolean
-}
-
 interface Props {}
 
 export const Deposits: React.FC<Props> = ({}) => {
-  const [transactions, setTransactions] = useState<Transaction[]>([])
   const { isWalletConnected } = Auth.useContainer()
-  const { deposits, page, setPage } = Form.useContainer()
-  const { callContract } = Wallet.useContainer()
+  const { page, setPage } = Form.useContainer()
+  const { transactions, refreshDeposits } = Wallet.useContainer()
 
   useEffect(() => {
     if (!isWalletConnected) return
-    callContract(async (contract) => {
-      setTransactions(await contract.viewDeposits())
-    })
-  }, [deposits, isWalletConnected])
+    refreshDeposits()
+  }, [isWalletConnected])
 
   const list = {
     visible: {
@@ -100,7 +87,7 @@ export const Deposits: React.FC<Props> = ({}) => {
               [...transactions]
                 .reverse()
                 .slice(page * 6, page * 6 + 6)
-                .map((transaction: Transaction) => (
+                .map((transaction) => (
                   <Deposit {...transaction} key={transaction.depositId} />
                 ))}
           </motion.div>

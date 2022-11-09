@@ -5,11 +5,14 @@ import Swal from "sweetalert2"
 import { Auth } from "../../containers/Auth"
 import { Form } from "../../containers/Form"
 import { Wallet } from "../../containers/Wallet"
+import withReactContent from "sweetalert2-react-content"
 
 interface Props {
   amount: string
   date: Dayjs
 }
+
+const MySwal = withReactContent(Swal)
 
 export const SendFunds: React.FC<Props> = ({ amount, date }) => {
   const {
@@ -17,19 +20,30 @@ export const SendFunds: React.FC<Props> = ({ amount, date }) => {
     setCurrencyBorderColor,
     setCalendarBorderColor,
     setAmountBorderColor,
-    refreshDeposits,
     setPage,
   } = Form.useContainer()
 
-  const { callContract, currency } = Wallet.useContainer()
+  const { callContract, currency, refreshDeposits } = Wallet.useContainer()
   const { isWalletConnected } = Auth.useContainer()
 
   const sendDeposit = async (): Promise<void> => {
     const doesUserAccept = async (daysToFreeze: number): Promise<boolean> => {
-      const isConfirmed = await Swal.fire({
-        title: `Are you sure you want to store ${amount} ${currency} for ${daysToFreeze} ${
-          daysToFreeze === 1 ? "day" : "days"
-        }?`,
+      const isConfirmed = await MySwal.fire({
+        title: (
+          <div>
+            <div className="text-3xl">
+              {`Are you sure you want to store ${amount} ${currency} for ${daysToFreeze} ${
+                daysToFreeze === 1 ? "day" : "days"
+              }?`}
+            </div>
+            <div className="text-xs">
+              By using this service, you agree to our{" "}
+              <a href="google.com" className="underline">
+                terms of service
+              </a>
+            </div>
+          </div>
+        ),
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Send",

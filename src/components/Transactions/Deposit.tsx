@@ -1,9 +1,7 @@
 import { Button } from "@mui/material"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { BiTimeFive } from "react-icons/bi"
-import { Wallet } from "../../containers/Wallet"
-import { Transaction } from "./Deposits"
+import { Transaction, Wallet } from "../../containers/Wallet"
 
 export const Deposit: React.FC<Transaction> = ({
   amount,
@@ -12,7 +10,8 @@ export const Deposit: React.FC<Transaction> = ({
   isComplete,
   depositId,
 }) => {
-  const { callContract, currency } = Wallet.useContainer()
+  const { callContract, currency, blockTimestamp, refreshDeposits } =
+    Wallet.useContainer()
 
   const withdrawFunds = async () => {
     const overrides = {
@@ -20,20 +19,19 @@ export const Deposit: React.FC<Transaction> = ({
     }
     callContract(async (contract) => {
       await contract.withdraw(depositId, overrides)
-    })
+    }, refreshDeposits)
   }
 
-  const releaseDateFormatted = dayjs(releaseDate.toNumber() * 1000).format(
-    "MM/DD/YYYY",
-  )
+  const releaseDateFormatted = dayjs(releaseDate * 1000).format("MM/DD/YYYY")
+  const startDateFormatted = dayjs(startDate * 1000).format("MM/DD/YYYY")
 
-  const startDateFormatted = dayjs(startDate.toNumber() * 1000).format(
-    "MM/DD/YYYY",
-  )
+  const balance =
+    Number((Number(amount.toString()) / 10 ** 18).toFixed(6)) === 0
+      ? "< 0.000001"
+      : Number((Number(amount.toString()) / 10 ** 18).toFixed(6))
 
-  const balance = Number((Number(amount.toString()) / 10 ** 18).toFixed(6))
+  const isReadyToWithdraw = (blockTimestamp ?? 0) >= releaseDate
 
-  const isReadyToWithdraw = dayjs().isAfter(releaseDateFormatted)
   const item = {
     visible: { opacity: 1, x: 0 },
     hidden: { opacity: 0, x: -4 },
@@ -51,19 +49,19 @@ export const Deposit: React.FC<Transaction> = ({
         {startDateFormatted} - {releaseDateFormatted}
       </div>
       <div className="grid place-content-center px-2 py-1">
-        {!isComplete ? (
-          <div className="flex items-center gap-2">
-            <Button
-              variant="contained"
-              onClick={withdrawFunds}
-              disabled={!isReadyToWithdraw}
-            >
-              Withraw
-            </Button>
-          </div>
-        ) : (
-          <BiTimeFive title="Withdraw not ready yet" />
-        )}
+        <div className="flex items-center gap-2">
+          <Button
+            variant="contained"
+            onClick={withdrawFunds}
+            disabled={!isReadyToWithdraw || isComplete}
+          >
+            {isComplete
+              ? "Complete"
+              : isReadyToWithdraw
+              ? "Withdraw"
+              : "Locked"}
+          </Button>
+        </div>
       </div>
     </motion.div>
   )
