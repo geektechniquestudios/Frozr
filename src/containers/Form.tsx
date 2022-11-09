@@ -13,6 +13,7 @@ const useForm = () => {
   const refreshDeposits = () => {
     setDeposits(!deposits)
   }
+  const [page, setPage] = useState(0)
 
   return {
     connectBorderColor,
@@ -25,6 +26,8 @@ const useForm = () => {
     setAmountBorderColor,
     refreshDeposits,
     deposits,
+    page,
+    setPage,
   }
 }
 

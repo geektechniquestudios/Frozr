@@ -1,5 +1,6 @@
 import { Button } from "@mui/material"
 import dayjs from "dayjs"
+import { motion } from "framer-motion"
 import { BiTimeFive } from "react-icons/bi"
 import { Wallet } from "../../containers/Wallet"
 import { Transaction } from "./Deposits"
@@ -33,9 +34,15 @@ export const Deposit: React.FC<Transaction> = ({
   const balance = Number((Number(amount.toString()) / 10 ** 18).toFixed(6))
 
   const isReadyToWithdraw = dayjs().isAfter(releaseDateFormatted)
-
+  const item = {
+    visible: { opacity: 1, x: 0 },
+    hidden: { opacity: 0, x: -4 },
+  }
   return (
-    <div className="flex h-14 justify-between gap-1 rounded-sm border border-slate-500 bg-slate-500 bg-opacity-50 text-stone-200">
+    <motion.div
+      className="flex h-14 justify-between gap-1 rounded-sm border border-slate-500 bg-slate-500 bg-opacity-50 text-stone-200"
+      variants={item}
+    >
       <div className="flex w-28 flex-col px-2 py-1">
         <p>{balance}</p>
         <p className="text-xs">{currency}</p>
@@ -58,6 +65,6 @@ export const Deposit: React.FC<Transaction> = ({
           <BiTimeFive title="Withdraw not ready yet" />
         )}
       </div>
-    </div>
+    </motion.div>
   )
 }

@@ -19,7 +19,6 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
             variant="outlined"
             sx={{
               fontWeight: "bold",
-              color: "",
               borderColor: connectBorderColor,
             }}
           >

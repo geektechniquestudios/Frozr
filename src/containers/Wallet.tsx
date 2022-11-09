@@ -47,7 +47,6 @@ const useWallet = () => {
   }
 
   const [currency, setCurrency] = useState("Avax")
-
   return { callContract, currency, setCurrency }
 }
 

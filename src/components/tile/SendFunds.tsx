@@ -18,6 +18,7 @@ export const SendFunds: React.FC<Props> = ({ amount, date }) => {
     setCalendarBorderColor,
     setAmountBorderColor,
     refreshDeposits,
+    setPage,
   } = Form.useContainer()
 
   const { callContract, currency } = Wallet.useContainer()
@@ -25,7 +26,6 @@ export const SendFunds: React.FC<Props> = ({ amount, date }) => {
 
   const sendDeposit = async (): Promise<void> => {
     const doesUserAccept = async (daysToFreeze: number): Promise<boolean> => {
-      console.log(amount)
       const isConfirmed = await Swal.fire({
         title: `Are you sure you want to store ${amount} ${currency} for ${daysToFreeze} ${
           daysToFreeze === 1 ? "day" : "days"
@@ -87,7 +87,10 @@ export const SendFunds: React.FC<Props> = ({ amount, date }) => {
     }
 
     if (!areFieldsFilled()) return
-    callContract(depositFunds, refreshDeposits)
+    callContract(depositFunds, () => {
+      refreshDeposits()
+      setPage(0)
+    })
   }
 
   return (
