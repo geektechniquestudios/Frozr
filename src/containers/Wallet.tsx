@@ -11,11 +11,53 @@ export interface Transaction {
   amount: BigNumber
   startDate: number
   releaseDate: number
-  currency: string
   isComplete: boolean
 }
 
 const useWallet = () => {
+  const [walletAddress, setWalletAddress] = useState(
+    localStorage.getItem("walletAddress") !== null
+      ? localStorage.getItem("walletAddress")
+      : "",
+  )
+  const [isWalletConnected, setIsWalletConnected] = useState(
+    localStorage.getItem("isWalletConnected") !== null
+      ? localStorage.getItem("isWalletConnected")! === "true"
+      : false,
+  )
+
+  const [isWalletConnecting, setIsWalletConnecting] = useState(false)
+
+  const connectWallet = async () => {
+    if (typeof window.ethereum === undefined) {
+      alert("Metamask not installed")
+      return
+    }
+    try {
+      setIsWalletConnecting(true)
+      const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+      await provider.send("eth_requestAccounts", [])
+      const signer = provider.getSigner()
+      const walletAddress = await signer.getAddress()
+      setIsWalletConnected(true)
+      setIsWalletConnecting(false)
+      setWalletAddress(walletAddress)
+      localStorage.setItem("walletAddress", walletAddress)
+      localStorage.setItem("isWalletConnected", "true")
+    } catch (error) {
+      console.error(error)
+      alert("Error connecting to wallet.")
+      setIsWalletConnecting(false)
+    }
+  }
+
+  const disconnectWallet = async () => {
+    setWalletAddress("")
+    setIsWalletConnected(false)
+    localStorage.setItem("walletAddress", "")
+    localStorage.setItem("isWalletConnected", "false")
+  }
+
   const callContract = async (
     contractCallFunction: (contract: ethers.Contract) => any,
     postContractCallFunction?: () => void,
@@ -80,6 +122,12 @@ const useWallet = () => {
     transactions,
     setTransactions,
     refreshDeposits,
+    connectWallet,
+    disconnectWallet,
+    isWalletConnected,
+    setIsWalletConnected,
+    isWalletConnecting,
+    walletAddress,
   }
 }
 

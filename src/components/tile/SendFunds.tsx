@@ -2,7 +2,6 @@ import { Button } from "@mui/material"
 import dayjs, { Dayjs } from "dayjs"
 import { ethers } from "ethers"
 import Swal from "sweetalert2"
-import { Auth } from "../../containers/Auth"
 import { Form } from "../../containers/Form"
 import { Wallet } from "../../containers/Wallet"
 import withReactContent from "sweetalert2-react-content"
@@ -23,8 +22,8 @@ export const SendFunds: React.FC<Props> = ({ amount, date }) => {
     setPage,
   } = Form.useContainer()
 
-  const { callContract, currency, refreshDeposits } = Wallet.useContainer()
-  const { isWalletConnected } = Auth.useContainer()
+  const { isWalletConnected, callContract, currency, refreshDeposits } =
+    Wallet.useContainer()
 
   const sendDeposit = async (): Promise<void> => {
     const doesUserAccept = async (daysToFreeze: number): Promise<boolean> => {

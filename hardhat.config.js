@@ -15,17 +15,13 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
 })
 
 // eslint-disable-next-line no-undef
-task(
-  "balances",
-  "Prints the list of AVAX account balances",
-  async (_, hre) => {
-    const accounts = await hre.ethers.getSigners()
-    for (const account of accounts) {
-      const balance = await hre.ethers.provider.getBalance(account.address)
-      console.log(`${account.address} has balance ${balance.toString()}`)
-    }
-  },
-)
+task("balances", "Prints the list of AVAX account balances", async (_, hre) => {
+  const accounts = await hre.ethers.getSigners()
+  for (const account of accounts) {
+    const balance = await hre.ethers.provider.getBalance(account.address)
+    console.log(`${account.address} has balance ${balance.toString()}`)
+  }
+})
 
 const accountKey = process.env.VITE_METAMASK_ACCOUNT_KEY
 

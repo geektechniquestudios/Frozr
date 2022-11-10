@@ -1,13 +1,13 @@
 import { Button } from "@mui/material"
-import { Auth } from "../../containers/Auth"
 import { Form } from "../../containers/Form"
+import { Wallet } from "../../containers/Wallet"
 import { default as connectWalletLogo } from "/src/assets/undraw_pay.svg"
 
 interface Props {}
 
 export const ConnectWallet: React.FC<Props> = ({}) => {
   const { isWalletConnected, connectWallet, disconnectWallet } =
-    Auth.useContainer()
+    Wallet.useContainer()
   const { connectBorderColor, setPage } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">

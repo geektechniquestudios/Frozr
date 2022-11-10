@@ -1,10 +1,10 @@
 import React from "react"
-import { Auth } from "../../containers/Auth"
 import { BsWallet2 } from "react-icons/bs"
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
+import { Wallet } from "../../containers/Wallet"
 
 export const HeaderRight: React.FC = () => {
-  const { walletAddress, isWalletConnected } = Auth.useContainer()
+  const { walletAddress, isWalletConnected } = Wallet.useContainer()
 
   return (
     <div className="mx-1 flex flex-auto items-center justify-end gap-1.5 align-middle">

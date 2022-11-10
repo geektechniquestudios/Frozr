@@ -28,6 +28,7 @@ dist-ssr
 .firebase/*
 cache/*
 cache
+
 src/artifacts/@openzeppelin/
 src/artifacts/build-info/
 src/artifacts/hardhat/

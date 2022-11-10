@@ -1,7 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 import { App } from "./App"
-import { Auth } from "./containers/Auth"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
 //@ts-ignore
 import { registerSW } from "virtual:pwa-register"
@@ -24,15 +23,13 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Auth.Provider>
-      <Form.Provider>
-        <Wallet.Provider>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
-        </Wallet.Provider>
-      </Form.Provider>
-    </Auth.Provider>
+    <Form.Provider>
+      <Wallet.Provider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Wallet.Provider>
+    </Form.Provider>
   </React.StrictMode>,
 )
 

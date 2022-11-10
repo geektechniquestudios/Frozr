@@ -1,7 +1,7 @@
 type Props = {
   href: string
   icon: React.ReactNode
-  title?: string
+  title: string
 }
 
 export const SocialLink: React.FC<Props> = ({ href, icon, title }) => {
