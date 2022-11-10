@@ -4,7 +4,7 @@ import Frozr from "../artifacts/contracts/Frozr.sol/Frozr.json"
 import { useState } from "react"
 
 declare let window: any
-const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS
+const contractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
 
 export interface Deposit {
   depositId: string

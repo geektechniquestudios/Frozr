@@ -5,7 +5,7 @@ import Swal from "sweetalert2"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import withReactContent from "sweetalert2-react-content"
-import { TOS } from "./TOS"
+import { TOS } from "../../popups/TOS"
 
 interface Props {
   amount: string
@@ -31,7 +31,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
       const isConfirmed = await MySwal.fire({
         title: (
           <div>
-            <div className="text-3xl">
+            <div className="text-2..eeee.xl">
               {`Are you sure you want to store ${amount} ${currency} for ${daysToFreeze} ${
                 daysToFreeze === 1 ? "day" : "days"
               }?`}
@@ -43,7 +43,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
                   MySwal.fire({
                     html: <TOS />,
                     confirmButtonText: "Close",
-                    confirmButtonColor: "#93c5fd",
+                    confirmButtonColor: "#0369a1",
                   })
                 }}
                 className="underline"
@@ -58,7 +58,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Send",
-        confirmButtonColor: "#93c5fd",
+        confirmButtonColor: "#0369a1",
       }).then((res) => res.isConfirmed)
       return isConfirmed
     }

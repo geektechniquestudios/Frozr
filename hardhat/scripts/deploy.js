@@ -1,6 +1,7 @@
 const fs = require("fs")
 const os = require("os")
 const hre = require("hardhat")
+
 require("dotenv").config({ path: "../../.env" })
 
 
@@ -24,8 +25,11 @@ async function main() {
   const frozr = await FrozrContract.deploy()
   await frozr.deployed()
 
-  console.log(`frozer contract deployed to: ${frozr.address}`)
-  setEnvValue("VITE_CONTRACT_ADDRESS", frozr.address)
+
+  const network = hre.network.name.toUpperCase()
+
+  console.log(`Frozer contract deployed to: ${frozr.address} on the ${network} network`)
+  setEnvValue(`VITE_${network}_CONTRACT_ADDRESS`, frozr.address)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -7,7 +7,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test-hardhat": "hardhat test",
-    "deploy-contract": "yarn hardhat run hardhat/scripts/deploy.js --network fuji"
+    "deploy-avax-contract": "yarn hardhat run hardhat/scripts/deploy.js --network fuji",
+    "deploy-eth-contract": "yarn hardhat run hardhat/scripts/deploy.js --network rinkeby",
+    "deploy-bsc-contract": "yarn hardhat run hardhat/scripts/deploy.js --network bscTestnet",
+    "deploy-neon-contract": "yarn hardhat run hardhat/scripts/deploy.js --network neonDevnet",
+    "deploy-sepolia-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepolia"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

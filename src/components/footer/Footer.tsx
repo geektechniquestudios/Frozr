@@ -3,9 +3,11 @@ import { SocialLink } from "./SocialLink"
 import { BiSupport } from "react-icons/bi"
 import { FaDiscord, FaDonate } from "react-icons/fa"
 import { RiCodeSSlashFill, RiFilePaperLine } from "react-icons/ri"
-import { TOS } from "../tiles/form/TOS"
+import { TOS } from "../popups/TOS"
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import { Donate } from "../popups/Donate"
+import { CustomerSupport as Support } from "../popups/Support"
 
 const MySwal = withReactContent(Swal)
 
@@ -20,7 +22,7 @@ export const Footer: React.FC = () => {
             MySwal.fire({
               html: <TOS />,
               confirmButtonText: "Close",
-              confirmButtonColor: "#93c5fd",
+              confirmButtonColor: "#0369a1",
             })
           }}
         />
@@ -30,13 +32,14 @@ export const Footer: React.FC = () => {
           icon={<RiCodeSSlashFill />}
         />
         <SocialLink
-          title="Customer Support"
+          title="Support"
           icon={<BiSupport />}
           onClick={() => {
             MySwal.fire({
-              html: <TOS />,
+              html: <Support />,
+              icon: "warning",
               confirmButtonText: "Close",
-              confirmButtonColor: "#93c5fd",
+              confirmButtonColor: "#0369a1",
             })
           }}
         />
@@ -45,13 +48,18 @@ export const Footer: React.FC = () => {
           icon={<FaDonate />}
           onClick={() => {
             MySwal.fire({
-              html: <TOS />,
+              html: <Donate />,
+              icon: "info",
               confirmButtonText: "Close",
-              confirmButtonColor: "#93c5fd",
+              confirmButtonColor: "#0369a1",
             })
           }}
         />
-        <SocialLink title="Discord" href="" icon={<FaDiscord />} />
+        <SocialLink
+          title="Discord"
+          href="https://discord.gg/X8PhpSnd"
+          icon={<FaDiscord />}
+        />
       </div>
     </div>
   )

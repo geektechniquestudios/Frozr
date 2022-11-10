@@ -1,3 +1,5 @@
+const { task } = require("hardhat/config")
+
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.11",
@@ -7,7 +9,7 @@ require("@nomiclabs/hardhat-waffle")
 require("dotenv").config({ path: ".env" })
 
 // eslint-disable-next-line no-undef
-task("accounts", "Prints the list of accounts", async (args, hre) => {
+task("accounts", "Prints the list of accounts", async (_args, hre) => {
   const accounts = await hre.ethers.getSigners()
   accounts.forEach((account) => {
     console.log(account.address)
@@ -15,13 +17,17 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
 })
 
 // eslint-disable-next-line no-undef
-task("balances", "Prints the list of AVAX account balances", async (_, hre) => {
-  const accounts = await hre.ethers.getSigners()
-  for (const account of accounts) {
-    const balance = await hre.ethers.provider.getBalance(account.address)
-    console.log(`${account.address} has balance ${balance.toString()}`)
-  }
-})
+task(
+  "balances",
+  "Prints the list of AVAX account balances",
+  async (_args, hre) => {
+    const accounts = await hre.ethers.getSigners()
+    for (const account of accounts) {
+      const balance = await hre.ethers.provider.getBalance(account.address)
+      console.log(`${account.address} has balance ${balance.toString()}`)
+    }
+  },
+)
 
 const accountKey = process.env.VITE_METAMASK_ACCOUNT_KEY
 
@@ -54,9 +60,9 @@ module.exports = {
       ],
     },
     bscTestnet: {
-      url: process.env.VITE_BSC_TESTNET_RPC_URL,
+      url: process.env.VITE_BSCTESTNET_RPC_URL,
+      gasPrice: 225000000000,
       chainId: 97,
-      gasPrice: 20000000000,
       accounts: [accountKey],
     },
     fuji: {
@@ -70,6 +76,18 @@ module.exports = {
       gasPrice: 225000000000,
       // chainId: 43114, // use this on mainnet launch
       chainId: 43113,
+      accounts: [accountKey],
+    },
+    neonDevnet: {
+      url: process.env.VITE_NEONDEVNET_RPC_URL,
+      // gasPrice: 225000000000,
+      chainId: 245022926,
+      accounts: [accountKey],
+    },
+    sepolia: {
+      url: process.env.VITE_SEPOLIA_RPC_URL,
+      // gasPrice: 225000000000,
+      chainId: 11155111,
       accounts: [accountKey],
     },
   },
