@@ -22,7 +22,8 @@ export const Deposits: React.FC<Props> = ({}) => {
   const isPrevDisabled = page === 0 || !isWalletConnected
 
   return (
-    <div
+    <motion.div
+      layout
       className="scrollbar shrink-0 overflow-auto rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-2"
       style={{
         backdropFilter: "blur(16px)",
@@ -60,6 +61,6 @@ export const Deposits: React.FC<Props> = ({}) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   )
 }

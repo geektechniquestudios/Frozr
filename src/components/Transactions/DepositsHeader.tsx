@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
 import { Transaction, Wallet } from "../../containers/Wallet"
 
@@ -18,7 +19,7 @@ export const DepositsHeader: React.FC<Props> = ({
 }) => {
   const { currency, isWalletConnected } = Wallet.useContainer()
   return (
-    <div className="flex w-full justify-between gap-2 px-2">
+    <motion.div layout className="flex w-full justify-between gap-2 px-2">
       <button
         title={!isPrevDisabled ? "Previous" : ""}
         onClick={() => setPage(page - 1)}
@@ -34,11 +35,37 @@ export const DepositsHeader: React.FC<Props> = ({
           }`}
         />
       </button>
-      <p className="grid h-14 w-full place-content-center text-center text-xl font-extrabold text-stone-300 sm:text-2xl">
-        {transactions.length == 0 || !isWalletConnected
-          ? "No Deposits To Show"
-          : `Your ${currency} Deposits`}
-      </p>
+      <div className="grid h-14 w-full place-content-center text-center text-xl font-extrabold text-stone-300 sm:text-2xl">
+        <AnimatePresence>
+          {transactions.length == 0 || !isWalletConnected ? (
+            <motion.div
+              className=" "
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0, 1], translateY: 0 }}
+              exit={{ opacity: 0, translateY: -30 }}
+              transition={{
+                duration: 0.7,
+                type: "spring",
+                stiffness: 40,
+              }}
+            >
+              No Deposits To Show
+            </motion.div>
+          ) : (
+            <motion.div
+              className=" "
+              initial={{ opacity: 0, translateY: -30 }}
+              animate={{ opacity: [0, 0, 1], translateY: 0 }}
+              exit={{ opacity: 0, translateY: -30 }}
+              transition={{
+                duration: 0.7,
+                type: "spring",
+                stiffness: 40,
+              }}
+            >{`Your ${currency} Deposits`}</motion.div>
+          )}
+        </AnimatePresence>
+      </div>
       <button
         title={!isNextDisabled ? "Next" : ""}
         onClick={() => setPage(page + 1)}
@@ -54,6 +81,6 @@ export const DepositsHeader: React.FC<Props> = ({
           }`}
         />
       </button>
-    </div>
+    </motion.div>
   )
 }

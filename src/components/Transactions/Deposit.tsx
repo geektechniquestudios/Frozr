@@ -50,6 +50,7 @@ export const Deposit: React.FC<Transaction> = ({
       <div className="grid place-content-center px-2 py-1">
         <div className="flex items-center gap-2">
           <Button
+            className="w-28"
             variant="contained"
             onClick={withdrawFunds}
             disabled={!isReadyToWithdraw || isComplete}
