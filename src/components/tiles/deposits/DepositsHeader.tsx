@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md"
-import { Transaction, Wallet } from "../../containers/Wallet"
+import { Deposit, Wallet } from "../../../containers/Wallet"
 
 interface Props {
   isNextDisabled: boolean
   isPrevDisabled: boolean
   page: number
   setPage: React.Dispatch<React.SetStateAction<number>>
-  deposits: Transaction[]
+  deposits: Deposit[]
 }
 
 export const DepositsHeader: React.FC<Props> = ({

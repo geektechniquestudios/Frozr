@@ -1,7 +1,7 @@
 import { useEffect } from "react"
-import { Form } from "../../containers/Form"
+import { Form } from "../../../containers/Form"
 import { Deposit } from "./Deposit"
-import { Wallet } from "../../containers/Wallet"
+import { Wallet } from "../../../containers/Wallet"
 import { AnimatePresence, motion } from "framer-motion"
 import { DepositsHeader } from "./DepositsHeader"
 
@@ -54,8 +54,8 @@ export const Deposits: React.FC<Props> = ({}) => {
               [...deposits]
                 .reverse()
                 .slice(page * 6, page * 6 + 6)
-                .map((transaction) => (
-                  <Deposit {...transaction} key={transaction.depositId} />
+                .map((deposit) => (
+                  <Deposit {...deposit} key={deposit.depositId} />
                 ))}
           </motion.div>
         )}

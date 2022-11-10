@@ -2,11 +2,11 @@ import { useState } from "react"
 import dayjs, { Dayjs } from "dayjs"
 import { ConnectWallet } from "./ConnectWallet"
 import { SelectCurrency } from "./SelectCurrency"
-import { Amount } from "./Amount"
-import { SendFunds } from "./SendFunds"
-import { Date } from "./Date"
+import { ChooseAmount } from "./ChooseAmount"
+import { StoreFunds } from "./StoreFunds"
+import { PickDate } from "./PickDate"
 
-export const TransactionTile = () => {
+export const FormTile = () => {
   const [date, setDate] = useState<Dayjs>(dayjs().add(1, "day"))
   const [amount, setAmount] = useState("")
 
@@ -19,9 +19,9 @@ export const TransactionTile = () => {
     >
       <ConnectWallet />
       <SelectCurrency />
-      <Date date={date} setDate={setDate} />
-      <Amount amount={amount} setAmount={setAmount} />
-      <SendFunds amount={amount} date={date} />
+      <PickDate date={date} setDate={setDate} />
+      <ChooseAmount amount={amount} setAmount={setAmount} />
+      <StoreFunds amount={amount} date={date} />
     </div>
   )
 }

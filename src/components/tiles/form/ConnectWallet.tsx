@@ -1,6 +1,6 @@
 import { Button } from "@mui/material"
-import { Form } from "../../containers/Form"
-import { Wallet } from "../../containers/Wallet"
+import { Form } from "../../../containers/Form"
+import { Wallet } from "../../../containers/Wallet"
 import { default as connectWalletLogo } from "/src/assets/undraw_pay.svg"
 
 interface Props {}

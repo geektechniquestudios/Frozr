@@ -1,9 +1,9 @@
 import { Button } from "@mui/material"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
-import { Transaction, Wallet } from "../../containers/Wallet"
+import { Deposit as DepositInterface, Wallet } from "../../../containers/Wallet"
 
-export const Deposit: React.FC<Transaction> = ({
+export const Deposit: React.FC<DepositInterface> = ({
   amount,
   startDate,
   releaseDate,

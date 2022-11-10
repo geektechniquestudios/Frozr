@@ -5,8 +5,8 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material"
-import { Form } from "../../containers/Form"
-import { Wallet } from "../../containers/Wallet"
+import { Form } from "../../../containers/Form"
+import { Wallet } from "../../../containers/Wallet"
 
 import { default as selectCurrencyLogo } from "/src/assets/undraw_currency.svg"
 

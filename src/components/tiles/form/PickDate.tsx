@@ -2,7 +2,7 @@ import { TextField } from "@mui/material"
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs, { Dayjs } from "dayjs"
-import { Form } from "../../containers/Form"
+import { Form } from "../../../containers/Form"
 import { default as dateLogo } from "/src/assets/undraw_calendar.svg"
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   setDate: React.Dispatch<React.SetStateAction<Dayjs>>
 }
 
-export const Date: React.FC<Props> = ({ date, setDate }) => {
+export const PickDate: React.FC<Props> = ({ date, setDate }) => {
   const { calendarBorderColor, setCalendarBorderColor } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">

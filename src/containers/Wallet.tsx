@@ -6,7 +6,7 @@ import { useState } from "react"
 declare let window: any
 const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS
 
-export interface Transaction {
+export interface Deposit {
   depositId: string
   amount: BigNumber
   startDate: number
@@ -112,7 +112,7 @@ const useWallet = () => {
 
   const [currency, setCurrency] = useState("Avax")
   const [blockTimestamp, setBlockTimestamp] = useState<number>()
-  const [deposits, setDeposits] = useState<Transaction[]>([])
+  const [deposits, setDeposits] = useState<Deposit[]>([])
 
   return {
     callContract,

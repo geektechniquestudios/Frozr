@@ -2,8 +2,8 @@ import { Button } from "@mui/material"
 import dayjs, { Dayjs } from "dayjs"
 import { ethers } from "ethers"
 import Swal from "sweetalert2"
-import { Form } from "../../containers/Form"
-import { Wallet } from "../../containers/Wallet"
+import { Form } from "../../../containers/Form"
+import { Wallet } from "../../../containers/Wallet"
 import withReactContent from "sweetalert2-react-content"
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 const MySwal = withReactContent(Swal)
 
-export const SendFunds: React.FC<Props> = ({ amount, date }) => {
+export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
   const {
     setConnectBorderColor,
     setCurrencyBorderColor,

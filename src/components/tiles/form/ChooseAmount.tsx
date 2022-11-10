@@ -1,5 +1,5 @@
 import CurrencyInput from "react-currency-input-field"
-import { Form } from "../../containers/Form"
+import { Form } from "../../../containers/Form"
 import { default as amountLogo } from "/src/assets/undraw_eth.svg"
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   setAmount: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const Amount: React.FC<Props> = ({ amount, setAmount }) => {
+export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
   const { amountBorderColor, setAmountBorderColor } = Form.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
