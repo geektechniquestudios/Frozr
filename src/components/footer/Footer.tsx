@@ -1,8 +1,13 @@
 import React from "react"
 import { SocialLink } from "./SocialLink"
 import { BiSupport } from "react-icons/bi"
-import { FaDonate } from "react-icons/fa"
+import { FaDiscord, FaDonate } from "react-icons/fa"
 import { RiCodeSSlashFill, RiFilePaperLine } from "react-icons/ri"
+import { TOS } from "../tiles/form/TOS"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+
+const MySwal = withReactContent(Swal)
 
 export const Footer: React.FC = () => {
   return (
@@ -10,8 +15,14 @@ export const Footer: React.FC = () => {
       <div className="flex h-14 items-center justify-between">
         <SocialLink
           title="Terms of Service"
-          href="https://www.linkedin.com/in/terry-dorsey-0a51b5187/"
           icon={<RiFilePaperLine />}
+          onClick={() => {
+            MySwal.fire({
+              html: <TOS />,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#93c5fd",
+            })
+          }}
         />
         <SocialLink
           title="Source Code"
@@ -20,14 +31,27 @@ export const Footer: React.FC = () => {
         />
         <SocialLink
           title="Customer Support"
-          href="https://stackoverflow.com/users/9634620/geektechnique"
           icon={<BiSupport />}
+          onClick={() => {
+            MySwal.fire({
+              html: <TOS />,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#93c5fd",
+            })
+          }}
         />
         <SocialLink
           title="Donate"
-          href="https://www.youtube.com/channel/UCiKB8a8J0PXB67s_P-jXuJQ?view_as=subscriber"
           icon={<FaDonate />}
+          onClick={() => {
+            MySwal.fire({
+              html: <TOS />,
+              confirmButtonText: "Close",
+              confirmButtonColor: "#93c5fd",
+            })
+          }}
         />
+        <SocialLink title="Discord" href="" icon={<FaDiscord />} />
       </div>
     </div>
   )

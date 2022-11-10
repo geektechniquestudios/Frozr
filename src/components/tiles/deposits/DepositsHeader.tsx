@@ -19,7 +19,7 @@ export const DepositsHeader: React.FC<Props> = ({
 }) => {
   const { currency, isWalletConnected } = Wallet.useContainer()
   return (
-    <motion.div layout className="flex w-full justify-between gap-2 px-2">
+    <motion.div className="flex w-full justify-between gap-2 px-2">
       <button
         title={!isPrevDisabled ? "Previous" : ""}
         onClick={() => setPage(page - 1)}
@@ -39,7 +39,6 @@ export const DepositsHeader: React.FC<Props> = ({
         <AnimatePresence>
           {deposits.length == 0 || !isWalletConnected ? (
             <motion.div
-              className=" "
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0, 1], translateY: 0 }}
               exit={{ opacity: 0, translateY: -30 }}

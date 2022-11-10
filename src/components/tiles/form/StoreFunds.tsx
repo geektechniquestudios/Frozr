@@ -5,6 +5,7 @@ import Swal from "sweetalert2"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import withReactContent from "sweetalert2-react-content"
+import { TOS } from "./TOS"
 
 interface Props {
   amount: string
@@ -37,12 +38,23 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
             </div>
             <div className="text-xs">
               By using this service, you agree to our{" "}
-              <a href="google.com" className="underline">
-                terms of service
-              </a>
+              <button
+                onClick={() => {
+                  MySwal.fire({
+                    html: <TOS />,
+                    confirmButtonText: "Close",
+                    confirmButtonColor: "#93c5fd",
+                  })
+                }}
+                className="underline"
+              >
+                Terms of Service
+              </button>
+              .
             </div>
           </div>
         ),
+
         icon: "question",
         showCancelButton: true,
         confirmButtonText: "Send",

@@ -22,7 +22,6 @@ export const Deposits: React.FC<Props> = ({}) => {
 
   return (
     <motion.div
-      layout
       className="scrollbar shrink-0 overflow-auto rounded-md border border-stone-600 bg-gray-500 bg-opacity-30 p-2"
       style={{
         backdropFilter: "blur(16px)",
