@@ -7,7 +7,7 @@ import { DepositsHeader } from "./DepositsHeader"
 
 interface Props {}
 
-export const Deposits: React.FC<Props> = ({}) => {
+export const DepositsTile: React.FC<Props> = ({}) => {
   const { page, setPage } = Form.useContainer()
   const { deposits, refreshDeposits, isWalletConnected } = Wallet.useContainer()
 
