@@ -9,8 +9,7 @@ interface Props {}
 
 export const Deposits: React.FC<Props> = ({}) => {
   const { page, setPage } = Form.useContainer()
-  const { transactions, refreshDeposits, isWalletConnected } =
-    Wallet.useContainer()
+  const { deposits, refreshDeposits, isWalletConnected } = Wallet.useContainer()
 
   useEffect(() => {
     if (!isWalletConnected) return
@@ -18,7 +17,7 @@ export const Deposits: React.FC<Props> = ({}) => {
   }, [isWalletConnected])
 
   const isNextDisabled =
-    page === Math.ceil(transactions.length / 6) - 1 || !isWalletConnected
+    page === Math.ceil(deposits.length / 6) - 1 || !isWalletConnected
   const isPrevDisabled = page === 0 || !isWalletConnected
 
   return (
@@ -34,10 +33,10 @@ export const Deposits: React.FC<Props> = ({}) => {
         isPrevDisabled={isPrevDisabled}
         page={page}
         setPage={setPage}
-        transactions={transactions}
+        deposits={deposits}
       />
       <AnimatePresence>
-        {isWalletConnected && transactions.length > 0 && (
+        {isWalletConnected && deposits.length > 0 && (
           <motion.div
             initial="hidden"
             animate="visible"
@@ -51,8 +50,8 @@ export const Deposits: React.FC<Props> = ({}) => {
             }}
             className="flex flex-col gap-2"
           >
-            {transactions &&
-              [...transactions]
+            {deposits &&
+              [...deposits]
                 .reverse()
                 .slice(page * 6, page * 6 + 6)
                 .map((transaction) => (

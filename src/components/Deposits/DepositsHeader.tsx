@@ -7,7 +7,7 @@ interface Props {
   isPrevDisabled: boolean
   page: number
   setPage: React.Dispatch<React.SetStateAction<number>>
-  transactions: Transaction[]
+  deposits: Transaction[]
 }
 
 export const DepositsHeader: React.FC<Props> = ({
@@ -15,7 +15,7 @@ export const DepositsHeader: React.FC<Props> = ({
   isPrevDisabled,
   page,
   setPage,
-  transactions,
+  deposits,
 }) => {
   const { currency, isWalletConnected } = Wallet.useContainer()
   return (
@@ -37,7 +37,7 @@ export const DepositsHeader: React.FC<Props> = ({
       </button>
       <div className="grid h-14 w-full place-content-center text-center text-xl font-extrabold text-stone-300 sm:text-2xl">
         <AnimatePresence>
-          {transactions.length == 0 || !isWalletConnected ? (
+          {deposits.length == 0 || !isWalletConnected ? (
             <motion.div
               className=" "
               initial={{ opacity: 0 }}

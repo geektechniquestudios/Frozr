@@ -1,9 +1,9 @@
 import { TransactionTile } from "./tile/TransactionTile"
-import { Deposits } from "./Transactions/Deposits"
+import { Deposits } from "./Deposits/Deposits"
 import { HeadingBlurb } from "./HeadingBlurb"
 import { Footer } from "./footer/Footer"
-import "../index.scss"
 import { FluffTile } from "./FluffTile"
+import "../index.scss"
 
 export const MainContent: React.FC = () => {
   return (

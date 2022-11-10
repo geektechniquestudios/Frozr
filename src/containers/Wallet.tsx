@@ -106,21 +106,21 @@ const useWallet = () => {
 
   const refreshDeposits = () => {
     callContract(async (contract) => {
-      setTransactions(await contract.viewDeposits())
+      setDeposits(await contract.viewDeposits())
     })
   }
 
   const [currency, setCurrency] = useState("Avax")
   const [blockTimestamp, setBlockTimestamp] = useState<number>()
-  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [deposits, setDeposits] = useState<Transaction[]>([])
 
   return {
     callContract,
     currency,
     setCurrency,
     blockTimestamp,
-    transactions,
-    setTransactions,
+    deposits,
+    setDeposits,
     refreshDeposits,
     connectWallet,
     disconnectWallet,
