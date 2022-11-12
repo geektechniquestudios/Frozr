@@ -59,8 +59,8 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
               BNB
             </MenuItem>
             <MenuItem
-              disabled
               value="NEON"
+              disabled
               onClick={() => {
                 updateNetwork("NEON")
               }}
@@ -68,7 +68,6 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
               NEON
             </MenuItem>
             <MenuItem
-              disabled
               value="ETH"
               onClick={() => {
                 updateNetwork("ETH")

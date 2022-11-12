@@ -7,6 +7,8 @@ import { Form } from "./Form"
 declare let window: any
 const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
 const bnbContractAddress = import.meta.env.VITE_BSCTESTNET_CONTRACT_ADDRESS
+const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
+const neonContractAddress = import.meta.env.VITE_NEONDEVNET_CONTRACT_ADDRESS
 
 export interface Deposit {
   depositId: string
@@ -88,8 +90,8 @@ const useWallet = () => {
       contractAddress: avaxContractAddress,
     },
     BNB: { chainId: 97, contractAddress: bnbContractAddress },
-    ETH: { chainId: 4 },
-    NEON: { chainId: 111 },
+    ETH: { chainId: 11155111, contractAddress: ethContractAddress },
+    NEON: { chainId: 245022926, contractAddress: neonContractAddress },
     "": { chainId: -1 },
   }
 
