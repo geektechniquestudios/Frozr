@@ -6,16 +6,16 @@ import {
   SelectChangeEvent,
 } from "@mui/material"
 import { Form } from "../../../containers/Form"
-import { CurrencyString, Wallet } from "../../../containers/Wallet"
+import { Wallet } from "../../../containers/Wallet"
 
 import { default as selectCurrencyLogo } from "/src/assets/undraw_currency.svg"
 
 interface Props {}
 
 export const SelectCurrency: React.FC<Props> = ({}) => {
-  const { currencyBorderColor, setCurrencyBorderColor } = Form.useContainer()
-  const { currency, setCurrency, isCorrectNetwork, updateNetwork } =
-    Wallet.useContainer()
+  const { currencyBorderColor, setPage, setCurrencyBorderColor } =
+    Form.useContainer()
+  const { currency, isCorrectNetwork, updateNetwork } = Wallet.useContainer()
 
   const label = isCorrectNetwork
     ? "Select a Currency"
@@ -39,7 +39,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
             value={currency}
             label={label}
             onChange={(event: SelectChangeEvent) => {
-              setCurrency(event.target.value as CurrencyString)
+              setPage(0)
             }}
           >
             <MenuItem
