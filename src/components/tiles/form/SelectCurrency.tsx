@@ -6,7 +6,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material"
 import { Form } from "../../../containers/Form"
-import { Wallet } from "../../../containers/Wallet"
+import { CurrencyString, Wallet } from "../../../containers/Wallet"
 
 import { default as selectCurrencyLogo } from "/src/assets/undraw_currency.svg"
 
@@ -14,7 +14,12 @@ interface Props {}
 
 export const SelectCurrency: React.FC<Props> = ({}) => {
   const { currencyBorderColor, setCurrencyBorderColor } = Form.useContainer()
-  const { currency, setCurrency } = Wallet.useContainer()
+  const { currency, setCurrency, isCorrectNetwork, updateNetwork } =
+    Wallet.useContainer()
+
+  const label = isCorrectNetwork
+    ? "Select a Currency"
+    : "Change Your Wallet's Network"
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="p-3">
@@ -24,16 +29,53 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
             setCurrencyBorderColor("border-transparent")
           }}
         >
-          <InputLabel>Select Currency</InputLabel>
+          <InputLabel>
+            <div className={`${isCorrectNetwork ? "" : "text-yellow-500"}`}>
+              {label}
+            </div>
+          </InputLabel>
           <Select
             className={`${currencyBorderColor} w-48 border`}
             value={currency}
-            label="Select Currency"
+            label={label}
             onChange={(event: SelectChangeEvent) => {
-              setCurrency(event.target.value)
+              setCurrency(event.target.value as CurrencyString)
             }}
           >
-            <MenuItem value="Avax">Avax</MenuItem>
+            <MenuItem
+              value="AVAX"
+              onClick={() => {
+                updateNetwork("AVAX")
+              }}
+            >
+              AVAX
+            </MenuItem>
+            <MenuItem
+              value="BNB"
+              onClick={() => {
+                updateNetwork("BNB")
+              }}
+            >
+              BNB
+            </MenuItem>
+            <MenuItem
+              disabled
+              value="NEON"
+              onClick={() => {
+                updateNetwork("NEON")
+              }}
+            >
+              NEON
+            </MenuItem>
+            <MenuItem
+              disabled
+              value="ETH"
+              onClick={() => {
+                updateNetwork("ETH")
+              }}
+            >
+              ETHER
+            </MenuItem>
           </Select>
         </FormControl>
       </div>

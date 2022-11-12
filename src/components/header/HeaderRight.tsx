@@ -11,9 +11,9 @@ export const HeaderRight: React.FC = () => {
       {isWalletConnected && (
         <motion.a
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0, 1], translateY: 0 }}
+          animate={{ opacity: 1 }}
           transition={{
-            duration: 0.7,
+            duration: 0.5,
             type: "spring",
             stiffness: 40,
           }}

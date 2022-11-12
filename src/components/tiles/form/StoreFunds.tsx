@@ -23,8 +23,13 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
     setPage,
   } = Form.useContainer()
 
-  const { isWalletConnected, callContract, currency, refreshDeposits } =
-    Wallet.useContainer()
+  const {
+    isWalletConnected,
+    callContract,
+    currency,
+    refreshDeposits,
+    isCorrectNetwork,
+  } = Wallet.useContainer()
 
   const sendDeposit = async (): Promise<void> => {
     const doesUserAccept = async (daysToFreeze: number): Promise<boolean> => {
@@ -87,7 +92,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
         return false
       }
       if (!isWalletConnected) return reddenWalletButton()
-      else if (!currency) return reddenCurrencyButton()
+      else if (!currency || !isCorrectNetwork) return reddenCurrencyButton()
       else if (!date || dayjs(date) < dayjs()) return reddenCalendarButton()
       else if (!amount || Number(amount) <= 0) return reddenAmountButton()
       return true

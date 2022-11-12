@@ -11,10 +11,11 @@ interface Props {
 
 export const DepositsTile: React.FC<Props> = ({ layoutTransition }) => {
   const { page, setPage } = Form.useContainer()
-  const { deposits, refreshDeposits, isWalletConnected } = Wallet.useContainer()
+  const { deposits, refreshDeposits, isWalletConnected, isCorrectNetwork } =
+    Wallet.useContainer()
 
   useEffect(() => {
-    if (!isWalletConnected) return
+    if (!isWalletConnected || isCorrectNetwork) return
     refreshDeposits()
   }, [isWalletConnected])
 

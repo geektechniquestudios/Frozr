@@ -17,7 +17,8 @@ export const Deposit: React.FC<DepositInterface> = ({
     const overrides = {
       gasLimit: 1000000,
     }
-    callContract(async (contract) => {
+    callContract(
+      async (contract) => {
       return await contract.withdraw(depositId, overrides)
     }, refreshDeposits)
   }

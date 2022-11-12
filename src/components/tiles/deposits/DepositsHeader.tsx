@@ -19,7 +19,10 @@ export const DepositsHeader: React.FC<Props> = ({
 }) => {
   const { currency, isWalletConnected } = Wallet.useContainer()
   return (
-    <motion.div layout="position" className="flex w-full justify-between gap-2 px-2">
+    <motion.div
+      layout="position"
+      className="flex w-full justify-between gap-2 px-2"
+    >
       <button
         title={!isPrevDisabled ? "Previous" : ""}
         onClick={() => setPage(page - 1)}

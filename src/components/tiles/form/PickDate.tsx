@@ -12,6 +12,7 @@ interface Props {
 
 export const PickDate: React.FC<Props> = ({ date, setDate }) => {
   const { calendarBorderColor, setCalendarBorderColor } = Form.useContainer()
+
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
@@ -25,7 +26,7 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
             <DesktopDatePicker
               minDate={dayjs().add(1, "day")}
               className={`${calendarBorderColor} w-48 border text-stone-300`}
-              label="Pick date"
+              label="Pick Your Date"
               value={date}
               onChange={(newValue) => {
                 if (newValue) setDate(newValue)

@@ -18,7 +18,7 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
             setAmountBorderColor("")
           }}
           autoComplete="off"
-          placeholder="Choose amount"
+          placeholder="Choose an Amount"
           defaultValue=""
           decimalsLimit={18}
           value={amount}
