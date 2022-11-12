@@ -24,7 +24,7 @@ export const HeadingTile = () => {
         <img src={vault} alt="vault" />
       </div>
       <p className="m-3 border-l border-slate-400 pl-2 text-2xl font-bold text-stone-200 sm:w-1/2">
-        Lock your cyptocurrency in a timed smart-contract vault for free
+        Lock your cyptocurrency in a timed smart contract vault for free
       </p>
     </motion.div>
   )

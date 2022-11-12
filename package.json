@@ -11,7 +11,8 @@
     "deploy-eth-contract": "yarn hardhat run hardhat/scripts/deploy.js --network rinkeby",
     "deploy-bsc-contract": "yarn hardhat run hardhat/scripts/deploy.js --network bscTestnet",
     "deploy-neon-contract": "yarn hardhat run hardhat/scripts/deploy.js --network neonDevnet",
-    "deploy-sepolia-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepolia"
+    "deploy-sepolia-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepolia",
+    "deploy-doge-contract": "yarn hardhat run hardhat/scripts/deploy.js --network dogeTestnet"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

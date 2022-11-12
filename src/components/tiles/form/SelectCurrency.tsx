@@ -60,7 +60,6 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
             </MenuItem>
             <MenuItem
               value="NEON"
-              disabled
               onClick={() => {
                 updateNetwork("NEON")
               }}
@@ -74,6 +73,14 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
               }}
             >
               ETHER
+            </MenuItem>
+            <MenuItem
+              value="DOGE"
+              onClick={() => {
+                updateNetwork("DOGE")
+              }}
+            >
+              DOGE
             </MenuItem>
           </Select>
         </FormControl>

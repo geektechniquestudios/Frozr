@@ -77,7 +77,6 @@ contract Frozr is Ownable {
   //   payable(msg.sender).transfer(
   //     deposits[_depositId].amount - (deposits[_depositId].amount / 10)
   //   );
-
   // }
 
   function viewDeposits() external view returns (Deposit[] memory) {

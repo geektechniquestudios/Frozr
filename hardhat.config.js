@@ -61,33 +61,33 @@ module.exports = {
     },
     bscTestnet: {
       url: process.env.VITE_BSCTESTNET_RPC_URL,
-      gasPrice: 225000000000,
       chainId: 97,
       accounts: [accountKey],
     },
     fuji: {
       url: process.env.VITE_AVALANCHE_TESTNET_RPC_URL,
-      gasPrice: 225000000000,
       chainId: 43113,
       accounts: [accountKey],
     },
     avalancheMainnet: {
       url: process.env.VITE_AVALANCHE_MAINNET_RPC_URL,
-      gasPrice: 225000000000,
       // chainId: 43114, // use this on mainnet launch
       chainId: 43113,
       accounts: [accountKey],
     },
     neonDevnet: {
       url: process.env.VITE_NEONDEVNET_RPC_URL,
-      // gasPrice: 225000000000,
       chainId: 245022926,
       accounts: [accountKey],
     },
     sepolia: {
       url: process.env.VITE_SEPOLIA_RPC_URL,
-      // gasPrice: 225000000000,
       chainId: 11155111,
+      accounts: [accountKey],
+    },
+    dogeTestnet: {
+      url: process.env.VITE_DOGETESTNET_RPC_URL,
+      chainId: 568,
       accounts: [accountKey],
     },
   },

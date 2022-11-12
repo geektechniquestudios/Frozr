@@ -9,6 +9,7 @@ const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
 const bnbContractAddress = import.meta.env.VITE_BSCTESTNET_CONTRACT_ADDRESS
 const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
 const neonContractAddress = import.meta.env.VITE_NEONDEVNET_CONTRACT_ADDRESS
+const dogeContractAddress = import.meta.env.VITE_DOGETESTNET_CONTRACT_ADDRESS
 
 export interface Deposit {
   depositId: string
@@ -32,7 +33,7 @@ export interface Deposit {
   })
 }
 
-export type CurrencyString = "AVAX" | "BNB" | "NEON" | "ETH" | ""
+export type CurrencyString = "AVAX" | "BNB" | "NEON" | "ETH" | "DOGE" | ""
 
 const useWallet = () => {
   const [walletAddress, setWalletAddress] = useState<string>(
@@ -92,6 +93,7 @@ const useWallet = () => {
     BNB: { chainId: 97, contractAddress: bnbContractAddress },
     ETH: { chainId: 11155111, contractAddress: ethContractAddress },
     NEON: { chainId: 245022926, contractAddress: neonContractAddress },
+    DOGE: {chainId: 568, contractAddress: dogeContractAddress},
     "": { chainId: -1 },
   }
 

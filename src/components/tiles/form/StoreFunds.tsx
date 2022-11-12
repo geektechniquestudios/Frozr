@@ -110,7 +110,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
 
       const overrides = {
         value: bigAmount,
-        gasLimit: 1000000,
+        // gasLimit: 10000000,
       }
 
       return await contract.deposit(daysToFreeze, overrides)
