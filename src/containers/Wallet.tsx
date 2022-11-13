@@ -3,6 +3,7 @@ import { BigNumber, ethers } from "ethers"
 import Frozr from "../artifacts/contracts/Frozr.sol/Frozr.json"
 import { useEffect, useState } from "react"
 import { Form } from "./Form"
+import Swal from "sweetalert2"
 
 declare let window: any
 const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
@@ -93,7 +94,7 @@ const useWallet = () => {
     BNB: { chainId: 97, contractAddress: bnbContractAddress },
     ETH: { chainId: 11155111, contractAddress: ethContractAddress },
     NEON: { chainId: 245022926, contractAddress: neonContractAddress },
-    DOGE: {chainId: 568, contractAddress: dogeContractAddress},
+    DOGE: { chainId: 568, contractAddress: dogeContractAddress },
     "": { chainId: -1 },
   }
 
@@ -171,6 +172,22 @@ const useWallet = () => {
     })
   }
 
+  const doesUserHaveEnoughAvax = async (price: BigNumber) => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+    const balance: BigNumber = await provider.getBalance(walletAddress!)
+    const doesUserHaveEnoughAvax = balance.gte(price)
+    console.log(balance.toString(), price.toString(), doesUserHaveEnoughAvax)
+    if (!doesUserHaveEnoughAvax) {
+      Swal.fire({
+        title: "Insufficient Funds",
+        text: `You don't have enough ${currency} to place this bet.`,
+        icon: "error",
+        confirmButtonText: "Ok",
+      })
+    }
+    return doesUserHaveEnoughAvax
+  }
+
   return {
     callContract,
     currency,
@@ -186,6 +203,7 @@ const useWallet = () => {
     walletAddress,
     isCorrectNetwork,
     updateNetwork,
+    doesUserHaveEnoughAvax,
   }
 }
 

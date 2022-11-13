@@ -29,6 +29,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
     currency,
     refreshDeposits,
     isCorrectNetwork,
+    doesUserHaveEnoughAvax,
   } = Wallet.useContainer()
 
   const sendDeposit = async (): Promise<void> => {
@@ -116,7 +117,11 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
       return await contract.deposit(daysToFreeze, overrides)
     }
 
-    if (!areFieldsFilled()) return
+    if (
+      !areFieldsFilled() ||
+      !(await doesUserHaveEnoughAvax(ethers.utils.parseEther(amount)))
+    )
+      return
     callContract(depositFunds, () => {
       refreshDeposits()
       setPage(0)

@@ -23,18 +23,15 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
       }}
       transition={layoutTransition}
       className="photo-grid grid gap-3 rounded-md text-slate-200"
-      style={{
-        backdropFilter: "blur(16px)",
-      }}
     >
       <Card
         tall
         content={
           <div className="flex flex-col gap-2 p-2">
-            <p className="m-2 border-b p-1 text-xl font-bold">
+            <p className="m-2 border-b p-1 text-lg font-bold sm:text-3xl">
               Fully Decentralized
             </p>
-            <p className="leading-8">
+            <p className="sm:text-xl sm:leading-8">
               A trustless smart-contract holds your funds. Your investment is
               kept safe in a protocol running on the blockchain, not with an
               individual, business, or bank.
@@ -73,7 +70,7 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
         wide
         content={
           <div>
-            <p className="border-b p-1 text-xl font-bold">Actually Free</p>
+            <p className="border-b p-1 text-3xl font-bold"></p>
             <p className="text-sm">
               A trustless system holds your funds. Your money is kept in a
               protocol running on the blockchain of your coin, not with an
@@ -87,7 +84,7 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
         tall
         content={
           <div>
-            <p className="border-b p-1 text-xl font-bold">Actually Free</p>
+            <p className="border-b p-1 text-3xl font-bold">Actually Free</p>
             <p className="text-sm">
               A trustless system holds your funds. Your money is kept in a
               protocol running on the blockchain of your coin, not with an
