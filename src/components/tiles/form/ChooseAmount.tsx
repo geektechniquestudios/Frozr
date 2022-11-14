@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import CurrencyInput from "react-currency-input-field"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
@@ -40,10 +41,24 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
           }}
         />
       </div>
-      <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70">
-        <div />
+      <motion.div
+        initial={{
+          x: 400,
+        }}
+        animate={{
+          x: 30,
+        }}
+        transition={{
+          // delay: 0.3,
+          duration: 1,
+          type: "spring",
+          damping: 16,
+          bounce: 0.3,
+        }}
+        className="flex w-full items-center justify-start rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70 sm:px-6"
+      >
         <img src={amountLogo} alt="amount logo" className="h-16" />
-      </div>
+      </motion.div>
     </div>
   )
 }

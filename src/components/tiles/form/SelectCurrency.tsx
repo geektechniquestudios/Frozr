@@ -5,6 +5,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material"
+import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 
@@ -87,9 +88,24 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           </Select>
         </FormControl>
       </div>
-      <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400">
+      <motion.div
+        initial={{
+          x: 400,
+        }}
+        animate={{
+          x: 0,
+        }}
+        transition={{
+          delay: 0.05,
+          duration: 5,
+          type: "spring",
+          damping: 20,
+          bounce: 0.7,
+        }}
+        className="flex w-full items-center justify-start rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400 sm:px-6"
+      >
         <img src={selectCurrencyLogo} alt="currency logo" className="h-16" />
-      </div>
+      </motion.div>
     </div>
   )
 }

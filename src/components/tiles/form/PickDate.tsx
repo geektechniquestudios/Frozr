@@ -2,6 +2,7 @@ import { TextField } from "@mui/material"
 import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs, { Dayjs } from "dayjs"
+import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { default as dateLogo } from "/src/assets/undraw_calendar.svg"
@@ -38,11 +39,24 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
           </LocalizationProvider>
         </div>
       </div>
-      <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-zinc-400 bg-opacity-80">
-        <div />
-        <div />
+      <motion.div
+        initial={{
+          x: 400,
+        }}
+        animate={{
+          x: 15,
+        }}
+        transition={{
+          delay: 0.1,
+          duration: 5,
+          type: "spring",
+          damping: 20,
+          bounce: 0.7,
+        }}
+        className="flex w-full items-center justify-start rounded-l-xl border-l border-t border-b border-stone-600 bg-zinc-400 bg-opacity-80 sm:px-6"
+      >
         <img src={dateLogo} alt="date logo" className="h-16" />
-      </div>
+      </motion.div>
     </div>
   )
 }

@@ -31,34 +31,28 @@ export const Deposit: React.FC<DepositInterface> = ({
 
   return (
     <motion.div
-      className="flex h-14 justify-between gap-1 rounded-sm border border-slate-500 bg-slate-500 bg-opacity-50 text-stone-200"
+      className="flex h-14 justify-between gap-1 rounded-sm border border-slate-500 bg-slate-500 bg-opacity-50 px-2 text-stone-200"
       variants={{
         visible: { opacity: 1, x: 0 },
         hidden: { opacity: 0, x: -4 },
       }}
     >
-      <div className="flex w-28 flex-col px-2 py-1">
+      <div className="flex w-28 flex-col justify-center">
         <p>{balance}</p>
         <p className="text-xs">{currency}</p>
       </div>
-      <div className="grid place-content-center px-2 py-1 text-sm sm:text-base">
+      <div className="grid place-content-center text-sm sm:text-base">
         {startDateFormatted} - {releaseDateFormatted}
       </div>
-      <div className="grid place-content-center px-2 py-1">
-        <div className="flex items-center gap-2">
-          <Button
-            className="w-28"
-            variant="contained"
-            onClick={withdrawFunds}
-            disabled={!isReadyToWithdraw || isComplete}
-          >
-            {isComplete
-              ? "Complete"
-              : isReadyToWithdraw
-              ? "Withdraw"
-              : "Locked"}
-          </Button>
-        </div>
+      <div className="grid place-content-center">
+        <Button
+          className="w-28"
+          variant="contained"
+          onClick={withdrawFunds}
+          disabled={!isReadyToWithdraw || isComplete}
+        >
+          {isComplete ? "Complete" : isReadyToWithdraw ? "Withdraw" : "Locked"}
+        </Button>
       </div>
     </motion.div>
   )

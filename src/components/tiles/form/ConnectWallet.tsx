@@ -1,4 +1,5 @@
 import { Button } from "@mui/material"
+import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { default as connectWalletLogo } from "/src/assets/undraw_pay.svg"
@@ -38,10 +39,23 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
           </Button>
         )}
       </div>
-      <div className="flex w-full items-center justify-evenly rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-100 bg-opacity-70">
+      <motion.div
+        initial={{
+          x: 400,
+        }}
+        animate={{
+          x: 10,
+        }}
+        transition={{
+          duration: 5,
+          type: "spring",
+          damping: 20,
+          bounce: 0.7,
+        }}
+        className="flex w-full items-center justify-start rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-100 bg-opacity-70 sm:px-6"
+      >
         <img src={connectWalletLogo} alt="wallet logo" className="h-16" />
-        <div />
-      </div>
+      </motion.div>
     </div>
   )
 }
