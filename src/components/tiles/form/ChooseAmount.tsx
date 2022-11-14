@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import CurrencyInput from "react-currency-input-field"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
+import { WindowSize } from "../../../containers/WindowSize"
 import { default as amountLogo } from "/src/assets/undraw_eth.svg"
 
 interface Props {
@@ -10,11 +11,14 @@ interface Props {
 }
 
 export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
+  const { isSmall } = WindowSize.useContainer()
   const { amountBorderColor, setAmountBorderColor } = Form.useContainer()
   const { isWalletConnected } = Wallet.useContainer()
   const borderColor = isWalletConnected
     ? amountBorderColor + " hover:border-white"
     : "border-gray-400"
+
+  const xPos = isSmall ? 0 : 35
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
@@ -46,18 +50,17 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
           x: 400,
         }}
         animate={{
-          x: 30,
+          x: xPos,
         }}
         transition={{
-          // delay: 0.3,
           duration: 1,
           type: "spring",
           damping: 16,
           bounce: 0.3,
         }}
-        className="flex w-full items-center justify-start rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70 sm:px-6"
+        className="flex w-full items-center justify-center rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70"
       >
-        <img src={amountLogo} alt="amount logo" className="h-16" />
+        <img src={amountLogo} alt="amount logo" className="h-14" />
       </motion.div>
     </div>
   )

@@ -7,6 +7,7 @@ import { registerSW } from "virtual:pwa-register"
 import { Form } from "./containers/Form"
 import { Wallet } from "./containers/Wallet"
 import "./index.scss"
+import { WindowSize } from "./containers/WindowSize"
 
 const theme = createTheme({
   palette: {
@@ -23,13 +24,15 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <Form.Provider>
-      <Wallet.Provider>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </Wallet.Provider>
-    </Form.Provider>
+    <WindowSize.Provider>
+      <Form.Provider>
+        <Wallet.Provider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </Wallet.Provider>
+      </Form.Provider>
+    </WindowSize.Provider>
   </React.StrictMode>,
 )
 

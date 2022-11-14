@@ -102,7 +102,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           damping: 20,
           bounce: 0.7,
         }}
-        className="flex w-full items-center justify-start rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400 sm:px-6"
+        className="flex w-full items-center justify-center rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400"
       >
         <img src={selectCurrencyLogo} alt="currency logo" className="h-16" />
       </motion.div>
