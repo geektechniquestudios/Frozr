@@ -1,5 +1,6 @@
 import CurrencyInput from "react-currency-input-field"
 import { Form } from "../../../containers/Form"
+import { Wallet } from "../../../containers/Wallet"
 import { default as amountLogo } from "/src/assets/undraw_eth.svg"
 
 interface Props {
@@ -9,11 +10,16 @@ interface Props {
 
 export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
   const { amountBorderColor, setAmountBorderColor } = Form.useContainer()
+  const { isWalletConnected } = Wallet.useContainer()
+  const borderColor = isWalletConnected
+    ? amountBorderColor + " hover:border-white"
+    : "border-gray-400"
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
         <CurrencyInput
-          className={`${amountBorderColor} h-14 w-48 rounded-md border bg-transparent py-1 px-3 text-stone-200 hover:border-white`}
+          disabled={!isWalletConnected}
+          className={`${borderColor} h-14 w-48 rounded-md border bg-transparent py-1 px-3 text-stone-200 `}
           onFocus={() => {
             setAmountBorderColor("")
           }}

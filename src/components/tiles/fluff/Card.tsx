@@ -4,10 +4,24 @@ interface Props {
   tall?: boolean
   wide?: boolean
   ultraWide?: boolean
-  content: React.ReactNode
+  title: string
+  description: string | React.ReactNode
 }
 
-export const Card: React.FC<Props> = ({ tall, wide, content, ultraWide }) => {
+export const Card: React.FC<Props> = ({
+  tall,
+  wide,
+  title,
+  description,
+  ultraWide,
+}) => {
+  const tallStyle = tall ? "card-tall" : ""
+  const wideStyle = wide ? "card-wide" : ""
+  const ultraWideStyle = ultraWide ? "card-ultra-wide" : ""
+  const smallTitleStyle =
+    !tall && !wide && !ultraWide ? "sm:text-2xl" : "sm:text-3xl"
+  const smallDescriptionStyle =
+    !tall && !wide && !ultraWide ? "sm:text-lg" : "sm:text-xl"
   return (
     <motion.div
       layout
@@ -32,14 +46,23 @@ export const Card: React.FC<Props> = ({ tall, wide, content, ultraWide }) => {
           transition: { duration: 0.3 },
         },
       }}
-      className={`${tall ? "card-tall" : ""} ${wide ? "card-wide" : ""} ${
-        ultraWide ? "card-ultra-wide" : ""
-      } transform rounded-md border border-slate-500 bg-slate-400 bg-opacity-20 p-2 text-slate-200`}
+      className={`${tallStyle} ${wideStyle} ${ultraWideStyle} transform rounded-md border border-slate-500 bg-slate-400 bg-opacity-20 p-2`}
       style={{
         backdropFilter: "blur(16px)",
       }}
     >
-      {content}
+      <div className="flex h-full flex-col gap-2 p-2">
+        <div
+          className={`${smallTitleStyle} flex items-center justify-center border-b p-1 text-center text-lg font-bold text-slate-200 sm:h-20`}
+        >
+          {title}
+        </div>
+        <div
+          className={`${smallDescriptionStyle} flex h-full flex-col items-center justify-center font-bold leading-loose text-slate-300 sm:leading-10`}
+        >
+          {description}
+        </div>
+      </div>
     </motion.div>
   )
 }

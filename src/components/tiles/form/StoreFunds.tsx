@@ -111,7 +111,6 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
 
       const overrides = {
         value: bigAmount,
-        // gasLimit: 10000000,
       }
 
       return await contract.deposit(daysToFreeze, overrides)
@@ -131,6 +130,7 @@ export const StoreFunds: React.FC<Props> = ({ amount, date }) => {
   return (
     <div className="grid h-1/5 place-content-center">
       <Button
+        disabled={!isWalletConnected || !isCorrectNetwork}
         onClick={sendDeposit}
         className="h-14 w-48"
         variant="outlined"

@@ -15,7 +15,8 @@ interface Props {}
 export const SelectCurrency: React.FC<Props> = ({}) => {
   const { currencyBorderColor, setPage, setCurrencyBorderColor } =
     Form.useContainer()
-  const { currency, isCorrectNetwork, updateNetwork } = Wallet.useContainer()
+  const { currency, isCorrectNetwork, updateNetwork, isWalletConnected } =
+    Wallet.useContainer()
 
   const label = isCorrectNetwork
     ? "Select a Currency"
@@ -25,6 +26,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
       <div className="p-3">
         <FormControl
           fullWidth
+          disabled={!isWalletConnected}
           onFocus={() => {
             setCurrencyBorderColor("border-transparent")
           }}

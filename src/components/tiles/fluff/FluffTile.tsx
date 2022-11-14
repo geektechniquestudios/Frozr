@@ -7,6 +7,7 @@ interface Props {
 }
 
 export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
+  const addresses: string[] = ["0x1", "0x2", "0x3", "0x4", "0x5", "0x6"]
   return (
     <motion.div
       layout
@@ -26,95 +27,65 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
     >
       <Card
         tall
-        content={
-          <div className="flex flex-col gap-2 p-2">
-            <p className="m-2 border-b p-1 text-lg font-bold sm:text-3xl">
-              Fully Decentralized
-            </p>
-            <p className="sm:text-xl sm:leading-8">
-              A trustless smart-contract holds your funds. Your investment is
+        title="Fully Decentralized"
+        description="A trustless smart-contract holds your funds. Your investment is
               kept safe in a protocol running on the blockchain, not with an
-              individual, business, or bank.
-            </p>
+              individual, business, or bank."
+      />
+      <Card
+        title="Entirely Open Source"
+        description={
+          <div>
+            View the code for yourself on{" "}
+            <a
+              href="https://github.com/geektechniquestudios/Frozr"
+              className="underline underline-offset-2"
+            >
+              github
+            </a>
           </div>
         }
       />
       <Card
-        content={
-          <div className="">
-            <p className="m-2 border-b p-1 text-xl font-bold">
-              Entierly Open Source
-            </p>
-            <p className="leading-8">
-              You can feel confident that your funds are safe due to the
-              transparent nature of the code.
-            </p>
-          </div>
-        }
-      />
-      <Card
-        content={
-          <div className="">
-            <p className="m-2 border-b p-1 text-xl font-bold">
-              No Data Collection
-            </p>
-            <p className="text-sm">
-              A trustless system holds your funds. Your money is kept in a
-              protocol running on the blockchain of your coin, not with an
-              individual or business.
-            </p>
-          </div>
-        }
+        title="No Frills"
+        description="Frozr is straightforward and simple. We aim to do one thing well."
       />
       <Card
         wide
-        content={
-          <div>
-            <p className="border-b p-1 text-3xl font-bold"></p>
-            <p className="text-sm">
-              A trustless system holds your funds. Your money is kept in a
-              protocol running on the blockchain of your coin, not with an
-              individual or business.
-            </p>
-          </div>
-        }
+        title="No Data Collection"
+        description="We don't collect any data on you. We don't even have a database. Everything is stored in the smart contract."
       />
       <Card
         wide
-        tall
-        content={
+        title="Actually Free"
+        description={
           <div>
-            <p className="border-b p-1 text-3xl font-bold">Actually Free</p>
-            <p className="text-sm">
-              A trustless system holds your funds. Your money is kept in a
-              protocol running on the blockchain of your coin, not with an
-              individual or business.
-            </p>
+            <div>
+              There are no hidden fees. We don't show ads or sell your data.
+              There is no upsell for a premium tier.
+            </div>
+            <div className=" text-slate-400">
+              Using Frozr is completely free.
+            </div>
           </div>
         }
       />
       <Card
         tall
-        content={
-          <div className="">
-            <p className="m-2 border-b p-1 text-xl">See Our Smart Contracts</p>
-            <p className="text-sm">
-              This will be a bulleted list of links to the smart contracts
-            </p>
-          </div>
-        }
-      />
-      <Card
-        ultraWide
-        content={
-          <div className="">
-            <p className="m-2 border-b p-1 text-xl font-bold">
-              Entierly Open Source
-            </p>
-            <p className="text-sm">
-              You can feel confident that your funds are safe due to the
-              transparent nature of the code.
-            </p>
+        title="Our Smart Contracts"
+        description={
+          <div className="flex flex-col justify-evenly">
+            {addresses.map((address) => (
+              <button
+                onClick={() => {
+                  //
+                }}
+                key={address}
+                className="color-shift mx-2 rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 py-1 px-2 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
+              >
+                {address}
+              </button>
+            ))}
           </div>
         }
       />

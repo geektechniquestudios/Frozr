@@ -4,6 +4,7 @@ import Frozr from "../artifacts/contracts/Frozr.sol/Frozr.json"
 import { useEffect, useState } from "react"
 import { Form } from "./Form"
 import Swal from "sweetalert2"
+import { checkForMetamask } from "../components/prompts/MetamaskNotInstalled"
 
 declare let window: any
 const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
@@ -23,15 +24,17 @@ export interface Deposit {
 // Force page refreshes on network changes
 {
   // The "any" network will allow spontaneous network changes
-  const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
-  provider.on("network", (_newNetwork, oldNetwork) => {
-    // When a Provider makes its initial connection, it emits a "network"
-    // event with a null oldNetwork along with the newNetwork. So, if the
-    // oldNetwork exists, it represents a changing network
-    if (oldNetwork) {
-      window.location.reload()
-    }
-  })
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+    provider.on("network", (_newNetwork, oldNetwork) => {
+      // When a Provider makes its initial connection, it emits a "network"
+      // event with a null oldNetwork along with the newNetwork. So, if the
+      // oldNetwork exists, it represents a changing network
+      if (oldNetwork) {
+        window.location.reload()
+      }
+    })
+  }
 }
 
 export type CurrencyString = "AVAX" | "BNB" | "NEON" | "ETH" | "DOGE" | ""
@@ -56,10 +59,7 @@ const useWallet = () => {
 
   const { setConnectBorderColor } = Form.useContainer()
   const connectWallet = async () => {
-    if (typeof window.ethereum === undefined) {
-      alert("Metamask not installed")
-      return
-    }
+    if (!checkForMetamask()) return
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
       await provider.send("eth_requestAccounts", [])
@@ -72,7 +72,7 @@ const useWallet = () => {
       setConnectBorderColor("border-transparent")
     } catch (error) {
       console.error(error)
-      alert("Error connecting to wallet.")
+      checkForMetamask()
     }
   }
 
@@ -99,10 +99,12 @@ const useWallet = () => {
   }
 
   useEffect(() => {
+    // always runs twice
     updateNetwork()
   }, [currency])
 
   const updateNetwork = async (networkName?: CurrencyString) => {
+    if (!checkForMetamask()) return
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     await provider.send("eth_requestAccounts", [])
     const { chainId } = await provider.getNetwork()
@@ -135,10 +137,7 @@ const useWallet = () => {
       })
     }
 
-    if (typeof window.ethereum === undefined) {
-      alert("Please install MetaMask to place a bet.")
-      return
-    }
+    if (!checkForMetamask()) return
 
     await window.ethereum.request({ method: "eth_requestAccounts" })
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -176,7 +175,6 @@ const useWallet = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     const balance: BigNumber = await provider.getBalance(walletAddress!)
     const doesUserHaveEnoughAvax = balance.gte(price)
-    console.log(balance.toString(), price.toString(), doesUserHaveEnoughAvax)
     if (!doesUserHaveEnoughAvax) {
       Swal.fire({
         title: "Insufficient Funds",

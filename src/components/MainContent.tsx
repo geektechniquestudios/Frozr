@@ -18,7 +18,7 @@ export const MainContent: React.FC = () => {
           <HeadingTile />
           <FormTile />
           <DepositsTile layoutTransition={layoutTransition} />
-          <FluffTile layoutTransition={layoutTransition} />
+          {/* <FluffTile layoutTransition={layoutTransition} /> */}
           <Footer />
         </LayoutGroup>
       </div>

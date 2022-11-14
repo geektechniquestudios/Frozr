@@ -3,6 +3,7 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import dayjs, { Dayjs } from "dayjs"
 import { Form } from "../../../containers/Form"
+import { Wallet } from "../../../containers/Wallet"
 import { default as dateLogo } from "/src/assets/undraw_calendar.svg"
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 
 export const PickDate: React.FC<Props> = ({ date, setDate }) => {
   const { calendarBorderColor, setCalendarBorderColor } = Form.useContainer()
-
+  const { isWalletConnected } = Wallet.useContainer()
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
@@ -24,6 +25,7 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
         >
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
+              disabled={!isWalletConnected}
               minDate={dayjs().add(1, "day")}
               className={`${calendarBorderColor} w-48 border text-stone-300`}
               label="Pick Your Date"
