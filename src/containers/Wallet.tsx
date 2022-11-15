@@ -53,9 +53,12 @@ const useWallet = () => {
     (localStorage.getItem("currency") ?? "AVAX") as CurrencyString,
   )
 
-  const [isCorrectNetwork, setIsCorrectNetwork] = useState(true)
+  const [isCorrectNetwork, setIsCorrectNetwork] = useState(false)
   const [blockTimestamp, setBlockTimestamp] = useState<number>()
   const [deposits, setDeposits] = useState<Deposit[]>([])
+  const [barLengths, setBarLengths] = useState<number[]>(
+    isWalletConnected ? [10, 0, 15, 35] : [0, 10, 25, 40],
+  )
 
   const { setConnectBorderColor } = Form.useContainer()
   const connectWallet = async () => {
@@ -115,7 +118,13 @@ const useWallet = () => {
     localStorage.setItem("currency", networkName ?? currency)
     setIsCorrectNetwork(isCorrectBlockchain)
     setDeposits([])
-    if (isCorrectBlockchain) refreshDeposits()
+    if (isCorrectBlockchain && isWalletConnected) {
+      refreshDeposits()
+      setBarLengths([35, 15, 0, 10])
+    }
+    if (!isCorrectBlockchain && isWalletConnected) {
+      setBarLengths([10, 0, 15, 35])
+    }
   }
 
   const callContract = async (
@@ -202,6 +211,8 @@ const useWallet = () => {
     isCorrectNetwork,
     updateNetwork,
     doesUserHaveEnoughAvax,
+    barLengths,
+    setBarLengths,
   }
 }
 

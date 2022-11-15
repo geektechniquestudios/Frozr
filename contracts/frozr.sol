@@ -4,7 +4,6 @@ pragma solidity ^0.8.11;
 import "hardhat/console.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-
 contract Frozr is Ownable {
   uint depositId = 0;
   struct Deposit {
@@ -59,25 +58,6 @@ contract Frozr is Ownable {
     deposits[_depositId].isComplete = true;
     payable(msg.sender).transfer(deposits[_depositId].amount);
   }
-
-  // function withdawEarly(uint _depositId) external payable {
-  //   require(
-  //     deposits[_depositId].isComplete == false,
-  //     "This deposit has already been withdrawn"
-  //   );
-  //   require(
-  //     deposits[_depositId].sender == msg.sender,
-  //     "You are not the owner of this deposit"
-  //   );
-
-  //   // add 10% fee to fror balance
-  //   frozrBalance += deposits[_depositId].amount / 10;
-
-  //   deposits[_depositId].isComplete = true;
-  //   payable(msg.sender).transfer(
-  //     deposits[_depositId].amount - (deposits[_depositId].amount / 10)
-  //   );
-  // }
 
   function viewDeposits() external view returns (Deposit[] memory) {
     uint[] memory ids = addressToDepositIds[msg.sender];

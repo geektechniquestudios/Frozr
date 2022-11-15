@@ -10,7 +10,6 @@ const useForm = () => {
     useState("border-transparent")
   const [amountBorderColor, setAmountBorderColor] = useState("border-blue-300")
   const [page, setPage] = useState(0)
-
   return {
     connectBorderColor,
     setConnectBorderColor,

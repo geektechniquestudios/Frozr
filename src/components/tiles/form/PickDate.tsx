@@ -15,10 +15,10 @@ interface Props {
 
 export const PickDate: React.FC<Props> = ({ date, setDate }) => {
   const { calendarBorderColor, setCalendarBorderColor } = Form.useContainer()
-  const { isWalletConnected } = Wallet.useContainer()
+  const { isWalletConnected, barLengths, setBarLengths } = Wallet.useContainer()
   const { isSmall } = WindowSize.useContainer()
 
-  const xPos = isSmall ? 0 : 15
+  const xPos = isSmall ? 0 : barLengths[2]
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">
@@ -36,7 +36,10 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
               label="Pick Your Date"
               value={date}
               onChange={(newValue) => {
-                if (newValue) setDate(newValue)
+                if (newValue) {
+                  setDate(newValue)
+                  setBarLengths([40, 25, 10, 0])
+                }
               }}
               renderInput={(params) => <TextField {...params} />}
             />

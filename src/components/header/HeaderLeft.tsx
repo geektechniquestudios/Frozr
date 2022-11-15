@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { default as logo } from "/src/assets/logo.png"
+import { default as logo } from "/src/assets/logo.webp"
 
 export const HeaderLeft: React.FC = () => {
   return (

@@ -24,15 +24,15 @@ const theme = createTheme({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <WindowSize.Provider>
-      <Form.Provider>
+    <Form.Provider>
+      <WindowSize.Provider>
         <Wallet.Provider>
           <ThemeProvider theme={theme}>
             <App />
           </ThemeProvider>
         </Wallet.Provider>
-      </Form.Provider>
-    </WindowSize.Provider>
+      </WindowSize.Provider>
+    </Form.Provider>
   </React.StrictMode>,
 )
 

@@ -8,6 +8,7 @@ import {
 import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
+import { WindowSize } from "../../../containers/WindowSize"
 
 import { default as selectCurrencyLogo } from "/src/assets/undraw_currency.svg"
 
@@ -16,9 +17,16 @@ interface Props {}
 export const SelectCurrency: React.FC<Props> = ({}) => {
   const { currencyBorderColor, setPage, setCurrencyBorderColor } =
     Form.useContainer()
-  const { currency, isCorrectNetwork, updateNetwork, isWalletConnected } =
-    Wallet.useContainer()
-
+  const {
+    barLengths,
+    setBarLengths,
+    currency,
+    isCorrectNetwork,
+    updateNetwork,
+    isWalletConnected,
+  } = Wallet.useContainer()
+  const { isSmall } = WindowSize.useContainer()
+  const xPos = isSmall ? 0 : barLengths[1]
   const label = isCorrectNetwork
     ? "Select a Currency"
     : "Change Your Wallet's Network"
@@ -41,7 +49,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
             className={`${currencyBorderColor} w-48 border`}
             value={currency}
             label={label}
-            onChange={(event: SelectChangeEvent) => {
+            onChange={() => {
               setPage(0)
             }}
           >
@@ -93,7 +101,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           x: 400,
         }}
         animate={{
-          x: 0,
+          x: xPos,
         }}
         transition={{
           delay: 0.05,

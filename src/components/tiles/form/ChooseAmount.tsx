@@ -13,12 +13,12 @@ interface Props {
 export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
   const { isSmall } = WindowSize.useContainer()
   const { amountBorderColor, setAmountBorderColor } = Form.useContainer()
-  const { isWalletConnected } = Wallet.useContainer()
+  const { isWalletConnected, barLengths } = Wallet.useContainer()
   const borderColor = isWalletConnected
     ? amountBorderColor + " hover:border-white"
     : "border-gray-400"
 
-  const xPos = isSmall ? 0 : 35
+  const xPos = isSmall ? 0 : barLengths[3]
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="grid place-content-center p-3">

@@ -3,8 +3,8 @@ import { DepositsTile } from "./tiles/deposits/DepositsTile"
 import { HeadingTile } from "./tiles/heading/HeadingTile"
 import { Footer } from "./footer/Footer"
 import { FluffTile } from "./tiles/fluff/FluffTile"
-import "../index.scss"
 import { LayoutGroup } from "framer-motion"
+import "../index.scss"
 
 export const MainContent: React.FC = () => {
   const layoutTransition = {
