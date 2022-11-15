@@ -30,9 +30,7 @@ export interface Deposit {
       // When a Provider makes its initial connection, it emits a "network"
       // event with a null oldNetwork along with the newNetwork. So, if the
       // oldNetwork exists, it represents a changing network
-      if (oldNetwork) {
-        window.location.reload()
-      }
+      if (oldNetwork) window.location.reload()
     })
   }
 }
@@ -61,6 +59,7 @@ const useWallet = () => {
   )
 
   const { setConnectBorderColor } = Form.useContainer()
+
   const connectWallet = async () => {
     if (!checkForMetamask()) return
     try {
@@ -73,6 +72,7 @@ const useWallet = () => {
       localStorage.setItem("walletAddress", walletAddress)
       localStorage.setItem("isWalletConnected", "true")
       setConnectBorderColor("border-transparent")
+      setBarLengths([10, 0, 15, 35])
     } catch (error) {
       console.error(error)
       checkForMetamask()
@@ -102,7 +102,7 @@ const useWallet = () => {
   }
 
   useEffect(() => {
-    // always runs twice
+    // always runs twice, confusing pattern that could be improved
     updateNetwork()
   }, [currency])
 
@@ -117,10 +117,10 @@ const useWallet = () => {
     setCurrency(networkName ?? currency)
     localStorage.setItem("currency", networkName ?? currency)
     setIsCorrectNetwork(isCorrectBlockchain)
-    setDeposits([])
+    if (networkName !== currency) setDeposits([])
     if (isCorrectBlockchain && isWalletConnected) {
-      refreshDeposits()
       setBarLengths([35, 15, 0, 10])
+      refreshDeposits()
     }
     if (!isCorrectBlockchain && isWalletConnected) {
       setBarLengths([10, 0, 15, 35])

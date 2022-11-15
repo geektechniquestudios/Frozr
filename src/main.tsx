@@ -6,8 +6,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles"
 import { registerSW } from "virtual:pwa-register"
 import { Form } from "./containers/Form"
 import { Wallet } from "./containers/Wallet"
-import "./index.scss"
 import { WindowSize } from "./containers/WindowSize"
+import "./index.scss"
 
 const theme = createTheme({
   palette: {

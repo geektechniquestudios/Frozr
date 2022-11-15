@@ -14,6 +14,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
     disconnectWallet,
     barLengths,
     setBarLengths,
+    refreshDeposits,
   } = Wallet.useContainer()
   const { connectBorderColor, setPage } = Form.useContainer()
   const { isSmall } = WindowSize.useContainer()
@@ -24,8 +25,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
         {!isWalletConnected && (
           <Button
             onClick={() => {
-              connectWallet()
-              setBarLengths([10, 0, 15, 35])
+              connectWallet().then(refreshDeposits)
             }}
             className="h-14 w-48"
             variant="outlined"

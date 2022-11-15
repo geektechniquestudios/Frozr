@@ -53,6 +53,7 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
           x: xPos,
         }}
         transition={{
+          delay: 0.1,
           duration: 1,
           type: "spring",
           damping: 16,
