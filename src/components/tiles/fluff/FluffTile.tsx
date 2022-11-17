@@ -1,7 +1,9 @@
 import { motion } from "framer-motion"
-import { useState } from "react"
+import { MdMoneyOffCsred, MdOutlineMobiledataOff } from "react-icons/md"
 import { Card } from "./Card"
-import "./photo-grid.scss"
+import { VscGithubAlt } from "react-icons/vsc"
+import { TbCircleDotted, TbFileSignal } from "react-icons/tb"
+import { FaPoo } from "react-icons/fa"
 
 interface Props {
   layoutTransition: {}
@@ -25,106 +27,91 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
     "DOGE " + shortenWalletAddress(dogeContractAddress),
   ]
 
-  const [selectedIndex, setSelectedIndex] = useState(0)
-
   return (
-    // <motion.div layout className="h-[1000px] shrink-0">
-      <motion.div
-        transition={layoutTransition}
-        initial="hidden"
-        animate="visible"
-        variants={{
-          visible: {
-            transition: {
-              staggerChildren: 0.09,
-              when: "beforeChildren",
-              type: "tween",
-            },
+    <motion.div
+      transition={layoutTransition}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.09,
+            when: "beforeChildren",
+            type: "tween",
           },
-        }}
-        className="photo-grid grid gap-3 rounded-md text-slate-200"
-      >
-        <Card
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          cardIndex={0}
-          title="Actually Free"
-          description={
-            <div>
-              <div>
-                There are no hidden fees. We don't show ads or sell your data.
-                There is no upsell for a premium tier.
-              </div>
-              <div className=" text-slate-400">
-                Using Frozr is completely free.
-              </div>
-            </div>
-          }
-        />
-        <Card
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          cardIndex={1}
-          title="Fully Decentralized"
-          description="A trustless smart-contract holds your funds. Your investment is
+        },
+      }}
+      className=" grid gap-3 rounded-md text-slate-200 md:grid-cols-3"
+    >
+      <Card
+        icon={<MdMoneyOffCsred size={40} />}
+        title="Actually Free"
+        description=""
+        // description={
+        //   <div>
+        //     <div>
+        //       There are no hidden fees. We don't show ads or sell your data.
+        //       There is no upsell for a premium tier.
+        //     </div>
+        //     <div className=" text-slate-400">
+        //       Using Frozr is completely free.
+        //     </div>
+        //   </div>
+        // }
+      />
+      <Card
+        icon={<TbCircleDotted size={40} />}
+        title="Fully Decentralized"
+        description="A trustless smart-contract holds your funds. Your investment is
               kept safe in a protocol running on the blockchain, not with an
               individual, business, or bank."
-        />
+      />
 
-        <Card
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          cardIndex={2}
-          title="Entirely Open Source"
-          description={
-            <div>
-              View the code for yourself on{" "}
-              <a
-                href="https://github.com/geektechniquestudios/Frozr"
-                className="underline underline-offset-2"
+      <Card
+        icon={<VscGithubAlt size={40} />}
+        title="Entirely Open Source"
+        description={
+          <div>
+            View the code for yourself on{" "}
+            <a
+              href="https://github.com/geektechniquestudios/Frozr"
+              className="underline underline-offset-2"
+            >
+              github
+            </a>
+          </div>
+        }
+      />
+      <Card
+        icon={<FaPoo size={40} />}
+        title="No Frills"
+        description="Frozr is straightforward and simple. We aim to do one thing well."
+      />
+      <Card
+        icon={<MdOutlineMobiledataOff size={40} />}
+        title="No Data Collection"
+        description="We don't collect any data on you. We don't even have a database. Everything is stored in the smart contract."
+      />
+
+      <Card
+        icon={<TbFileSignal size={40} />}
+        title="Our Smart Contracts"
+        description={
+          <div className="flex h-full flex-col justify-evenly">
+            {addresses.map((address) => (
+              <button
+                onClick={() => {
+                  // open to snowtrace of address
+                }}
+                key={address}
+                className="color-shift mx-2 rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 py-1 px-2 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
               >
-                github
-              </a>
-            </div>
-          }
-        />
-        <Card
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          cardIndex={3}
-          title="No Frills"
-          description="Frozr is straightforward and simple. We aim to do one thing well."
-        />
-        <Card
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          cardIndex={4}
-          title="No Data Collection"
-          description="We don't collect any data on you. We don't even have a database. Everything is stored in the smart contract."
-        />
-
-        <Card
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          cardIndex={5}
-          title="Our Smart Contracts"
-          description={
-            <div className="flex h-full flex-col justify-evenly">
-              {addresses.map((address) => (
-                <button
-                  onClick={() => {
-                    // open to snowtrace of address
-                  }}
-                  key={address}
-                  className="color-shift mx-2 rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 py-1 px-2 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
-                >
-                  {address}
-                </button>
-              ))}
-            </div>
-          }
-        />
-      </motion.div>
-    // </motion.div>
+                {address}
+              </button>
+            ))}
+          </div>
+        }
+      />
+    </motion.div>
   )
 }
