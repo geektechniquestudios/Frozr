@@ -1,27 +1,27 @@
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 
 interface Props {
-  tall?: boolean
-  wide?: boolean
   ultraWide?: boolean
   title: string
   description: string | React.ReactNode
+  selectedIndex?: number
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number>>
+  cardIndex: number
 }
 
 export const Card: React.FC<Props> = ({
-  tall,
-  wide,
   title,
   description,
-  ultraWide,
+  selectedIndex,
+  setSelectedIndex,
+  cardIndex,
 }) => {
-  const tallStyle = tall ? "card-tall" : ""
-  const wideStyle = wide ? "card-wide" : ""
-  const ultraWideStyle = ultraWide ? "card-ultra-wide" : ""
-  const smallTitleStyle =
-    !tall && !wide && !ultraWide ? "sm:text-2xl" : "sm:text-3xl"
-  const smallDescriptionStyle =
-    !tall && !wide && !ultraWide ? "sm:text-lg" : "sm:text-xl"
+  const isSelectedStyle = selectedIndex === cardIndex ? " card-wide" : ""
+  // const ultraWideStyle = ultraWide ? "card-ultra-wide" : ""
+  // const smallTitleStyle =
+  //   !tall && !wide && !ultraWide ? "sm:text-2xl" : "sm:text-3xl"
+  // const smallDescriptionStyle =
+  //   !tall && !wide && !ultraWide ? "sm:text-lg" : "sm:text-xl"
   return (
     <motion.div
       layout
@@ -46,22 +46,31 @@ export const Card: React.FC<Props> = ({
           transition: { duration: 0.3 },
         },
       }}
-      className={`${tallStyle} ${wideStyle} ${ultraWideStyle} transform rounded-md border border-slate-500 bg-slate-400 bg-opacity-20 p-2`}
+      className={`${isSelectedStyle} transform rounded-md border border-slate-500 bg-slate-400 bg-opacity-20 p-2`}
       style={{
         backdropFilter: "blur(16px)",
       }}
+      onClick={() => {
+        setSelectedIndex(cardIndex === selectedIndex ? -1 : cardIndex)
+      }}
     >
       <div className="flex h-full flex-col gap-2 p-2">
-        <div
-          className={`${smallTitleStyle} flex items-center justify-center border-b p-1 text-center text-lg font-bold text-slate-200 sm:h-20`}
-        >
-          {title}
-        </div>
-        <div
-          className={`${smallDescriptionStyle} flex h-full flex-col items-center justify-center font-bold leading-loose text-slate-300 sm:leading-10`}
-        >
-          {description}
-        </div>
+        <AnimatePresence>
+          {selectedIndex !== cardIndex && (
+            <motion.div
+              className={`flex items-center justify-center border-b p-1 text-center text-lg font-bold text-slate-200 sm:h-20`}
+            >
+              {title}
+            </motion.div>
+          )}
+          {selectedIndex === cardIndex && (
+            <motion.div
+              className={`flex h-full flex-col items-center justify-center font-bold leading-loose text-slate-300 sm:leading-10`}
+            >
+              {description}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   )

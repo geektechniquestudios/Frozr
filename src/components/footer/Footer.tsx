@@ -8,12 +8,15 @@ import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import { Donate } from "../popups/Donate"
 import { CustomerSupport as Support } from "../popups/Support"
+import { motion } from "framer-motion"
 
 const MySwal = withReactContent(Swal)
 
-export const Footer: React.FC = () => {
+interface Props {}
+
+export const Footer: React.FC<Props> = ({}) => {
   return (
-    <div className="flex h-full flex-col justify-end">
+    <motion.div layout className="flex h-full flex-col justify-end">
       <div className="flex h-14 items-center justify-between">
         <SocialLink
           title="Terms of Service"
@@ -61,6 +64,6 @@ export const Footer: React.FC = () => {
           icon={<FaDiscord />}
         />
       </div>
-    </div>
+    </motion.div>
   )
 }

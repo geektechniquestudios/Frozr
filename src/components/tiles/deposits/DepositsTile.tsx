@@ -29,8 +29,8 @@ export const DepositsTile: React.FC<Props> = ({ layoutTransition }) => {
   return (
     <AnimatePresence>
       <motion.div
-        transition={layoutTransition}
         layout
+        transition={layoutTransition}
         className="shrink-0 overflow-hidden rounded-md border border-slate-500 bg-gray-500 bg-opacity-30 p-2"
         style={{
           backdropFilter: "blur(16px)",
