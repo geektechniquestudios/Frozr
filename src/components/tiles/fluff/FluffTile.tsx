@@ -20,12 +20,32 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
   const shortenWalletAddress = (walletAddress: string) =>
     `${walletAddress.slice(0, 7)}...${walletAddress.slice(-7)}`
 
-  const addresses: [CurrencyString, string][] = [
-    ["AVAX", shortenWalletAddress(avaxContractAddress)],
-    ["BNB", shortenWalletAddress(bnbContractAddress)],
-    ["ETH", shortenWalletAddress(ethContractAddress)],
-    ["NEON", shortenWalletAddress(neonContractAddress)],
-    ["DOGE", shortenWalletAddress(dogeContractAddress)],
+  const addresses: [CurrencyString, string, string][] = [
+    [
+      "AVAX",
+      shortenWalletAddress(avaxContractAddress),
+      "https://snowtrace.io/address/" + avaxContractAddress,
+    ],
+    [
+      "BNB",
+      shortenWalletAddress(bnbContractAddress),
+      "https://bscscan.com/address/" + bnbContractAddress,
+    ],
+    [
+      "ETH",
+      shortenWalletAddress(ethContractAddress),
+      "https://etherscan.io/address" + ethContractAddress,
+    ],
+    [
+      "NEON",
+      shortenWalletAddress(neonContractAddress),
+      "https://neonscan.org/address/" + neonContractAddress,
+    ],
+    [
+      "DOGE",
+      shortenWalletAddress(dogeContractAddress),
+      "https://dogechain.info/address/" + dogeContractAddress,
+    ],
   ]
 
   return (
@@ -47,38 +67,22 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
       <Card
         icon={<MdMoneyOffCsred size={40} />}
         title="Actually Free"
-        description={
-          <div className="flex flex-col gap-3">
-            <div>
-              There are no hidden fees. We don't show ads or sell your data.
-              There is no upsell for a premium tier.
-            </div>
-            <div className="text-slate-100">
-              Using Frozr is completely free.
-            </div>
-          </div>
-        }
+        description1="There are no hidden fees. We don't show ads or sell your data.
+              There is no upsell for a premium tier."
+        description2="Using Frozr is completely free."
       />
       <Card
         icon={<TbCircleDotted size={40} />}
         title="Fully Decentralized"
-        description={
-          <div className="flex flex-col gap-3">
-            <div>
-              A smart-contract holds your funds more securely than a bank vault.
-            </div>
-            <div className="text-slate-100">
-              Only you hold the key, not a business, bank, or even us.
-            </div>
-          </div>
-        }
+        description1="A smart-contract holds your funds more securely than a bank vault."
+        description2="Only you hold the key, not a business, bank, or even us."
       />
 
       <Card
         icon={<VscGithubAlt size={40} />}
         title="Entirely Open Source"
-        description={
-          <div className="flex flex-col gap-9">
+        description1={
+          <div className="flex flex-col gap-4">
             <div>
               View the code for yourself on{" "}
               <a
@@ -98,31 +102,32 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
       <Card
         icon={<FaPoo size={40} />}
         title="No BS"
-        description="Frozr is straightforward and simple. We aim to do one thing well."
+        description1="Frozr is straightforward and simple. No gimmicks."
+        description2="We aim to do one thing well."
       />
       <Card
         icon={<MdOutlineMobiledataOff size={40} />}
         title="No Data Collection"
-        description="We don't collect any user data. We don't use cookies or analytics.
-             This service runs on web3."
+        description1="We don't collect any user data. We don't use cookies or tracking analytics."
+        description2="Frozr is a Web3 service. Your data is yours."
       />
 
       <Card
         icon={<TbFileSignal size={40} />}
         title="Our Smart Contracts"
-        description={
+        description1={
           <div className="flex h-full flex-col justify-evenly">
-            {addresses.map(([address, currency]) => (
-              <button
-                onClick={() => {
-                  // open to snowtrace of address
-                }}
+            {addresses.map(([address, currency, url]) => (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={url}
                 key={address}
                 className="color-shift mx-2 flex justify-between rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
               >
                 <div className=""> {address}</div>
                 <div className=""> {currency}</div>
-              </button>
+              </a>
             ))}
           </div>
         }

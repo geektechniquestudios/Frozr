@@ -2,11 +2,17 @@ import { motion } from "framer-motion"
 
 interface Props {
   title: string
-  description: string | React.ReactNode
+  description1: string | React.ReactNode
+  description2?: string | React.ReactNode
   icon: React.ReactNode
 }
 
-export const Card: React.FC<Props> = ({ title, description, icon }) => {
+export const Card: React.FC<Props> = ({
+  title,
+  description1,
+  description2,
+  icon,
+}) => {
   return (
     <motion.div
       layout
@@ -48,7 +54,14 @@ export const Card: React.FC<Props> = ({ title, description, icon }) => {
           </div>
           <div className="flex h-full flex-col items-center justify-center font-bold text-slate-300">
             <div className="mt-10 p-2 text-center text-slate-400">{title}</div>
-            <div className="h-full w-full p-5 ">{description}</div>
+            <div className="h-full w-full p-5 ">
+              <div className="flex h-full flex-col gap-4">
+                <div className={`${!description2 && "h-full"}`}>
+                  {description1}
+                </div>
+                <div className="text-slate-100">{description2}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

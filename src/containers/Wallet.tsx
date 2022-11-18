@@ -4,7 +4,7 @@ import Frozr from "../artifacts/contracts/Frozr.sol/Frozr.json"
 import { useEffect, useState } from "react"
 import { Form } from "./Form"
 import Swal from "sweetalert2"
-import { checkForMetamask } from "../components/prompts/MetamaskNotInstalled"
+import { checkForMetamask } from "../components/prompts/CheckForMetamask"
 
 declare let window: any
 const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
@@ -102,7 +102,8 @@ const useWallet = () => {
   }
 
   useEffect(() => {
-    // always runs twice, confusing pattern that could be improved
+    // prevents spamming user on page load if no wallet is connected
+    if (typeof window.ethereum === "undefined") return
     updateNetwork()
   }, [currency])
 
