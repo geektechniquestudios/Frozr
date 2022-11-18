@@ -23,8 +23,8 @@ export const HeadingTile = () => {
       <div className="flex h-32 shrink justify-start sm:w-1/2">
         <img src={vault} alt="vault" />
       </div>
-      <p className="m-3 border-l border-slate-400 pl-2 text-lg font-bold text-stone-200 sm:w-1/2 sm:text-2xl ">
-        Lock your cyptocurrency in a timed smart contract vault for free
+      <p className="m-3 border-l border-slate-400 pl-2 text-lg font-bold text-stone-200 sm:w-1/2 sm:text-2xl">
+        Lock your cyptocurrency in a timed smart-contract vault for free
       </p>
     </motion.div>
   )

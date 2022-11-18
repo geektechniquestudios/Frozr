@@ -16,7 +16,7 @@ interface Props {}
 
 export const Footer: React.FC<Props> = ({}) => {
   return (
-    <motion.div layout className="flex h-full flex-col justify-end">
+    <motion.div className="flex h-full flex-col justify-end">
       <div className="flex h-14 items-center justify-between">
         <SocialLink
           title="Terms of Service"

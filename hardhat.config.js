@@ -2,7 +2,7 @@ const { task } = require("hardhat/config")
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.11",
+  solidity: "0.8.17",
 }
 
 require("@nomiclabs/hardhat-waffle")
@@ -32,7 +32,11 @@ task(
 const accountKey = process.env.VITE_METAMASK_ACCOUNT_KEY
 
 module.exports = {
-  solidity: "0.8.11",
+  solidity: "0.8.17",
+  optimizer: {
+    enabled: true,
+    // runs: 200,
+  },
   paths: {
     artifacts: "./src/artifacts",
     tests: "./hardhat/test",

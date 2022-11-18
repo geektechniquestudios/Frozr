@@ -1,38 +1,29 @@
 //SPDX-License-Identifier: Affero-3.0
-pragma solidity ^0.8.11;
+pragma solidity ^0.8.17;
 
 import "hardhat/console.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Frozr is Ownable {
+contract Frozr {
   uint depositId = 0;
   struct Deposit {
-    uint depositId;
     address sender;
     bool isComplete;
+    uint depositId;
     uint amount;
     uint startDate;
     uint releaseDate;
   }
-  mapping(uint => Deposit) public deposits;
+  mapping(uint => Deposit) private deposits;
   mapping(address => uint[]) private addressToDepositIds;
 
-  uint private frozrBalance;
-  address payable private frozrAddress;
-
-  constructor() {
-    frozrAddress = payable(msg.sender);
-    frozrBalance = 0;
-  }
-
   function deposit(uint _daysToFreeze) external payable {
-    require(msg.value > 0, "You must send some ether");
-    require(_daysToFreeze > 0, "You must freeze for at least 1 day");
+    require(msg.value > 0, "Non-zero amount required");
+    require(_daysToFreeze > 0, "You must store funds for at least 1 day");
 
     deposits[depositId] = Deposit(
-      depositId,
       msg.sender,
       false,
+      depositId,
       msg.value,
       block.timestamp,
       block.timestamp + (_daysToFreeze * 1 days)
@@ -66,14 +57,5 @@ contract Frozr is Ownable {
       userDeposits[i] = deposits[ids[i]];
     }
     return userDeposits;
-  }
-
-  function withdrawFrozrBalance() external onlyOwner {
-    frozrAddress.transfer(frozrBalance);
-    frozrBalance = 0;
-  }
-
-  function viewFrozrBalance() external view onlyOwner returns (uint) {
-    return frozrBalance;
   }
 }
