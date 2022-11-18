@@ -1,29 +1,12 @@
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 
 interface Props {
-  // ultraWide?: boolean
   title: string
   description: string | React.ReactNode
   icon: React.ReactNode
-  // selectedIndex?: number
-  // setSelectedIndex: React.Dispatch<React.SetStateAction<number>>
-  // cardIndex: number
 }
 
-export const Card: React.FC<Props> = ({
-  title,
-  description,
-  icon,
-  // selectedIndex,
-  // setSelectedIndex,
-  // cardIndex,
-}) => {
-  // const isSelectedStyle = selectedIndex === cardIndex ? " card-wide" : ""
-  // const ultraWideStyle = ultraWide ? "card-ultra-wide" : ""
-  // const smallTitleStyle =
-  //   !tall && !wide && !ultraWide ? "sm:text-2xl" : "sm:text-3xl"
-  // const smallDescriptionStyle =
-  //   !tall && !wide && !ultraWide ? "sm:text-lg" : "sm:text-xl"
+export const Card: React.FC<Props> = ({ title, description, icon }) => {
   return (
     <motion.div
       layout
@@ -48,29 +31,25 @@ export const Card: React.FC<Props> = ({
           transition: { duration: 0.3 },
         },
       }}
-      className={`h-96 rounded-md border border-slate-500 bg-slate-400 bg-opacity-20`}
+      className="h-96 rounded-lg border border-slate-500"
       style={{
         backdropFilter: "blur(16px)",
       }}
-      // onClick={() => {
-      //   setSelectedIndex(cardIndex === selectedIndex ? -1 : cardIndex)
-      // }}
     >
-      <div className="flex h-full flex-col">
-        <div
-          className={`flex h-20 items-center justify-center border-b border-slate-600 bg-slate-800 bg-opacity-20 p-1 text-center text-lg font-bold text-slate-200`}
-          style={{ backdropFilter: "blur(16px)" }}
-        >
-          <div className="grid h-20 w-20 translate-y-10 place-content-center rounded-full border-transparent border-slate-400 border-opacity-20 bg-slate-800">
-            {icon}
+      <div className="h-full w-full rounded-lg border-4 border-slate-700 bg-slate-700">
+        <div className="flex h-full flex-col">
+          <div
+            className="flex h-20 items-center justify-center rounded-t-md bg-slate-800  bg-opacity-80 p-1 text-center text-lg font-bold text-slate-200"
+            style={{ backdropFilter: "blur(16px)" }}
+          >
+            <div className="grid h-20 w-20 translate-y-10 place-content-center rounded-full border-4 border-slate-700 bg-slate-800">
+              {icon}
+            </div>
           </div>
-        </div>
-        <div
-          className={`flex h-full flex-col items-center justify-center font-bold leading-loose text-slate-300 sm:leading-10`}
-        >
-          <div className="mt-8 p-2 text-center text-slate-300">{title}</div>
-          <div className="h-full w-full p-2"></div>
-          {/* {description} */}
+          <div className="flex h-full flex-col items-center justify-center font-bold text-slate-300">
+            <div className="mt-10 p-2 text-center text-slate-400">{title}</div>
+            <div className="h-full w-full p-5 ">{description}</div>
+          </div>
         </div>
       </div>
     </motion.div>

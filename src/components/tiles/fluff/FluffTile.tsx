@@ -4,6 +4,7 @@ import { Card } from "./Card"
 import { VscGithubAlt } from "react-icons/vsc"
 import { TbCircleDotted, TbFileSignal } from "react-icons/tb"
 import { FaPoo } from "react-icons/fa"
+import { CurrencyString } from "../../../containers/Wallet"
 
 interface Props {
   layoutTransition: {}
@@ -19,12 +20,12 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
   const shortenWalletAddress = (walletAddress: string) =>
     `${walletAddress.slice(0, 7)}...${walletAddress.slice(-7)}`
 
-  const addresses: string[] = [
-    "AVAX " + shortenWalletAddress(avaxContractAddress),
-    "BNB " + shortenWalletAddress(bnbContractAddress),
-    "ETH " + shortenWalletAddress(ethContractAddress),
-    "NEON " + shortenWalletAddress(neonContractAddress),
-    "DOGE " + shortenWalletAddress(dogeContractAddress),
+  const addresses: [CurrencyString, string][] = [
+    ["AVAX", shortenWalletAddress(avaxContractAddress)],
+    ["BNB", shortenWalletAddress(bnbContractAddress)],
+    ["ETH", shortenWalletAddress(ethContractAddress)],
+    ["NEON", shortenWalletAddress(neonContractAddress)],
+    ["DOGE", shortenWalletAddress(dogeContractAddress)],
   ]
 
   return (
@@ -41,56 +42,69 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
           },
         },
       }}
-      className=" grid gap-3 rounded-md text-slate-200 md:grid-cols-3"
+      className=" grid gap-3 rounded-md text-slate-200 sm:grid-cols-2 md:grid-cols-3"
     >
       <Card
         icon={<MdMoneyOffCsred size={40} />}
         title="Actually Free"
-        description=""
-        // description={
-        //   <div>
-        //     <div>
-        //       There are no hidden fees. We don't show ads or sell your data.
-        //       There is no upsell for a premium tier.
-        //     </div>
-        //     <div className=" text-slate-400">
-        //       Using Frozr is completely free.
-        //     </div>
-        //   </div>
-        // }
+        description={
+          <div className="flex flex-col gap-3">
+            <div>
+              There are no hidden fees. We don't show ads or sell your data.
+              There is no upsell for a premium tier.
+            </div>
+            <div className="text-slate-100">
+              Using Frozr is completely free.
+            </div>
+          </div>
+        }
       />
       <Card
         icon={<TbCircleDotted size={40} />}
         title="Fully Decentralized"
-        description="A trustless smart-contract holds your funds. Your investment is
-              kept safe in a protocol running on the blockchain, not with an
-              individual, business, or bank."
+        description={
+          <div className="flex flex-col gap-3">
+            <div>
+              A smart-contract holds your funds more securely than a bank vault.
+            </div>
+            <div className="text-slate-100">
+              Only you hold the key, not a business, bank, or even us.
+            </div>
+          </div>
+        }
       />
 
       <Card
         icon={<VscGithubAlt size={40} />}
         title="Entirely Open Source"
         description={
-          <div>
-            View the code for yourself on{" "}
-            <a
-              href="https://github.com/geektechniquestudios/Frozr"
-              className="underline underline-offset-2"
-            >
-              github
-            </a>
+          <div className="flex flex-col gap-9">
+            <div>
+              View the code for yourself on{" "}
+              <a
+                href="https://github.com/geektechniquestudios/Frozr"
+                className="underline underline-offset-2"
+              >
+                github
+              </a>
+              .
+            </div>
+            <div className="text-slate-100">
+              We take pride in full transparency of every line of code.
+            </div>
           </div>
         }
       />
       <Card
         icon={<FaPoo size={40} />}
-        title="No Frills"
+        title="No BS"
         description="Frozr is straightforward and simple. We aim to do one thing well."
       />
       <Card
         icon={<MdOutlineMobiledataOff size={40} />}
         title="No Data Collection"
-        description="We don't collect any data on you. We don't even have a database. Everything is stored in the smart contract."
+        description="We don't collect any user data. We don't use cookies or analytics.
+             This service runs on web3."
       />
 
       <Card
@@ -98,15 +112,16 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
         title="Our Smart Contracts"
         description={
           <div className="flex h-full flex-col justify-evenly">
-            {addresses.map((address) => (
+            {addresses.map(([address, currency]) => (
               <button
                 onClick={() => {
                   // open to snowtrace of address
                 }}
                 key={address}
-                className="color-shift mx-2 rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 py-1 px-2 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
+                className="color-shift mx-2 flex justify-between rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
               >
-                {address}
+                <div className=""> {address}</div>
+                <div className=""> {currency}</div>
               </button>
             ))}
           </div>
