@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "test-hardhat": "hardhat test",
     "deploy-avax-contract": "yarn hardhat run hardhat/scripts/deploy.js --network fuji",
-    "deploy-eth-contract": "yarn hardhat run hardhat/scripts/deploy.js --network rinkeby",
+    "deploy-eth-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepholia",
     "deploy-bsc-contract": "yarn hardhat run hardhat/scripts/deploy.js --network bscTestnet",
     "deploy-neon-contract": "yarn hardhat run hardhat/scripts/deploy.js --network neonDevnet",
     "deploy-sepolia-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepolia",

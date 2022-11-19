@@ -16,34 +16,41 @@ const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
 const neonContractAddress = import.meta.env.VITE_NEONDEVNET_CONTRACT_ADDRESS
 const dogeContractAddress = import.meta.env.VITE_DOGETESTNET_CONTRACT_ADDRESS
 
-export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
+export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
   const shortenWalletAddress = (walletAddress: string) =>
-    `${walletAddress.slice(0, 7)}...${walletAddress.slice(-7)}`
+    `${walletAddress.slice(0, 7)}...${walletAddress.slice(-4)}`
 
-  const addresses: [CurrencyString, string, string][] = [
+  // const
+
+  const addresses: [CurrencyString, string, string, string][] = [
     [
       "AVAX",
       shortenWalletAddress(avaxContractAddress),
+      avaxContractAddress,
       "https://snowtrace.io/address/" + avaxContractAddress,
     ],
     [
       "BNB",
       shortenWalletAddress(bnbContractAddress),
+      bnbContractAddress,
       "https://bscscan.com/address/" + bnbContractAddress,
     ],
     [
       "ETH",
       shortenWalletAddress(ethContractAddress),
+      ethContractAddress,
       "https://etherscan.io/address" + ethContractAddress,
     ],
     [
       "NEON",
       shortenWalletAddress(neonContractAddress),
+      neonContractAddress,
       "https://neonscan.org/address/" + neonContractAddress,
     ],
     [
       "DOGE",
       shortenWalletAddress(dogeContractAddress),
+      dogeContractAddress,
       "https://dogechain.info/address/" + dogeContractAddress,
     ],
   ]
@@ -117,16 +124,17 @@ export const FluffTile: React.FC<Props> = ({ layoutTransition }) => {
         title="Our Smart Contracts"
         description1={
           <div className="flex h-full flex-col justify-evenly">
-            {addresses.map(([address, currency, url]) => (
+            {addresses.map(([currency, shortenedAddress, fullAddress, url]) => (
               <a
+                title={fullAddress}
                 target="_blank"
                 rel="noopener noreferrer"
                 href={url}
-                key={address}
-                className="color-shift mx-2 flex justify-between rounded-full border border-stone-700 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
+                key={currency}
+                className="color-shift mx-2 flex justify-between rounded-full border border-slate-500 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
               >
-                <div className=""> {address}</div>
-                <div className=""> {currency}</div>
+                <div className="mr-2">{currency}</div>
+                <div>{shortenedAddress}</div>
               </a>
             ))}
           </div>

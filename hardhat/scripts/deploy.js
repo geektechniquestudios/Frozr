@@ -4,7 +4,6 @@ const hre = require("hardhat")
 
 require("dotenv").config({ path: "../../.env" })
 
-
 function setEnvValue(key, value) {
   // read file from hdd & split if from a linebreak to a array
   const ENV_VARS = fs.readFileSync(".env", "utf8").split(os.EOL)
@@ -21,14 +20,17 @@ function setEnvValue(key, value) {
 }
 
 async function main() {
+  console.log("Deploying Frozr contract...")
   const FrozrContract = await hre.ethers.getContractFactory("Frozr")
+  console.log("Contract instance created...")
   const frozr = await FrozrContract.deploy()
+  console.log("Deploying contract...")
   await frozr.deployed()
 
-
   const network = hre.network.name.toUpperCase()
-
-  console.log(`Frozer contract deployed to: ${frozr.address} on the ${network} network`)
+  console.log(
+    `Frozer contract deployed to: ${frozr.address} on the ${network} network`,
+  )
   setEnvValue(`VITE_${network}_CONTRACT_ADDRESS`, frozr.address)
 }
 

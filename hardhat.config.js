@@ -33,10 +33,10 @@ const accountKey = process.env.VITE_METAMASK_ACCOUNT_KEY
 
 module.exports = {
   solidity: "0.8.17",
-  optimizer: {
-    enabled: true,
-    // runs: 200,
-  },
+  // optimizer: {
+  //   enabled: true,
+  //   // runs: 200,
+  // },
   paths: {
     artifacts: "./src/artifacts",
     tests: "./hardhat/test",
@@ -92,6 +92,11 @@ module.exports = {
     dogeTestnet: {
       url: process.env.VITE_DOGETESTNET_RPC_URL,
       chainId: 568,
+      accounts: [accountKey],
+    },
+    ethereumMainnet: {
+      url: process.env.VITE_ETHEREUM_MAINNET_RPC_URL,
+      chainId: 1,
       accounts: [accountKey],
     },
   },

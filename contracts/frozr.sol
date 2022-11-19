@@ -6,12 +6,12 @@ import "hardhat/console.sol";
 contract Frozr {
   uint depositId = 0;
   struct Deposit {
-    address sender;
-    bool isComplete;
     uint depositId;
     uint amount;
     uint startDate;
     uint releaseDate;
+    bool isComplete;
+    address sender;
   }
   mapping(uint => Deposit) private deposits;
   mapping(address => uint[]) private addressToDepositIds;
@@ -21,12 +21,12 @@ contract Frozr {
     require(_daysToFreeze > 0, "You must store funds for at least 1 day");
 
     deposits[depositId] = Deposit(
-      msg.sender,
-      false,
       depositId,
       msg.value,
       block.timestamp,
-      block.timestamp + (_daysToFreeze * 1 days)
+      block.timestamp + (_daysToFreeze * 1 days),
+      false,
+      msg.sender
     );
     addressToDepositIds[msg.sender].push(depositId);
     depositId++;
