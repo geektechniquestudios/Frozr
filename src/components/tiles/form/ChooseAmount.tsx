@@ -3,7 +3,7 @@ import CurrencyInput from "react-currency-input-field"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { WindowSize } from "../../../containers/WindowSize"
-import { default as amountLogo } from "/src/assets/undraw_eth.svg"
+import { default as amountLogo } from "/src/assets/chooseAmount.svg"
 
 interface Props {
   amount: string
@@ -59,9 +59,13 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
           damping: 16,
           bounce: 0.3,
         }}
-        className="flex w-full items-center justify-center rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70"
       >
-        <img src={amountLogo} alt="amount logo" className="h-14" />
+        <img
+          src={amountLogo}
+          alt="amount logo"
+          className="h-36 translate-y-4 drop-shadow-2xl"
+        />
       </motion.div>
     </div>
   )

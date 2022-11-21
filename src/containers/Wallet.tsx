@@ -7,11 +7,13 @@ import Swal from "sweetalert2"
 import { checkForMetamask } from "../components/prompts/CheckForMetamask"
 
 declare let window: any
-const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
-const bnbContractAddress = import.meta.env.VITE_BSCTESTNET_CONTRACT_ADDRESS
+const avaxContractAddress = import.meta.env
+  .VITE_AVALANCHEMAINNET_CONTRACT_ADDRESS
+const fujiContractAddress = import.meta.env.VITE_FUJI_CONTRACT_ADDRESS
+const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
 const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
-const neonContractAddress = import.meta.env.VITE_NEONDEVNET_CONTRACT_ADDRESS
-const dogeContractAddress = import.meta.env.VITE_DOGETESTNET_CONTRACT_ADDRESS
+const neonContractAddress = import.meta.env.VITE_NEON_DEVNET_CONTRACT_ADDRESS
+const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
 
 export interface Deposit {
   depositId: string
@@ -35,7 +37,33 @@ export interface Deposit {
   }
 }
 
-export type CurrencyString = "AVAX" | "BNB" | "NEON" | "ETH" | "DOGE" | ""
+export type CurrencyString =
+  | "Avalanche"
+  | "Fuji Testnet"
+  | "BNB Testnet"
+  | "NEON Devnet"
+  | "ETH Testnet"
+  | "DOGE Testnet"
+  | ""
+
+const currencyMap: Record<
+  CurrencyString,
+  { chainId?: number; contractAddress?: string }
+> = {
+  Avalanche: {
+    chainId: 43114,
+    contractAddress: avaxContractAddress,
+  },
+  "Fuji Testnet": {
+    chainId: 43113,
+    contractAddress: fujiContractAddress,
+  },
+  "BNB Testnet": { chainId: 97, contractAddress: bnbContractAddress },
+  "ETH Testnet": { chainId: 11155111, contractAddress: ethContractAddress },
+  "NEON Devnet": { chainId: 245022926, contractAddress: neonContractAddress },
+  "DOGE Testnet": { chainId: 568, contractAddress: dogeContractAddress },
+  "": { chainId: -1 },
+}
 
 const useWallet = () => {
   const [walletAddress, setWalletAddress] = useState<string>(
@@ -86,28 +114,19 @@ const useWallet = () => {
     localStorage.setItem("isWalletConnected", "false")
   }
 
-  const currencyMap: Record<
-    CurrencyString,
-    { chainId?: number; contractAddress?: string }
-  > = {
-    AVAX: {
-      chainId: 43113,
-      contractAddress: avaxContractAddress,
-    },
-    BNB: { chainId: 97, contractAddress: bnbContractAddress },
-    ETH: { chainId: 11155111, contractAddress: ethContractAddress },
-    NEON: { chainId: 245022926, contractAddress: neonContractAddress },
-    DOGE: { chainId: 568, contractAddress: dogeContractAddress },
-    "": { chainId: -1 },
-  }
-
   useEffect(() => {
     // prevents spamming user on page load if no wallet is connected
-    if (typeof window.ethereum === "undefined") return
+    if (typeof window.ethereum === "undefined") {
+      disconnectWallet()
+      return
+    }
     updateNetwork()
   }, [currency])
 
   const updateNetwork = async (networkName?: CurrencyString) => {
+    setCurrency(networkName ?? currency)
+    localStorage.setItem("currency", networkName ?? currency)
+
     if (!checkForMetamask()) return
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     await provider.send("eth_requestAccounts", [])
@@ -115,8 +134,6 @@ const useWallet = () => {
     const isCorrectBlockchain =
       chainId === currencyMap[networkName ?? currency].chainId
 
-    setCurrency(networkName ?? currency)
-    localStorage.setItem("currency", networkName ?? currency)
     setIsCorrectNetwork(isCorrectBlockchain)
     if (networkName !== currency) setDeposits([])
     if (isCorrectBlockchain && isWalletConnected) {

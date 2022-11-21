@@ -1,16 +1,10 @@
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material"
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
 import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { WindowSize } from "../../../containers/WindowSize"
 
-import { default as selectCurrencyLogo } from "/src/assets/undraw_currency.svg"
+import { default as selectCurrencyLogo } from "/src/assets/selectCurrency.svg"
 
 interface Props {}
 
@@ -19,7 +13,6 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
     Form.useContainer()
   const {
     barLengths,
-    setBarLengths,
     currency,
     isCorrectNetwork,
     updateNetwork,
@@ -54,44 +47,52 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
             }}
           >
             <MenuItem
-              value="AVAX"
+              value="Avalanche"
               onClick={() => {
-                updateNetwork("AVAX")
+                updateNetwork("Avalanche")
               }}
             >
-              AVAX
+              Avalanche
             </MenuItem>
             <MenuItem
-              value="BNB"
+              value="Fuji Testnet"
               onClick={() => {
-                updateNetwork("BNB")
+                updateNetwork("Fuji Testnet")
               }}
             >
-              BNB
+              Fuji Testent
             </MenuItem>
             <MenuItem
-              value="NEON"
+              value="BNB Testnet"
               onClick={() => {
-                updateNetwork("NEON")
+                updateNetwork("BNB Testnet")
               }}
             >
-              NEON
+              BNB Testent
             </MenuItem>
             <MenuItem
-              value="ETH"
+              value="NEON Devnet"
               onClick={() => {
-                updateNetwork("ETH")
+                updateNetwork("NEON Devnet")
               }}
             >
-              ETHER
+              NEON Testent
             </MenuItem>
             <MenuItem
-              value="DOGE"
+              value="ETH Tesnet"
               onClick={() => {
-                updateNetwork("DOGE")
+                updateNetwork("ETH Testnet")
               }}
             >
-              DOGE
+              ETHER Testent
+            </MenuItem>
+            <MenuItem
+              value="DOGE Testnet"
+              onClick={() => {
+                updateNetwork("DOGE Testnet")
+              }}
+            >
+              DOGE Testent
             </MenuItem>
           </Select>
         </FormControl>
@@ -110,9 +111,13 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           damping: 20,
           bounce: 0.7,
         }}
-        className="flex w-full items-center justify-center rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400"
       >
-        <img src={selectCurrencyLogo} alt="currency logo" className="h-16" />
+        <img
+          src={selectCurrencyLogo}
+          alt="currency logo"
+          className="h-24 translate-y-2 drop-shadow-2xl"
+        />
       </motion.div>
     </div>
   )

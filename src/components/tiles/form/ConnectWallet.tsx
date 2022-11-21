@@ -3,7 +3,7 @@ import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { WindowSize } from "../../../containers/WindowSize"
-import { default as connectWalletLogo } from "/src/assets/undraw_pay.svg"
+import { default as connectWalletLogo } from "/src/assets/connectWallet.svg"
 
 interface Props {}
 
@@ -64,9 +64,13 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
           damping: 20,
           bounce: 0.7,
         }}
-        className="flex w-full items-center justify-center rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-100 bg-opacity-70"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-100 bg-opacity-70"
       >
-        <img src={connectWalletLogo} alt="wallet logo" className="h-16" />
+        <img
+          src={connectWalletLogo}
+          alt="wallet logo"
+          className="h-40 drop-shadow-2xl"
+        />
       </motion.div>
     </div>
   )

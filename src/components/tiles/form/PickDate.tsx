@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { WindowSize } from "../../../containers/WindowSize"
-import { default as dateLogo } from "/src/assets/undraw_calendar.svg"
+import { default as dateLogo } from "/src/assets/pickDate.svg"
 
 interface Props {
   date: Dayjs
@@ -60,9 +60,13 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
           damping: 20,
           bounce: 0.7,
         }}
-        className="flex w-full items-center justify-center rounded-l-xl border-l border-t border-b border-stone-600 bg-zinc-400 bg-opacity-80"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-zinc-400 bg-opacity-80"
       >
-        <img src={dateLogo} alt="date logo" className="h-16" />
+        <img
+          src={dateLogo}
+          alt="date logo"
+          className="h-36 translate-y-3 drop-shadow-2xl"
+        />
       </motion.div>
     </div>
   )

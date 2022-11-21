@@ -11,48 +11,52 @@ interface Props {
 }
 
 const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
-const bnbContractAddress = import.meta.env.VITE_BSCTESTNET_CONTRACT_ADDRESS
+const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
 const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
-const neonContractAddress = import.meta.env.VITE_NEONDEVNET_CONTRACT_ADDRESS
-const dogeContractAddress = import.meta.env.VITE_DOGETESTNET_CONTRACT_ADDRESS
+const neonContractAddress = import.meta.env.VITE_NEON_DEVNET_CONTRACT_ADDRESS
+const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
 
 export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
   const shortenWalletAddress = (walletAddress: string) =>
     `${walletAddress.slice(0, 7)}...${walletAddress.slice(-4)}`
 
-  // const
-
   const addresses: [CurrencyString, string, string, string][] = [
     [
-      "AVAX",
+      "Avalanche",
       shortenWalletAddress(avaxContractAddress),
       avaxContractAddress,
       "https://snowtrace.io/address/" + avaxContractAddress,
     ],
     [
-      "BNB",
-      shortenWalletAddress(bnbContractAddress),
-      bnbContractAddress,
-      "https://bscscan.com/address/" + bnbContractAddress,
+      "Fuji Testnet",
+      shortenWalletAddress(avaxContractAddress),
+      avaxContractAddress,
+      "https://snowtrace.io/address/" + avaxContractAddress,
     ],
-    [
-      "ETH",
-      shortenWalletAddress(ethContractAddress),
-      ethContractAddress,
-      "https://etherscan.io/address" + ethContractAddress,
-    ],
-    [
-      "NEON",
-      shortenWalletAddress(neonContractAddress),
-      neonContractAddress,
-      "https://neonscan.org/address/" + neonContractAddress,
-    ],
-    [
-      "DOGE",
-      shortenWalletAddress(dogeContractAddress),
-      dogeContractAddress,
-      "https://dogechain.info/address/" + dogeContractAddress,
-    ],
+    // [
+    //   "BNB Testnet",
+    //   shortenWalletAddress(bnbContractAddress),
+    //   bnbContractAddress,
+    //   "https://bscscan.com/address/" + bnbContractAddress,
+    // ],
+    // [
+    //   "ETH Testnet",
+    //   shortenWalletAddress(ethContractAddress),
+    //   ethContractAddress,
+    //   "https://etherscan.io/address" + ethContractAddress,
+    // ],
+    // [
+    //   "NEON Devnet",
+    //   shortenWalletAddress(neonContractAddress),
+    //   neonContractAddress,
+    //   "https://neonscan.org/address/" + neonContractAddress,
+    // ],
+    // [
+    //   "DOGE Testnet",
+    //   shortenWalletAddress(dogeContractAddress),
+    //   dogeContractAddress,
+    //   "https://dogechain.info/address/" + dogeContractAddress,
+    // ],
   ]
 
   return (

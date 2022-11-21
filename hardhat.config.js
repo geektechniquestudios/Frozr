@@ -17,17 +17,13 @@ task("accounts", "Prints the list of accounts", async (_args, hre) => {
 })
 
 // eslint-disable-next-line no-undef
-task(
-  "balances",
-  "Prints the list of AVAX account balances",
-  async (_args, hre) => {
-    const accounts = await hre.ethers.getSigners()
-    for (const account of accounts) {
-      const balance = await hre.ethers.provider.getBalance(account.address)
-      console.log(`${account.address} has balance ${balance.toString()}`)
-    }
-  },
-)
+task("balances", "Prints the list of account balances", async (_args, hre) => {
+  const accounts = await hre.ethers.getSigners()
+  for (const account of accounts) {
+    const balance = await hre.ethers.provider.getBalance(account.address)
+    console.log(`${account.address} has balance ${balance.toString()}`)
+  }
+})
 
 const accountKey = process.env.VITE_METAMASK_ACCOUNT_KEY
 
@@ -35,7 +31,7 @@ module.exports = {
   solidity: "0.8.17",
   // optimizer: {
   //   enabled: true,
-  //   // runs: 200,
+  //   runs: 200,
   // },
   paths: {
     artifacts: "./src/artifacts",
@@ -64,7 +60,7 @@ module.exports = {
       ],
     },
     bscTestnet: {
-      url: process.env.VITE_BSCTESTNET_RPC_URL,
+      url: process.env.VITE_BSC_TESTNET_RPC_URL,
       chainId: 97,
       accounts: [accountKey],
     },
@@ -75,12 +71,11 @@ module.exports = {
     },
     avalancheMainnet: {
       url: process.env.VITE_AVALANCHE_MAINNET_RPC_URL,
-      // chainId: 43114, // use this on mainnet launch
-      chainId: 43113,
+      chainId: 43114,
       accounts: [accountKey],
     },
     neonDevnet: {
-      url: process.env.VITE_NEONDEVNET_RPC_URL,
+      url: process.env.VITE_NEON_DEVNET_RPC_URL,
       chainId: 245022926,
       accounts: [accountKey],
     },
@@ -90,7 +85,7 @@ module.exports = {
       accounts: [accountKey],
     },
     dogeTestnet: {
-      url: process.env.VITE_DOGETESTNET_RPC_URL,
+      url: process.env.VITE_DOGE_TESTNET_RPC_URL,
       chainId: 568,
       accounts: [accountKey],
     },
