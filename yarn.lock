@@ -2401,11 +2401,6 @@
     "@types/sinon-chai" "^3.2.3"
     "@types/web3" "1.0.19"
 
-"@openzeppelin/contracts@^4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.8.0.tgz#6854c37df205dd2c056bdfa1b853f5d732109109"
-  integrity sha512-AGuwhRRL+NaKx73WKRNzeCxOCOCxpaqF+kp8TJ89QzAipSwZy/NoflkWaL9bywXFRhIzXt8j38sfF7KBKCPWLw==
-
 "@popperjs/core@^2.11.6":
   version "2.11.6"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
@@ -5933,10 +5928,10 @@ sweetalert2-react-content@^5.0.7:
   resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-5.0.7.tgz#6fd7299978b2e0221d3049746ff2b39c1a7aa72d"
   integrity sha512-8Fk82Mpk45lFXpJWKIFF/lq8k/dJKDDQGFcuqVosaL/qRdViyAs5+u37LoTGfnOIvf+rfQB3PAXcp1XLLn+0ew==
 
-sweetalert2@^11.6.9:
-  version "11.6.9"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.6.9.tgz#23fdd581d0b695c61fedbe5b9be1994c73d7b722"
-  integrity sha512-zx0vdToB2Ququk+0qbXruca5KJuScyno77cqPfuwSiRwlMS5CwwnZDWiLqcRlIAZzDEbZHz9g/T7BDqAGqsQlA==
+sweetalert2@^11.6.10:
+  version "11.6.10"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.6.10.tgz#ea5f670fcfdd1b8753629ba13c17725c586a12f8"
+  integrity sha512-/tzEmEYqqHVkO6iMfvCFcmaO78un93CdZIhB+DGj9BLMkcuXS8jo2bmYoxjEAryhxsKPqXiWmZNo3gw/qw/ZwQ==
 
 tailwindcss@^3.2.4:
   version "3.2.4"

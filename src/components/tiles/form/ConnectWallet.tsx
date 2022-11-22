@@ -64,12 +64,12 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
           damping: 20,
           bounce: 0.7,
         }}
-        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-indigo-100 bg-opacity-70"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-indigo-200 border-opacity-30 bg-indigo-100 bg-opacity-70"
       >
         <img
           src={connectWalletLogo}
           alt="wallet logo"
-          className="h-40 drop-shadow-2xl"
+          className="h-36 -translate-y-2 drop-shadow-2xl"
         />
       </motion.div>
     </div>

@@ -59,7 +59,7 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
           damping: 16,
           bounce: 0.3,
         }}
-        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-gray-200 bg-opacity-70"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-purple-200 border-opacity-30 bg-indigo-200 bg-opacity-40"
       >
         <img
           src={amountLogo}

@@ -74,11 +74,6 @@ module.exports = {
       chainId: 43114,
       accounts: [accountKey],
     },
-    neonDevnet: {
-      url: process.env.VITE_NEON_DEVNET_RPC_URL,
-      chainId: 245022926,
-      accounts: [accountKey],
-    },
     sepolia: {
       url: process.env.VITE_SEPOLIA_RPC_URL,
       chainId: 11155111,

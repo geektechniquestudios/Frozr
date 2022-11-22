@@ -36,3 +36,8 @@ $secondary: #78716c;
 .color-shift {
   @apply transition-colors duration-300 ease-in-out;
 }
+
+// prevnts a layout shift while popup is visible
+body {
+  padding-right: 0 !important;
+}

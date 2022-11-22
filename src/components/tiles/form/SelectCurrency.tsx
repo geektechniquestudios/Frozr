@@ -20,9 +20,10 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
   } = Wallet.useContainer()
   const { isSmall } = WindowSize.useContainer()
   const xPos = isSmall ? 0 : barLengths[1]
-  const label = isCorrectNetwork
-    ? "Select a Currency"
-    : "Change Your Wallet's Network"
+  const label =
+    isCorrectNetwork || !isWalletConnected || currency === ""
+      ? "Select a Currency"
+      : "Update Your Wallet"
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
       <div className="p-3">
@@ -34,7 +35,13 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           }}
         >
           <InputLabel>
-            <div className={`${isCorrectNetwork ? "" : "text-yellow-500"}`}>
+            <div
+              className={`${
+                isCorrectNetwork || !isWalletConnected || currency === ""
+                  ? ""
+                  : "text-yellow-500"
+              }`}
+            >
               {label}
             </div>
           </InputLabel>
@@ -71,20 +78,12 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
               BNB Testent
             </MenuItem>
             <MenuItem
-              value="NEON Devnet"
+              value="Sepolia Testnet"
               onClick={() => {
-                updateNetwork("NEON Devnet")
+                updateNetwork("Sepolia Testnet")
               }}
             >
-              NEON Testent
-            </MenuItem>
-            <MenuItem
-              value="ETH Tesnet"
-              onClick={() => {
-                updateNetwork("ETH Testnet")
-              }}
-            >
-              ETHER Testent
+              Sepolia Testent
             </MenuItem>
             <MenuItem
               value="DOGE Testnet"
@@ -111,12 +110,12 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           damping: 20,
           bounce: 0.7,
         }}
-        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-stone-600 bg-slate-400"
+        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-violet-200 border-opacity-30 bg-purple-100 bg-opacity-50"
       >
         <img
           src={selectCurrencyLogo}
           alt="currency logo"
-          className="h-24 translate-y-2 drop-shadow-2xl"
+          className="h-40 translate-y-2 drop-shadow-2xl"
         />
       </motion.div>
     </div>

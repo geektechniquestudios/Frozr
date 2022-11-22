@@ -13,12 +13,11 @@ interface Props {
 const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
 const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
 const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
-const neonContractAddress = import.meta.env.VITE_NEON_DEVNET_CONTRACT_ADDRESS
 const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
 
 export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
   const shortenWalletAddress = (walletAddress: string) =>
-    `${walletAddress.slice(0, 7)}...${walletAddress.slice(-4)}`
+    `${walletAddress.slice(0, 5)}...${walletAddress.slice(-3)}`
 
   const addresses: [CurrencyString, string, string, string][] = [
     [
@@ -33,30 +32,24 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
       avaxContractAddress,
       "https://snowtrace.io/address/" + avaxContractAddress,
     ],
-    // [
-    //   "BNB Testnet",
-    //   shortenWalletAddress(bnbContractAddress),
-    //   bnbContractAddress,
-    //   "https://bscscan.com/address/" + bnbContractAddress,
-    // ],
-    // [
-    //   "ETH Testnet",
-    //   shortenWalletAddress(ethContractAddress),
-    //   ethContractAddress,
-    //   "https://etherscan.io/address" + ethContractAddress,
-    // ],
-    // [
-    //   "NEON Devnet",
-    //   shortenWalletAddress(neonContractAddress),
-    //   neonContractAddress,
-    //   "https://neonscan.org/address/" + neonContractAddress,
-    // ],
-    // [
-    //   "DOGE Testnet",
-    //   shortenWalletAddress(dogeContractAddress),
-    //   dogeContractAddress,
-    //   "https://dogechain.info/address/" + dogeContractAddress,
-    // ],
+    [
+      "BNB Testnet",
+      shortenWalletAddress(bnbContractAddress),
+      bnbContractAddress,
+      "https://bscscan.com/address/" + bnbContractAddress,
+    ],
+    [
+      "Sepolia Testnet",
+      shortenWalletAddress(ethContractAddress),
+      ethContractAddress,
+      "https://etherscan.io/address" + ethContractAddress,
+    ],
+    [
+      "DOGE Testnet",
+      shortenWalletAddress(dogeContractAddress),
+      dogeContractAddress,
+      "https://dogechain.info/address/" + dogeContractAddress,
+    ],
   ]
 
   return (
@@ -127,7 +120,7 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
         icon={<TbFileSignal size={40} />}
         title="Our Smart Contracts"
         description1={
-          <div className="flex h-full flex-col justify-evenly">
+          <div className="flex h-full flex-col items-center justify-evenly">
             {addresses.map(([currency, shortenedAddress, fullAddress, url]) => (
               <a
                 title={fullAddress}
@@ -135,9 +128,11 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
                 rel="noopener noreferrer"
                 href={url}
                 key={currency}
-                className="color-shift mx-2 flex justify-between rounded-full border border-slate-500 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
+                className="color-shift mx-2 flex w-44 items-center justify-between rounded-full border border-slate-500 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
               >
-                <div className="mr-2">{currency}</div>
+                <div className="mr-2 w-20 overflow-hidden text-ellipsis whitespace-nowrap">
+                  {currency}
+                </div>
                 <div>{shortenedAddress}</div>
               </a>
             ))}

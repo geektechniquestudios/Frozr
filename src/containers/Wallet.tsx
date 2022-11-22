@@ -12,7 +12,6 @@ const avaxContractAddress = import.meta.env
 const fujiContractAddress = import.meta.env.VITE_FUJI_CONTRACT_ADDRESS
 const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
 const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
-const neonContractAddress = import.meta.env.VITE_NEON_DEVNET_CONTRACT_ADDRESS
 const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
 
 export interface Deposit {
@@ -41,8 +40,7 @@ export type CurrencyString =
   | "Avalanche"
   | "Fuji Testnet"
   | "BNB Testnet"
-  | "NEON Devnet"
-  | "ETH Testnet"
+  | "Sepolia Testnet"
   | "DOGE Testnet"
   | ""
 
@@ -59,8 +57,7 @@ const currencyMap: Record<
     contractAddress: fujiContractAddress,
   },
   "BNB Testnet": { chainId: 97, contractAddress: bnbContractAddress },
-  "ETH Testnet": { chainId: 11155111, contractAddress: ethContractAddress },
-  "NEON Devnet": { chainId: 245022926, contractAddress: neonContractAddress },
+  "Sepolia Testnet": { chainId: 11155111, contractAddress: ethContractAddress },
   "DOGE Testnet": { chainId: 568, contractAddress: dogeContractAddress },
   "": { chainId: -1 },
 }
@@ -76,7 +73,7 @@ const useWallet = () => {
   )
 
   const [currency, setCurrency] = useState<CurrencyString>(
-    (localStorage.getItem("currency") ?? "AVAX") as CurrencyString,
+    (localStorage.getItem("currency") ?? "") as CurrencyString,
   )
 
   const [isCorrectNetwork, setIsCorrectNetwork] = useState(false)
@@ -132,7 +129,7 @@ const useWallet = () => {
     await provider.send("eth_requestAccounts", [])
     const { chainId } = await provider.getNetwork()
     const isCorrectBlockchain =
-      chainId === currencyMap[networkName ?? currency].chainId
+      chainId === currencyMap[networkName ?? currency]?.chainId ?? -1
 
     setIsCorrectNetwork(isCorrectBlockchain)
     if (networkName !== currency) setDeposits([])
@@ -183,6 +180,7 @@ const useWallet = () => {
       const tx = await contractCallFunction(contract)
       tx &&
         tx.wait().then(() => {
+          contract.removeAllListeners()
           postContractCallFunction && postContractCallFunction()
         })
     } catch (err) {
@@ -193,6 +191,7 @@ const useWallet = () => {
   }
 
   const refreshDeposits = () => {
+    if (currency === "" || !isWalletConnected) return
     callContract(async (contract) => {
       setDeposits(await contract.viewDeposits())
     })

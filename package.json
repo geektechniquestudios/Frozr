@@ -11,7 +11,6 @@
     "deploy-fuji-contract": "yarn hardhat run hardhat/scripts/deploy.js --network fuji",
     "deploy-eth-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepholia",
     "deploy-bsc-contract": "yarn hardhat run hardhat/scripts/deploy.js --network bscTestnet",
-    "deploy-neon-contract": "yarn hardhat run hardhat/scripts/deploy.js --network neonDevnet",
     "deploy-sepolia-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepolia",
     "deploy-doge-contract": "yarn hardhat run hardhat/scripts/deploy.js --network dogeTestnet"
   },
@@ -31,7 +30,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-icons": "^4.6.0",
     "sass": "^1.56.1",
-    "sweetalert2": "^11.6.9",
+    "sweetalert2": "^11.6.10",
     "sweetalert2-react-content": "^5.0.7",
     "unstated-next": "^1.1.0"
   },
