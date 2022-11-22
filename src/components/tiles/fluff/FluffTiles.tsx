@@ -10,7 +10,8 @@ interface Props {
   layoutTransition: {}
 }
 
-const avaxContractAddress = import.meta.env.VITE_AVAX_CONTRACT_ADDRESS
+const avaxContractAddress = import.meta.env
+  .VITE_AVALANCHEMAINNET_CONTRACT_ADDRESS
 const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
 const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
 const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
@@ -120,21 +121,23 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
         icon={<TbFileSignal size={40} />}
         title="Our Smart Contracts"
         description1={
-          <div className="flex h-full flex-col items-center justify-evenly">
+          <div className="grid grid-cols-2 items-center justify-evenly gap-2 sm:flex sm:flex-col">
             {addresses.map(([currency, shortenedAddress, fullAddress, url]) => (
-              <a
-                title={fullAddress}
-                target="_blank"
-                rel="noopener noreferrer"
-                href={url}
-                key={currency}
-                className="color-shift mx-2 flex w-44 items-center justify-between rounded-full border border-slate-500 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline"
-              >
-                <div className="mr-2 w-20 overflow-hidden text-ellipsis whitespace-nowrap">
-                  {currency}
-                </div>
-                <div>{shortenedAddress}</div>
-              </a>
+              <div className="flex items-center justify-center">
+                <a
+                  title={`${currency}: ${fullAddress}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={url}
+                  key={currency}
+                  className="color-shift mx-2 flex h-10 w-full flex-col items-center justify-between rounded-full border border-slate-500 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline sm:h-7 sm:w-48 sm:flex-row"
+                >
+                  <div className="mr-2 w-20 overflow-hidden text-ellipsis whitespace-nowrap">
+                    {currency}
+                  </div>
+                  <div>{shortenedAddress}</div>
+                </a>
+              </div>
             ))}
           </div>
         }
