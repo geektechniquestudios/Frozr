@@ -123,13 +123,12 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
         description1={
           <div className="grid grid-cols-2 items-center justify-evenly gap-2 sm:flex sm:flex-col">
             {addresses.map(([currency, shortenedAddress, fullAddress, url]) => (
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center" key={currency}>
                 <a
                   title={`${currency}: ${fullAddress}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   href={url}
-                  key={currency}
                   className="color-shift mx-2 flex h-10 w-full flex-col items-center justify-between rounded-full border border-slate-500 bg-slate-600 bg-opacity-90 px-3 py-1 text-xs hover:border-slate-300 hover:text-slate-300 hover:underline sm:h-7 sm:w-48 sm:flex-row"
                 >
                   <div className="mr-2 w-20 overflow-hidden text-ellipsis whitespace-nowrap">
