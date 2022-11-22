@@ -41,7 +41,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
           <Button
             onClick={() => {
               disconnectWallet()
-              setBarLengths([0, 15, 30, 45])
+              setBarLengths([1, 15, 30, 45])
               setPage(0)
             }}
             className="h-14 w-48 opacity-30"

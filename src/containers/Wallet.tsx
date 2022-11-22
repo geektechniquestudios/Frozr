@@ -80,7 +80,7 @@ const useWallet = () => {
   const [blockTimestamp, setBlockTimestamp] = useState<number>()
   const [deposits, setDeposits] = useState<Deposit[]>([])
   const [barLengths, setBarLengths] = useState<number[]>(
-    isWalletConnected ? [10, 0, 15, 35] : [0, 10, 25, 40],
+    isWalletConnected ? [10, 1, 15, 35] : [1, 10, 25, 40],
   )
 
   const { setConnectBorderColor } = Form.useContainer()
@@ -97,7 +97,7 @@ const useWallet = () => {
       localStorage.setItem("walletAddress", walletAddress)
       localStorage.setItem("isWalletConnected", "true")
       setConnectBorderColor("border-transparent")
-      setBarLengths([10, 0, 15, 35])
+      setBarLengths([10, 1, 15, 35])
     } catch (error) {
       console.error(error)
       checkForMetamask()
@@ -133,12 +133,12 @@ const useWallet = () => {
 
     setIsCorrectNetwork(isCorrectBlockchain)
     if (networkName !== currency) setDeposits([])
-    if (isCorrectBlockchain && isWalletConnected) {
-      setBarLengths([35, 15, 0, 10])
-      refreshDeposits()
-    }
     if (!isCorrectBlockchain && isWalletConnected) {
-      setBarLengths([10, 0, 15, 35])
+      setBarLengths([10, 1, 15, 35])
+    }
+    if (isCorrectBlockchain && isWalletConnected) {
+      setBarLengths([35, 15, 1, 10])
+      refreshDeposits()
     }
   }
 

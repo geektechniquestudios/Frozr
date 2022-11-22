@@ -38,7 +38,7 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
               onChange={(newValue) => {
                 if (newValue) {
                   setDate(newValue)
-                  setBarLengths([40, 25, 10, 0])
+                  setBarLengths([40, 25, 10, 1])
                 }
               }}
               renderInput={(params) => <TextField {...params} />}
@@ -85,7 +85,7 @@ export const PickDate: React.FC<Props> = ({ date, setDate }) => {
                 damping: 20,
                 bounce: 0.7,
               }}
-              className="absolute -z-10 h-48 w-48 border border-slate-500 border-opacity-30 bg-sky-300 bg-opacity-20"
+              className="absolute -z-50 h-48 w-48 border border-slate-500 border-opacity-30 bg-sky-300 bg-opacity-20"
               style={{ borderRadius: "77% 23% 17% 83% / 61% 38% 62% 39%" }}
             />
           )}
