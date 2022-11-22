@@ -24,7 +24,7 @@ export const DepositsHeader: React.FC<Props> = ({
       className="flex w-full justify-between gap-2 px-2"
     >
       <button
-        title={!isPrevDisabled ? "Previous" : ""}
+        title={!isPrevDisabled ? "Previous" : "No Previous Deposits"}
         onClick={() => setPage(page - 1)}
         disabled={isPrevDisabled}
         className="grid place-content-center"
@@ -69,7 +69,7 @@ export const DepositsHeader: React.FC<Props> = ({
         </AnimatePresence>
       </div>
       <button
-        title={!isNextDisabled ? "Next" : ""}
+        title={!isNextDisabled ? "Next" : "No More Deposits"}
         onClick={() => setPage(page + 1)}
         disabled={isNextDisabled}
         className="grid place-content-center"
