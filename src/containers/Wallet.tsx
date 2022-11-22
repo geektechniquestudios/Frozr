@@ -191,7 +191,7 @@ const useWallet = () => {
   }
 
   const refreshDeposits = () => {
-    if (currency === "" || !isWalletConnected) return
+    if (currency === "") return
     callContract(async (contract) => {
       setDeposits(await contract.viewDeposits())
     })
