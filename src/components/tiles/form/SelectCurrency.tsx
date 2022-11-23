@@ -62,6 +62,14 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
               Avalanche
             </MenuItem>
             <MenuItem
+              value="BNB BEP20"
+              onClick={() => {
+                updateNetwork("BNB BEP20")
+              }}
+            >
+              BNB BEP20
+            </MenuItem>
+            <MenuItem
               value="Fuji Testnet"
               onClick={() => {
                 updateNetwork("Fuji Testnet")

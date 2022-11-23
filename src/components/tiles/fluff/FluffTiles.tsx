@@ -10,11 +10,18 @@ interface Props {
   layoutTransition: {}
 }
 
-const avaxContractAddress = import.meta.env
-  .VITE_AVALANCHEMAINNET_CONTRACT_ADDRESS
-const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
-const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
-const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
+const avaxMainnetContractAddress = import.meta.env
+  .VITE_AVALANCHE_MAINNET_CONTRACT_ADDRESS
+const fujiTestnetContractAddress = import.meta.env
+  .VITE_FUJI_TESTNET_CONTRACT_ADDRESS
+const bnbMainnetContractAddress = import.meta.env
+  .VITE_BSC_MAINNET_CONTRACT_ADDRESS
+const bnbTestnetContractAddress = import.meta.env
+  .VITE_BSC_TESTNET_CONTRACT_ADDRESS
+const sepoliaTestnetContractAddress = import.meta.env
+  .VITE_SEPOLIA_TESTNET_CONTRACT_ADDRESS
+const dogeTestnetContractAddress = import.meta.env
+  .VITE_DOGE_TESTNET_CONTRACT_ADDRESS
 
 export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
   const shortenWalletAddress = (walletAddress: string) =>
@@ -23,33 +30,40 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
   const addresses: [CurrencyString, string, string, string][] = [
     [
       "Avalanche",
-      shortenWalletAddress(avaxContractAddress),
-      avaxContractAddress,
-      "https://snowtrace.io/address/" + avaxContractAddress,
+      shortenWalletAddress(avaxMainnetContractAddress),
+      avaxMainnetContractAddress,
+      "https://snowtrace.io/address/" + avaxMainnetContractAddress,
+    ],
+    [
+      "BNB BEP20",
+      shortenWalletAddress(bnbMainnetContractAddress),
+      bnbMainnetContractAddress,
+      "https://bscscan.com/address/" + bnbMainnetContractAddress,
     ],
     [
       "Fuji Testnet",
-      shortenWalletAddress(avaxContractAddress),
-      avaxContractAddress,
-      "https://snowtrace.io/address/" + avaxContractAddress,
+      shortenWalletAddress(fujiTestnetContractAddress),
+      fujiTestnetContractAddress,
+      "https://cchain.explorer.avax-test.network/address/" +
+        fujiTestnetContractAddress,
     ],
     [
       "BNB Testnet",
-      shortenWalletAddress(bnbContractAddress),
-      bnbContractAddress,
-      "https://bscscan.com/address/" + bnbContractAddress,
+      shortenWalletAddress(bnbTestnetContractAddress),
+      bnbTestnetContractAddress,
+      "https://testnet.bscscan.com/address/" + bnbTestnetContractAddress,
     ],
-    [
-      "Sepolia Testnet",
-      shortenWalletAddress(ethContractAddress),
-      ethContractAddress,
-      "https://etherscan.io/address" + ethContractAddress,
-    ],
+    // [
+    //   "Sepolia Testnet",
+    //   shortenWalletAddress(sepoliaTestnetContractAddress),
+    //   sepoliaTestnetContractAddress,
+    //   "https://etherscan.io/address" + sepoliaTestnetContractAddress,
+    // ],
     [
       "DOGE Testnet",
-      shortenWalletAddress(dogeContractAddress),
-      dogeContractAddress,
-      "https://dogechain.info/address/" + dogeContractAddress,
+      shortenWalletAddress(dogeTestnetContractAddress),
+      dogeTestnetContractAddress,
+      "https://dogechain.info/address/" + dogeTestnetContractAddress,
     ],
   ]
 

@@ -59,34 +59,39 @@ module.exports = {
         "0x750839e9dbbd2a0910efe40f50b2f3b2f2f59f5580bb4b83bd8c1201cf9a010a",
       ],
     },
-    bscTestnet: {
+    bsc_testnet: {
       url: process.env.VITE_BSC_TESTNET_RPC_URL,
       chainId: 97,
       accounts: [accountKey],
     },
-    fuji: {
+    fuji_testnet: {
       url: process.env.VITE_AVALANCHE_TESTNET_RPC_URL,
       chainId: 43113,
       accounts: [accountKey],
     },
-    avalancheMainnet: {
-      url: process.env.VITE_AVALANCHE_MAINNET_RPC_URL,
-      chainId: 43114,
-      accounts: [accountKey],
-    },
-    sepolia: {
-      url: process.env.VITE_SEPOLIA_RPC_URL,
+    sepolia_testnet: {
+      url: process.env.VITE_SEPOLIA_TESTNET_RPC_URL,
       chainId: 11155111,
       accounts: [accountKey],
     },
-    dogeTestnet: {
+    doge_testnet: {
       url: process.env.VITE_DOGE_TESTNET_RPC_URL,
       chainId: 568,
       accounts: [accountKey],
     },
-    ethereumMainnet: {
+    ethereum_mainnet: {
       url: process.env.VITE_ETHEREUM_MAINNET_RPC_URL,
       chainId: 1,
+      accounts: [accountKey],
+    },
+    avalanche_mainnet: {
+      url: process.env.VITE_AVALANCHE_MAINNET_RPC_URL,
+      chainId: 43114,
+      accounts: [accountKey],
+    },
+    bsc_mainnet: {
+      url: process.env.VITE_BSC_MAINNET_RPC_URL,
+      chainId: 56,
       accounts: [accountKey],
     },
   },

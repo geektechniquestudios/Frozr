@@ -8,11 +8,17 @@ import { checkForMetamask } from "../components/prompts/CheckForMetamask"
 
 declare let window: any
 const avaxContractAddress = import.meta.env
-  .VITE_AVALANCHEMAINNET_CONTRACT_ADDRESS
-const fujiContractAddress = import.meta.env.VITE_FUJI_CONTRACT_ADDRESS
-const bnbContractAddress = import.meta.env.VITE_BSC_TESTNET_CONTRACT_ADDRESS
-const ethContractAddress = import.meta.env.VITE_SEPOLIA_CONTRACT_ADDRESS
-const dogeContractAddress = import.meta.env.VITE_DOGE_TESTNET_CONTRACT_ADDRESS
+  .VITE_AVALANCHE_MAINNET_CONTRACT_ADDRESS
+const bnbMainnetContractAddress = import.meta.env
+  .VITE_BSC_MAINNET_CONTRACT_ADDRESS
+const fujiTestnetContractAddress = import.meta.env
+  .VITE_FUJI_TESTNET_CONTRACT_ADDRESS
+const bnbTestnetContractAddress = import.meta.env
+  .VITE_BSC_TESTNET_CONTRACT_ADDRESS
+const sepoliaContractAddress = import.meta.env
+  .VITE_SEPOLIA_TESTNET_CONTRACT_ADDRESS
+const dogeTestnetContractAddress = import.meta.env
+  .VITE_DOGE_TESTNET_CONTRACT_ADDRESS
 
 export interface Deposit {
   depositId: string
@@ -38,6 +44,7 @@ export interface Deposit {
 
 export type CurrencyString =
   | "Avalanche"
+  | "BNB BEP20"
   | "Fuji Testnet"
   | "BNB Testnet"
   | "Sepolia Testnet"
@@ -52,13 +59,20 @@ const currencyMap: Record<
     chainId: 43114,
     contractAddress: avaxContractAddress,
   },
+  "BNB BEP20": {
+    chainId: 56,
+    contractAddress: bnbMainnetContractAddress,
+  },
   "Fuji Testnet": {
     chainId: 43113,
-    contractAddress: fujiContractAddress,
+    contractAddress: fujiTestnetContractAddress,
   },
-  "BNB Testnet": { chainId: 97, contractAddress: bnbContractAddress },
-  "Sepolia Testnet": { chainId: 11155111, contractAddress: ethContractAddress },
-  "DOGE Testnet": { chainId: 568, contractAddress: dogeContractAddress },
+  "BNB Testnet": { chainId: 97, contractAddress: bnbTestnetContractAddress },
+  "Sepolia Testnet": {
+    chainId: 11155111,
+    contractAddress: sepoliaContractAddress,
+  },
+  "DOGE Testnet": { chainId: 568, contractAddress: dogeTestnetContractAddress },
   "": { chainId: -1 },
 }
 
