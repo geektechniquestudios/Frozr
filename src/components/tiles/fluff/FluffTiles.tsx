@@ -63,7 +63,8 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
       "DOGE Testnet",
       shortenWalletAddress(dogeTestnetContractAddress),
       dogeTestnetContractAddress,
-      "https://dogechain.info/address/" + dogeTestnetContractAddress,
+      "https://explorer-testnet.dogechain.dog/address/" +
+        dogeTestnetContractAddress,
     ],
   ]
 

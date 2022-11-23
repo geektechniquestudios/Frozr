@@ -13,7 +13,7 @@
     "deploy-eth-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepholia_testnet",
     "deploy-tbsc-contract": "yarn hardhat run hardhat/scripts/deploy.js --network bscTestnet",
     "deploy-sepolia-contract": "yarn hardhat run hardhat/scripts/deploy.js --network sepolia",
-    "deploy-doge-contract": "yarn hardhat run hardhat/scripts/deploy.js --network dogeTestnet"
+    "deploy-doge-contract": "yarn hardhat run hardhat/scripts/deploy.js --network doge_testnet"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
