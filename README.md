@@ -1,6 +1,6 @@
 # Frozr
 
-<img src="/src/assets/logo.webp" height="200" align="right" href="https://frozr.io/"/>
+<img src="/asset-sources/banner.png" height="200" href="https://frozr.io/"/>
 
 ## A safe free open-source time vault for your crypto
   Check it out at [frozr.io](https://frozr.io)
