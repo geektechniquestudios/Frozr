@@ -1,18 +1,18 @@
-# Frozr
+[![](asset-sources/banner.png)](https://frozr.io)
 
-<img src="/asset-sources/banner.png" height="200" href="https://frozr.io/"/>
-
-## A safe free open-source time vault for your crypto
+## A Free Open-Source Time Vault For Your Cryptocurrency
   Check it out at [frozr.io](https://frozr.io)
 
-### What is Frozr?
-  Frozr is a minimal web service that enables you to safely store cryptocurrency in a time-locked smart-contract vault.
+Frozr is a minimal web service that enables you to safely store cryptocurrency in a smart-contract time vault. It was built with a focus on simplicity and usability.
 
 ### Why is it free
   Because something like this shouldn't cost anything.
   
 ### Technologies
   Frozr was built using Yarn, Vite, TypeScript, React, TailwindCSS, Framer Motion, Solidity, and Ethersjs. 
+
+### Verification
+  All of Frozr's smart-contracts have verified source code that you can easily inspect. Visit the site and scroll down for links to the contracts.
 
 <!-- ### Troubleshooting
   "Metamask isn't installed"
