@@ -35,7 +35,7 @@ export const Footer: React.FC<Props> = ({}) => {
           icon={<RiCodeSSlashFill />}
         />
         <SocialLink
-          title="Support"
+          title="Contact"
           icon={<BiSupport />}
           onClick={() => {
             MySwal.fire({
