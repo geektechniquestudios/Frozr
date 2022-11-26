@@ -8,6 +8,11 @@ Frozr is a minimal web service that enables you to safely store cryptocurrency i
 ### Why is it free
   Because something like this shouldn't cost anything.
   
+### Supported Currencies
+- Avalanche
+- BNB on the BEP20 chain
+  If you have a currency you would like supported, 
+  
 ### Technologies
   Frozr was built using Yarn, Vite, TypeScript, React, TailwindCSS, Framer Motion, Solidity, and Ethersjs. 
 
