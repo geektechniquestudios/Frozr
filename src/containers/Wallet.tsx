@@ -117,7 +117,8 @@ const useWallet = () => {
       setBarLengths([10, 1, 15, 35])
     } catch (error: any) {
       console.error(error as Error)
-      if (error.code !== -32002) setIsWalletConnecting(false)
+      if (error.code === -32002) return
+      setIsWalletConnecting(false)
       checkForMetamask()
     }
   }

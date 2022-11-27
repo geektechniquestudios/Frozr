@@ -36,7 +36,28 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
               borderColor: connectBorderColor,
             }}
           >
-            {isWalletConnecting ? "Waiting on Wallet" : "Connect Your Wallet"}
+            {isWalletConnecting ? (
+              <div>
+                <>Waiting for Wallet</>
+                <motion.div
+                  className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-blue-400"
+                  animate={{
+                    scale: [1, 5],
+                    opacity: [1, 0],
+                  }}
+                  transition={{
+                    delay: 0.4,
+                    duration: 2.2,
+                    ease: "easeOut",
+                    times: [0, 0.5],
+                    repeat: Infinity,
+                  }}
+                />
+                <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full border border-sky-300 bg-sky-400 opacity-75" />
+              </div>
+            ) : (
+              "Connect Your Wallet"
+            )}
           </Button>
         )}
         {isWalletConnected && (
