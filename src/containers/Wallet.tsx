@@ -99,21 +99,25 @@ const useWallet = () => {
 
   const { setConnectBorderColor } = Form.useContainer()
 
+  const [isWalletConnecting, setIsWalletConnecting] = useState(false)
   const connectWallet = async () => {
     if (!checkForMetamask()) return
+    setIsWalletConnecting(true)
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
       await provider.send("eth_requestAccounts", [])
       const signer = provider.getSigner()
       const walletAddress = await signer.getAddress()
       setIsWalletConnected(true)
+      setIsWalletConnecting(false)
       setWalletAddress(walletAddress)
       localStorage.setItem("walletAddress", walletAddress)
       localStorage.setItem("isWalletConnected", "true")
       setConnectBorderColor("border-transparent")
       setBarLengths([10, 1, 15, 35])
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      console.error(error as Error)
+      if (error.code !== -32002) setIsWalletConnecting(false)
       checkForMetamask()
     }
   }
@@ -139,20 +143,24 @@ const useWallet = () => {
     localStorage.setItem("currency", networkName ?? currency)
 
     if (!checkForMetamask()) return
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
-    await provider.send("eth_requestAccounts", [])
-    const { chainId } = await provider.getNetwork()
-    const isCorrectBlockchain =
-      chainId === currencyMap[networkName ?? currency]?.chainId ?? -1
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
+      await provider.send("eth_requestAccounts", [])
+      const { chainId } = await provider.getNetwork()
+      const isCorrectBlockchain =
+        chainId === currencyMap[networkName ?? currency]?.chainId ?? -1
 
-    setIsCorrectNetwork(isCorrectBlockchain)
-    if (networkName !== currency) setDeposits([])
-    if (!isCorrectBlockchain && isWalletConnected) {
-      setBarLengths([10, 1, 15, 35])
-    }
-    if (isCorrectBlockchain && isWalletConnected) {
-      setBarLengths([35, 15, 1, 10])
-      refreshDeposits()
+      setIsCorrectNetwork(isCorrectBlockchain)
+      if (networkName !== currency) setDeposits([])
+      if (!isCorrectBlockchain && isWalletConnected) {
+        setBarLengths([10, 1, 15, 35])
+      }
+      if (isCorrectBlockchain && isWalletConnected) {
+        setBarLengths([35, 15, 1, 10])
+        refreshDeposits()
+      }
+    } catch (error) {
+      console.error(error as Error)
     }
   }
 
@@ -244,6 +252,8 @@ const useWallet = () => {
     doesUserHaveEnoughAvax,
     barLengths,
     setBarLengths,
+    isWalletConnecting,
+    setIsWalletConnecting,
   }
 }
 

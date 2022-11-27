@@ -15,6 +15,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
     barLengths,
     setBarLengths,
     refreshDeposits,
+    isWalletConnecting,
   } = Wallet.useContainer()
   const { connectBorderColor, setPage } = Form.useContainer()
   const { isSmall } = WindowSize.useContainer()
@@ -24,6 +25,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
       <div className="grid place-content-center p-3">
         {!isWalletConnected && (
           <Button
+            disabled={isWalletConnecting}
             onClick={() => {
               connectWallet().then(refreshDeposits)
             }}
@@ -34,7 +36,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
               borderColor: connectBorderColor,
             }}
           >
-            Connect your wallet
+            {isWalletConnecting ? "Waiting on Wallet" : "Connect Your Wallet"}
           </Button>
         )}
         {isWalletConnected && (
