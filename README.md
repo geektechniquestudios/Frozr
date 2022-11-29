@@ -1,26 +1,28 @@
 [![](asset-sources/banner.png)](https://frozr.io)
 
-## A Free Open-Source Time Vault For Your Cryptocurrency
-  Check it out at [frozr.io](https://frozr.io)
+### Check it out at [frozr.io](https://frozr.io)
 
-Frozr is a minimal web service that enables you to safely store cryptocurrency in a smart-contract time vault. It was built with a focus on simplicity and usability.
-
-### Why is it free
-  Because something like this shouldn't cost anything.
+Frozr is a minimal web service that enables you to safely store cryptocurrency in a smart-contract time vault. It was built with a focus on security, simplicity and usability. This service is and always will be ad free, monetarily free, and tracking free because something like this shouldn't cost anything.
   
+### Usage Guide
+
+1. You need a smart wallet like [Metamask](https://metamask.io/download/) to interface with the site. No login or account is required.
+2. Click on the "Connect Wallet" button and follow the prompts in your smart wallet.
+3. Select a currency to store, ensuring you're on the correct network. Don't worry, the website will let you know if you're on the wrong network.
+4. Choose a release date for your funds.
+5. Choose an amount to store.
+6. Finally click the "Store Your Funds" button.
+7. You'll see your deposit show up on the page immediately. After the chosen date passes, you'll be able to click the withdraw button and retrieve your funds.
+
+
 ### Supported Currencies
 - Avalanche
 - BNB on the BEP20 chain
-  If you have a currency you would like supported, 
+
+If you have a currency you would like supported, open an issue requesting it.
   
 ### Technologies
   Frozr was built using Yarn, Vite, TypeScript, React, TailwindCSS, Framer Motion, Solidity, and Ethersjs. 
 
 ### Verification
-  All of Frozr's smart-contracts have verified source code that you can easily inspect. Visit the site and scroll down for links to the contracts.
-
-<!-- ### Troubleshooting
-  "Metamask isn't installed"
-  To use this website, you'll need a smart wallet. [Metamask](https://metamask.io/download/) is recommended.
-  "What if the site goes down?"
-   The smart contract works independently of the website. Even if Frozr were to completely dissapear, the contract will still operate indefinitely, keeping your funds safe. -->
+  All of Frozr's smart-contracts have verified source code that you can easily inspect. Visit the site and scroll to the bottom for links to our contracts.
