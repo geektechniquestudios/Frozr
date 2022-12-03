@@ -53,7 +53,18 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
                     repeat: Infinity,
                   }}
                 />
-                <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full border border-blue-400 bg-sky-500" />
+                <motion.div
+                  className="absolute -top-1 -right-1 h-3 w-3 rounded-full border border-blue-400 bg-sky-500"
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    delay: 0.4,
+                    duration: 2.2,
+                    times: [0, 0.03, 0.21], 
+                    repeat: Infinity,
+                  }}
+                />
               </div>
             ) : (
               "Connect Your Wallet"

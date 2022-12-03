@@ -10,7 +10,7 @@ export const Donate: React.FC<Props> = ({}) => {
         the creators by sending funds to this bitcoin address.
       </p>
       <div className="flex gap-2">
-        <img src="./src/assets/btc_addr.png" />
+        <img src="./src/assets/bitcoinAddress.png" />
         <p className="grid place-content-center font-bold">
           bc1q22ydn8wg8rv7f9e82dmpsfq5zsw9jlxah0rg7q
         </p>

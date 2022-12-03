@@ -46,7 +46,7 @@ export const Deposit: React.FC<DepositInterface> = ({
       </div>
       <div className="grid place-content-center">
         <Button
-          className="w-28"
+          className="w-28 text-slate-800"
           variant="contained"
           onClick={withdrawFunds}
           disabled={!isReadyToWithdraw || isComplete}
