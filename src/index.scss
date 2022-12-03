@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  background: rgb(15, 23, 42);
+  background: linear-gradient(
+    47deg,
+    rgba(15, 23, 42, 1) 0%,
+    rgba(25, 50, 81, 1) 67%,
+    rgba(25, 50, 81, 1) 70%,
+    rgba(27, 36, 73, 1) 77%,
+    rgba(15, 23, 42, 1) 100%
+  );
+}
+
+$primary: #a8a29e;
+$secondary: #78716c;
+
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: $primary $secondary;
+}
+.scrollbar::-webkit-scrollbar {
+  @apply h-2 w-2;
+}
+.scrollbar::-webkit-scrollbar-track {
+  @apply bg-stone-600;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-stone-400;
+}
+.scrollbar::-webkit-scrollbar-corner {
+  @apply bg-stone-400;
+}
+.color-shift {
+  @apply transition-colors duration-300 ease-in-out;
+}
+
+// prevnts a layout shift while popup is visible
+body {
+  padding-right: 0 !important;
+}

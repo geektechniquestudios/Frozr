@@ -1,32 +1,16 @@
-import * as React from "react"
-import { Footer } from "./components/Footer"
-import { Header } from "./components/Header"
+import { motion } from "framer-motion"
+import { Header } from "./components/header/Header"
 import { MainContent } from "./components/MainContent"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
 
 export const App: React.FC = () => {
   return (
-    <ThemeProvider
-      theme={createTheme({
-        palette: {
-          primary: {
-            main: '#15803d',
-          },
-          secondary: {
-            main: '#f43f5e',
-          },
-          background: {
-            default: '#192231',
-            paper: '#24344d',
-          },
-        },
-      })}
+    <motion.div
+      id="app"
+      layoutScroll
+      className="scrollbar flex h-screen flex-col overflow-y-scroll"
     >
-      <div className="flex h-screen flex-col bg-stone-700">
-        <Header />
-        <MainContent />
-        <Footer />
-      </div>
-    </ThemeProvider>
+      <Header />
+      <MainContent />
+    </motion.div>
   )
 }
