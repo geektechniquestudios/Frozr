@@ -24,6 +24,7 @@ export const CustomerSupport: React.FC<Props> = ({}) => {
         >
           geektechniquestudios@gmail.com
         </button>
+        .
       </div>
     </div>
   )

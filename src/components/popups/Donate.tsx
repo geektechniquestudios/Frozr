@@ -5,7 +5,7 @@ export const Donate: React.FC<Props> = ({}) => {
     <div className="flex flex-col gap-5">
       <p className="text-3xl">Donate</p>
       <p className="border-b text-sm">
-        This webservice is provided entirely free of charge. If this you used
+        This webservice is provided entirely free of charge. If you used
         this service and found it useful, please consider donating to support
         the creators by sending funds to this bitcoin address.
       </p>
