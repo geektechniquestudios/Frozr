@@ -19,7 +19,7 @@ export const FormTile = () => {
       transition={{
         duration: 0.6,
       }}
-      className="h-[32em] shrink-0 overflow-hidden  rounded-md border border-slate-500 bg-slate-500 bg-opacity-40"
+      className="h-[32em] shrink-0 overflow-hidden rounded-md border border-slate-500 bg-slate-500 bg-opacity-40"
       style={{
         backdropFilter: "blur(16px)",
       }}

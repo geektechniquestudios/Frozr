@@ -6,6 +6,7 @@ module.exports = {
 }
 
 require("@nomiclabs/hardhat-waffle")
+require("@nomicfoundation/hardhat-chai-matchers")
 require("dotenv").config({ path: ".env" })
 
 // eslint-disable-next-line no-undef

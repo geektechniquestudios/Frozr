@@ -60,7 +60,7 @@ export const Footer: React.FC<Props> = ({}) => {
         />
         <SocialLink
           title="Discord"
-          href="https://discord.gg/X8PhpSnd"
+          href="https://discord.gg/ySpQCFdcR2"
           icon={<FaDiscord />}
         />
       </div>
