@@ -1,0 +1,7 @@
+{
+ "build": {
+   "image": "node:18",
+   "command": "yarn && yarn build",
+   "publicDir": "dist"
+ }
+}

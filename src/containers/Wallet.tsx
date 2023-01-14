@@ -1,6 +1,6 @@
 import { createContainer } from "unstated-next"
 import { BigNumber, ethers } from "ethers"
-import Frozr from "../artifacts/contracts/Frozr.sol/Frozr.json"
+import Frozr from "../artifacts/contracts/frozr.sol/Frozr.json"
 import { useEffect, useState } from "react"
 import { Form } from "./Form"
 import Swal from "sweetalert2"
