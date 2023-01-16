@@ -223,8 +223,8 @@ const useWallet = () => {
   const doesUserHaveEnoughFunds = async (price: BigNumber) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     const balance: BigNumber = await provider.getBalance(walletAddress!)
-    const doesUserHaveEnoughAvax = balance.gte(price)
-    if (!doesUserHaveEnoughAvax) {
+    const doesUserHaveEnough = balance.gte(price)
+    if (!doesUserHaveEnough) {
       Swal.fire({
         title: "Insufficient Funds",
         text: `You don't have enough ${currency} to place this bet.`,
@@ -232,7 +232,7 @@ const useWallet = () => {
         confirmButtonText: "Ok",
       })
     }
-    return doesUserHaveEnoughAvax
+    return doesUserHaveEnough
   }
 
   return {
