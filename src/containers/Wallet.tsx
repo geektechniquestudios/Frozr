@@ -220,7 +220,7 @@ const useWallet = () => {
     })
   }
 
-  const doesUserHaveEnoughAvax = async (price: BigNumber) => {
+  const doesUserHaveEnoughFunds = async (price: BigNumber) => {
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any")
     const balance: BigNumber = await provider.getBalance(walletAddress!)
     const doesUserHaveEnoughAvax = balance.gte(price)
@@ -250,7 +250,7 @@ const useWallet = () => {
     walletAddress,
     isCorrectNetwork,
     updateNetwork,
-    doesUserHaveEnoughAvax,
+    doesUserHaveEnoughAvax: doesUserHaveEnoughFunds,
     barLengths,
     setBarLengths,
     isWalletConnecting,
