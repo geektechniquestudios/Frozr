@@ -5,8 +5,8 @@ export const HeadingTile = () => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scaleX: 0.95, x: -25, y: -5 }}
-      animate={{ opacity: 1, scaleX: 1, x: 0, y: 0 }}
+      initial={{ opacity: 0, x: -25, y: -5 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{
         duration: 0.04,
         type: "spring",
