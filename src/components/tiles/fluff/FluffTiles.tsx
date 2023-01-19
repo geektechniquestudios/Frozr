@@ -128,7 +128,7 @@ export const FluffTiles: React.FC<Props> = ({ layoutTransition }) => {
       <Card
         icon={<MdOutlineMobiledataOff size={40} />}
         title="No Data Collection"
-        description1="We don't collect any user data. We don't use cookies or tracking analytics."
+        description1="We do not collect any information from our visitors. We respect your privacy."
         description2="Frozr is a Web3 service. Your data is yours."
       />
 
