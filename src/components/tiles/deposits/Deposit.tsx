@@ -44,9 +44,11 @@ export const Deposit: React.FC<DepositInterface> = ({
         <p className="text-sm sm:text-base">{balance}</p>
         <p className="text-xs">{currency}</p>
       </div>
-      <div className="mx-0.5 grid place-content-center text-xs sm:text-base">
-        <div>{startDateFormatted} -</div>
-        <div>{releaseDateFormatted}</div>
+      <div className="mx-0.5 flex flex-wrap items-center text-xs sm:text-base">
+        <div className="mr-1 flex grow justify-center">
+          {startDateFormatted + " - "}
+        </div>
+        <div className="flex grow justify-center">{releaseDateFormatted}</div>
       </div>
       <div className="grid place-content-center">
         <Button
