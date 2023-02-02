@@ -26,7 +26,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
       : "Update Your Wallet"
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
-      <div className="p-3">
+      <div className="grid place-content-center p-3">
         <FormControl
           fullWidth
           disabled={!isWalletConnected}
