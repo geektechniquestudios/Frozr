@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import CurrencyInput from "react-currency-input-field"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
-  const { isSmall } = WindowSize.useContainer()
+  const { isSmall, width } = WindowSize.useContainer()
   const { amountBorderColor, setAmountBorderColor } = Form.useContainer()
   const { isWalletConnected, barLengths } = Wallet.useContainer()
   const borderColor = isWalletConnected
@@ -45,28 +45,35 @@ export const ChooseAmount: React.FC<Props> = ({ amount, setAmount }) => {
           }}
         />
       </div>
-      <motion.div
-        initial={{
-          x: 400,
-        }}
-        animate={{
-          x: xPos,
-        }}
-        transition={{
-          delay: 0.1,
-          duration: 1,
-          type: "spring",
-          damping: 16,
-          bounce: 0.3,
-        }}
-        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-purple-200 border-opacity-30 bg-indigo-200 bg-opacity-40"
-      >
-        <img
-          src={amountLogo}
-          alt="amount logo"
-          className="h-36 translate-y-4 drop-shadow-2xl"
-        />
-      </motion.div>
+      <AnimatePresence>
+        {width > 350 && (
+          <motion.div
+            initial={{
+              x: 400,
+            }}
+            animate={{
+              x: xPos,
+            }}
+            exit={{
+              x: 400,
+            }}
+            transition={{
+              delay: 0.1,
+              duration: 1,
+              type: "spring",
+              damping: 16,
+              bounce: 0.3,
+            }}
+            className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-purple-200 border-opacity-30 bg-indigo-200 bg-opacity-40"
+          >
+            <img
+              src={amountLogo}
+              alt="amount logo"
+              className="h-36 translate-y-4 drop-shadow-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

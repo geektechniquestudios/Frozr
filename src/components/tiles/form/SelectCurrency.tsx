@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { WindowSize } from "../../../containers/WindowSize"
@@ -18,7 +18,7 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
     updateNetwork,
     isWalletConnected,
   } = Wallet.useContainer()
-  const { isSmall } = WindowSize.useContainer()
+  const { isSmall, width } = WindowSize.useContainer()
   const xPos = isSmall ? 0 : barLengths[1]
   const label =
     isCorrectNetwork || !isWalletConnected || currency === ""
@@ -104,28 +104,35 @@ export const SelectCurrency: React.FC<Props> = ({}) => {
           </Select>
         </FormControl>
       </div>
-      <motion.div
-        initial={{
-          x: 400,
-        }}
-        animate={{
-          x: xPos,
-        }}
-        transition={{
-          delay: 0.05,
-          duration: 5,
-          type: "spring",
-          damping: 20,
-          bounce: 0.7,
-        }}
-        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-violet-200 border-opacity-30 bg-purple-100 bg-opacity-50"
-      >
-        <img
-          src={selectCurrencyLogo}
-          alt="currency logo"
-          className="h-40 translate-y-2 drop-shadow-2xl"
-        />
-      </motion.div>
+      <AnimatePresence>
+        {width > 350 && (
+          <motion.div
+            initial={{
+              x: 400,
+            }}
+            animate={{
+              x: xPos,
+            }}
+            exit={{
+              x: 400,
+            }}
+            transition={{
+              delay: 0.05,
+              duration: 5,
+              type: "spring",
+              damping: 20,
+              bounce: 0.7,
+            }}
+            className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-violet-200 border-opacity-30 bg-purple-100 bg-opacity-50"
+          >
+            <img
+              src={selectCurrencyLogo}
+              alt="currency logo"
+              className="h-40 translate-y-2 drop-shadow-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

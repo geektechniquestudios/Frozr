@@ -55,7 +55,7 @@ export const DepositsHeader: React.FC<Props> = ({
             </motion.div>
           ) : (
             <motion.div
-              className=" "
+              className="text-base sm:text-2xl"
               initial={{ opacity: 0, translateY: -30 }}
               animate={{ opacity: [0, 0, 1], translateY: 0 }}
               exit={{ opacity: 0, translateY: -30 }}

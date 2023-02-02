@@ -1,5 +1,5 @@
 import { Button } from "@mui/material"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { Form } from "../../../containers/Form"
 import { Wallet } from "../../../containers/Wallet"
 import { WindowSize } from "../../../containers/WindowSize"
@@ -18,7 +18,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
     isWalletConnecting,
   } = Wallet.useContainer()
   const { connectBorderColor, setPage } = Form.useContainer()
-  const { isSmall } = WindowSize.useContainer()
+  const { isSmall, width } = WindowSize.useContainer()
   const xPos = isSmall ? 0 : barLengths[0]
   return (
     <div className="flex h-1/5 justify-evenly gap-4 py-1">
@@ -61,7 +61,7 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
                   transition={{
                     delay: 0.4,
                     duration: 2.2,
-                    times: [0, 0.03, 0.21], 
+                    times: [0, 0.03, 0.21],
                     repeat: Infinity,
                   }}
                 />
@@ -85,27 +85,34 @@ export const ConnectWallet: React.FC<Props> = ({}) => {
           </Button>
         )}
       </div>
-      <motion.div
-        initial={{
-          x: 400,
-        }}
-        animate={{
-          x: xPos,
-        }}
-        transition={{
-          duration: 5,
-          type: "spring",
-          damping: 20,
-          bounce: 0.7,
-        }}
-        className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-indigo-200 border-opacity-30 bg-indigo-100 bg-opacity-70"
-      >
-        <img
-          src={connectWalletLogo}
-          alt="wallet logo"
-          className="h-36 -translate-y-2 drop-shadow-2xl"
-        />
-      </motion.div>
+      <AnimatePresence>
+        {width > 350 && (
+          <motion.div
+            initial={{
+              x: 400,
+            }}
+            animate={{
+              x: xPos,
+            }}
+            exit={{
+              x: 400,
+            }}
+            transition={{
+              duration: 5,
+              type: "spring",
+              damping: 20,
+              bounce: 0.7,
+            }}
+            className="flex w-full items-center justify-center overflow-clip rounded-l-xl border-l border-t border-b border-indigo-200 border-opacity-30 bg-indigo-100 bg-opacity-70"
+          >
+            <img
+              src={connectWalletLogo}
+              alt="wallet logo"
+              className="h-36 -translate-y-2 drop-shadow-2xl"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

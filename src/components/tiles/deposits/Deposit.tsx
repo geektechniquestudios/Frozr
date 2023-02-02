@@ -2,6 +2,7 @@ import { Button } from "@mui/material"
 import dayjs from "dayjs"
 import { motion } from "framer-motion"
 import { Deposit as DepositInterface, Wallet } from "../../../containers/Wallet"
+import { WindowSize } from "../../../containers/WindowSize"
 
 export const Deposit: React.FC<DepositInterface> = ({
   amount,
@@ -12,6 +13,8 @@ export const Deposit: React.FC<DepositInterface> = ({
 }) => {
   const { callContract, currency, blockTimestamp, refreshDeposits } =
     Wallet.useContainer()
+
+  const { width } = WindowSize.useContainer()
 
   const withdrawFunds = async () => {
     callContract(async (contract) => {
@@ -37,19 +40,21 @@ export const Deposit: React.FC<DepositInterface> = ({
         hidden: { opacity: 0, x: -4 },
       }}
     >
-      <div className="flex w-28 flex-col justify-center">
-        <p>{balance}</p>
+      <div className="flex w-auto shrink flex-col justify-center sm:w-28">
+        <p className="text-sm sm:text-base">{balance}</p>
         <p className="text-xs">{currency}</p>
       </div>
-      <div className="grid place-content-center text-sm sm:text-base">
-        {startDateFormatted} - {releaseDateFormatted}
+      <div className="mx-0.5 grid place-content-center text-xs sm:text-base">
+        <div>{startDateFormatted} -</div>
+        <div>{releaseDateFormatted}</div>
       </div>
       <div className="grid place-content-center">
         <Button
-          className="w-28 text-slate-800"
+          className="w-20 text-slate-800 sm:w-28"
           variant="contained"
           onClick={withdrawFunds}
           disabled={!isReadyToWithdraw || isComplete}
+          sx={{ fontSize: width < 640 ? 10 : 14 }}
         >
           {isComplete ? "Complete" : isReadyToWithdraw ? "Withdraw" : "Locked"}
         </Button>
