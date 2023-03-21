@@ -23,4 +23,4 @@ If you have a currency you would like supported, open an issue requesting it.
 
 Store your cryptocurrency with confidence using Frozr's smart-contract time vault. Check it out now at [frozr.io](https://frozr.io/)!
 
-If that ever goes offline, [check this mirror](https://cool-surf-2864.on.fleek.co/).
+If that ever goes offline, [check this ipfs mirror](https://cool-surf-2864.on.fleek.co/).
