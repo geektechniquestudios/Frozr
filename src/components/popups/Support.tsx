@@ -13,7 +13,7 @@ export const CustomerSupport: React.FC<Props> = ({}) => {
         >
           github
         </a>
-        , or reach out at out at{" "}
+        , or reach out at{" "}
         <button
           className="underline underline-offset-2"
           onClick={() => {
